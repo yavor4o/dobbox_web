@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <title>Заявка за нов линк за потвърждение</title>
+    <!--begin::Global Stylesheets Bundle(mandatory for all pages)-->
+		<link href="{{ url_for('static', filename='assets/plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ url_for('static', filename='assets/css/style.bundle.css') }}" rel="stylesheet" type="text/css" />
+
+		<!--end::Global Stylesheets Bundle-->
+</head>
+<body>
+
+					<!--begin::Email template-->
+					<style>html,body { padding:0; margin:0; font-family: Inter, Helvetica, "sans-serif"; } a:hover { color: #009ef7; }</style>
+					<div id="#kt_app_body_content" style="background-color:#fcfbfb; font-family:Arial,Helvetica,sans-serif; line-height: 1.5; min-height: 100%; font-weight: normal; font-size: 15px; color: #ffffff; margin:0; padding:0; width:100%;">
+						<div style="background-color:#ffffff; padding: 45px 0 34px 0; border-radius: 24px; margin:40px auto; max-width: 600px;">
+							<table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" height="auto" style="border-collapse:collapse">
+								<tbody>
+									<tr>
+										<td align="center" valign="center" style="text-align:center; padding-bottom: 10px">
+											<!--begin:Email content-->
+											<div style="text-align:center; margin:0 15px 34px 15px">
+												<!--begin:Logo-->
+												<div style="margin-bottom: 10px">
+													<a href="https://dobbox.net" rel="noopener" target="_blank">
+                                                    <img alt="Logo" src="{{ url_for('static', filename='/assets/media/logos/logo-bo.png') }}" width="200" height="auto" />
+
+                                                </a>
+												</div>
+												<!--end:Logo-->
+												<!--begin:Media-->
+												<div style="margin-bottom: 15px">
+													<img alt="Logo" src="/static/assets/media/email/icon-positive-vote-1.svg" />
+												</div>
+												<!--end:Media-->
+												<!--begin:Text-->
+												<div style="font-size: 14px; font-weight: 500; margin-bottom: 27px; font-family:Arial,Helvetica,sans-serif;color: black;">
+													{% if context == "login" %}
+                                                        <h1>Вашият акаунт не е потвърден</h1>
+                                                        <p>Ако желаете да получите нов линк за потвърждение на вашия имейл или да активирате линка от вашата поща, моля въведете имейла си по-долу.</p>
+                                                    {% else %}
+                                                        <h1>Линкът за потвърждение е изтекъл</h1>
+                                                        <p>Ако желаете да получите нов линк за потвърждение на вашия имейл, моля въведете имейла си по-долу.</p>
+                                                    {% endif %}
+
+                                                    {% if error %}
+                                                        <p class="error">{{ error }}</p>
+                                                    {% endif %}
+												</div>
+												<!--end:Text-->
+												<!--begin:Action-->
+
+												<!--begin:Action-->
+											</div>
+											<!--end:Email content-->
+                                        <form class="form"  novalidate="novalidate" action="{{ url_for('authentication.request_new_confirmation') }}"  method="post" style="max-width: 400px; margin: 0 auto;">
+                                                {{ form.csrf_token }}
+                                                <div class="fv-row mb-8">
+                                                    <!--begin::Password-->
+                                                    {{ form.email(class_="form-control bg-transparent", placeholder="Въведете валиден имейл", autocomplete="off", type="email") }}
+                                                    {% if form.email.errors %}
+                                                        {% for error in form.email.errors %}
+                                                            <span class="error">{{ error }}</span>
+                                                        {% endfor %}
+                                                    {% endif %}
+                                                    <!--end::Password-->
+                                                </div>
+
+                                                <div class="form-group text-center">
+                                                        {{ form.recaptcha }}
+                                                    </div> <br>
+                    <div style="background-color:#50cd89; border-radius:6px;display:inline-block; padding:11px 19px; color: #FFFFFF; font-size: 14px; font-weight:500;">
+                                                {{ form.submit(class_="btn btn-success") }}
+                        </div>
+                                            </form>
+										</td>
+									</tr>
+									<tr style="display: flex; justify-content: center; margin:0 60px 35px 60px">
+										<td align="start" valign="start" style="padding-bottom: 10px;">
+											<p style="color:#181C32; font-size: 18px; font-weight: 600; margin-bottom:13px">Какво следва?</p>
+											<!--begin::Wrapper-->
+											<div style="background: #F9F9F9; border-radius: 12px; padding:35px 30px">
+												<!--begin::Item-->
+												<div style="display:flex">
+													<!--begin::Media-->
+													<div style="display: flex; justify-content: center; align-items: center; width:40px; height:40px; margin-right:13px">
+														<img alt="Logo" src="/static/assets/media/email/icon-polygon.svg" />
+														<span style="position: absolute; color:#50CD89; font-size: 16px; font-weight: 600;">1</span>
+													</div>
+													<!--end::Media-->
+													<!--begin::Block-->
+													<div>
+														<!--begin::Content-->
+														<div>
+															<!--begin::Title-->
+															<a href="#" style="color:#181C32; font-size: 14px; font-weight: 600;font-family:Arial,Helvetica,sans-serif">Изберете план</a>
+															<!--end::Title-->
+															<!--begin::Desc-->
+															<p style="color:#5E6278; font-size: 13px; font-weight: 500; padding-top:3px; margin:0;font-family:Arial,Helvetica,sans-serif">Един от най-подходящите и функционален е Бизнес плана.Консултирайте се с нас и ще ви разкажем подробно за всеки един.</p>
+															<!--end::Desc-->
+														</div>
+														<!--end::Content-->
+														<!--begin::Separator-->
+														<div class="separator separator-dashed" style="margin:17px 0 15px 0"></div>
+														<!--end::Separator-->
+													</div>
+													<!--end::Block-->
+												</div>
+												<!--end::Item-->
+												<!--begin::Item-->
+												<div style="display:flex">
+													<!--begin::Media-->
+													<div style="display: flex; justify-content: center; align-items: center; width:40px; height:40px; margin-right:13px">
+														<img alt="Logo" src="/static/assets/media/email/icon-polygon.svg" />
+														<span style="position: absolute; color:#50CD89; font-size: 16px; font-weight: 600;">2</span>
+													</div>
+													<!--end::Media-->
+													<!--begin::Block-->
+													<div>
+														<!--begin::Content-->
+														<div>
+															<!--begin::Title-->
+															<a href="#" style="color:#181C32; font-size: 14px; font-weight: 600;font-family:Arial,Helvetica,sans-serif">Интегриране и настройки</a>
+															<!--end::Title-->
+															<!--begin::Desc-->
+															<p style="color:#5E6278; font-size: 13px; font-weight: 500; padding-top:3px; margin:0;font-family:Arial,Helvetica,sans-serif">Получавате безплатна интеграция и настройки спрямо вашият бизнес модел.</p>
+															<!--end::Desc-->
+														</div>
+														<!--end::Content-->
+														<!--begin::Separator-->
+														<div class="separator separator-dashed" style="margin:17px 0 15px 0"></div>
+														<!--end::Separator-->
+													</div>
+													<!--end::Block-->
+												</div>
+												<!--end::Item-->
+												<!--begin::Item-->
+												<div style="display:flex">
+													<!--begin::Media-->
+													<div style="display: flex; justify-content: center; align-items: center; width:40px; height:40px; margin-right:13px">
+														<img alt="Logo" src="/static/assets/media/email/icon-polygon.svg" />
+														<span style="position: absolute; color:#50CD89; font-size: 16px; font-weight: 600;">3</span>
+													</div>
+													<!--end::Media-->
+													<!--begin::Block-->
+													<div>
+														<!--begin::Content-->
+														<div>
+															<!--begin::Title-->
+															<a href="#" style="color:#181C32; font-size: 14px; font-weight: 600;font-family:Arial,Helvetica,sans-serif">Започнете работа със системата</a>
+															<!--end::Title-->
+															<!--begin::Desc-->
+															<p style="color:#5E6278; font-size: 13px; font-weight: 500; padding-top:3px; margin:0;font-family:Arial,Helvetica,sans-serif">Лесна за разбиране но с мощна функционалност с която ще постигнете висока ефективност на бинеса си.</p>
+															<!--end::Desc-->
+														</div>
+														<!--end::Content-->
+													</div>
+													<!--end::Block-->
+												</div>
+												<!--end::Item-->
+											</div>
+											<!--end::Wrapper-->
+										</td>
+									</tr>
+									<tr>
+										<td align="center" valign="center" style="font-size: 13px; text-align:center; padding: 0 10px 10px 10px; font-weight: 500; color: #A1A5B7; font-family:Arial,Helvetica,sans-serif">
+											<p style="color:#181C32; font-size: 16px; font-weight: 600; margin-bottom:9px">Свържете се с нас!</p>
+											<p style="margin-bottom:2px">Национален номер: +359 888 03 55 88</p>
+											<p style="margin-bottom:4px">Къде да ни намерите
+											<a href="https://data.dobbox.net" rel="noopener" target="_blank" style="font-weight: 600">info@dobbox.net</a>.</p>
+											<p>Раб. Време  Пон-Пет, 8:00-17:00 </p>
+										</td>
+									</tr>
+									<tr>
+										<td align="center" valign="center" style="text-align:center; padding-bottom: 20px;">
+											<a href="#" style="margin-right:10px">
+												<img alt="Logo" src="/static/assets/media/email/icon-linkedin.svg" />
+											</a>
+
+											<a href="#" style="margin-right:10px">
+												<img alt="Logo" src="/static/assets/media/email/icon-facebook.svg" />
+											</a>
+
+										</td>
+									</tr>
+									<tr>
+										<td align="center" valign="center" style="font-size: 13px; padding:0 15px; text-align:center; font-weight: 500; color: #A1A5B7;font-family:Arial,Helvetica,sans-serif">
+											<p>&copy; Copyright SodoTrade LTD.
+
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<!--end::Email template-->
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <title>Регистрация</title>
+</head>
+<body>
+    <h2>Регистрация в системата</h2>
+    {% for message in get_flashed_messages() %}
+        <div>{{ message }}</div>
+    {% endfor %}
+    <form action="" method="post" enctype="multipart/form-data">
+        {{ form.csrf_token }}
+        <div>
+            <label for="username">Потребителско име:</label>
+            {{ form.username }}
+            {% for error in form.username.errors %}
+                <span style="color: red;">{{ error }}</span>
+            {% endfor %}
+        </div>
+        <div>
+            <label for="password">Парола:</label>
+            {{ form.password }}
+            {% for error in form.password.errors %}
+                <span style="color: red;">{{ error }}</span>
+            {% endfor %}
+        </div>
+    <div>
+            <label for="confirm">Потвърдете паролата:</label>
+            {{ form.confirm }}
+            {% for error in form.confirm.errors %}
+                <span style="color: red;">{{ error }}</span>
+            {% endfor %}
+        </div>
+        <div>
+            <label for="name">Име:</label>
+            {{ form.name }}
+            {% for error in form.name.errors %}
+                <span style="color: red;">{{ error }}</span>
+            {% endfor %}
+        </div>
+        <div>
+            <label for="email">Email:</label>
+            {{ form.email }}
+            {% for error in form.email.errors %}
+                <span style="color: red;">{{ error }}</span>
+            {% endfor %}
+        </div>
+        <div>
+            <label for="phone">Телефон:</label>
+            {{ form.phone }}
+            {% for error in form.phone.errors %}
+                <span style="color: red;">{{ error }}</span>
+            {% endfor %}
+        </div>
+
+        <div>
+            <label for="image">Снимка:</label>
+            {{ form.image }}
+            {% for error in form.image.errors %}
+                <span style="color: red;">{{ error }}</span>
+            {% endfor %}
+        </div>
+        <div>
+            <label for="manager">Мениджър:</label>
+            {{ form.manager }}
+            {% for error in form.manager.errors %}
+                <span style="color: red;">{{ error }}</span>
+            {% endfor %}
+        </div>
+        <div>
+            <label for="role">Роля:</label>
+            {{ form.role }}
+            {% for error in form.role.errors %}
+                <span style="color: red;">{{ error }}</span>
+            {% endfor %}
+        </div>
+        <div>
+            <button type="submit">Регистрирай</button>
+
+            {{ form.recaptcha }}
+        </div>
+    </form>
+</body>
+</html>
