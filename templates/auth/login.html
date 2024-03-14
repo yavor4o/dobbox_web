@@ -114,7 +114,7 @@
                         <!--end::Submit button-->
                         <!--begin::Sign up-->
                         <div class="text-gray-500 text-center fw-semibold fs-6">Нямате регистрация?
-                            <a href="" class="link-primary">Регистрирай се</a></div>
+                            <a href="{% url 'register' %}" class="link-primary">Регистрирай се</a></div>
                         <br>
                         <!--end::Sign up-->
                     </form>
@@ -132,6 +132,7 @@
                                         <h4 class="mb-1 text-{{ message.tags }}">Съобщение</h4>
                                         <span>{{ message }}</span>
                                     </div>
+                               
                                 </div>
                             {% endfor %}
 
