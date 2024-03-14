@@ -59,13 +59,27 @@
                         <!--end::Separator-->
                         <!--begin::Input group=-->
                         {% if form.non_field_errors %}
-                            <div class="alert alert-danger" role="alert">
-                                {% for error in form.non_field_errors %}
-                                    {{ error }}
-                                {% endfor %}
+                            <div class="notice d-flex bg-light-warning rounded border-warning border border-dashed mb-2 p-6">
+                                <!--begin::Icon-->
+                                <i class="ki-outline ki-information fs-2tx text-warning me-4"></i>
+                                <!--end::Icon-->
+                            
+                                <!--begin::Wrapper-->
+                                <div class="d-flex flex-stack flex-grow-1">
+                                    <!--begin::Content-->
+                                    <div class="fw-semibold">
+                                        <h4 class="text-gray-900 fw-bold">Внимание!</h4>
+                                        <div class="fs-6 text-gray-700">
+                                            {% for error in form.non_field_errors %}
+                                                {{ error }}
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                    <!--end::Content-->
+                                </div>
+                                <!--end::Wrapper-->
                             </div>
-                        {% endif %}
-
+                            {% endif %}
                         <div class="fv-row mb-8">
                             {{ form.username }}
                             {% if form.username.errors %}
@@ -145,5 +159,5 @@
 					</div>
 					<!--end::Form-->
                 <!--begin::Custom Javascript(used for this page only)-->
-                <script src="{% static 'js/authentication/login.js' %}"></script>
+                <script src="{% static 'js/authentication/login/login.js' %}"></script>
 					{% endblock %}

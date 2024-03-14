@@ -53,7 +53,8 @@
 							</div>
 							<!--end::Logo-->
 							<!--begin::Title-->
-							<h1 class="fw-bolder text-gray-900 mb-5">Добре Дошли в Dobbox WEB</h1>
+							<h1 class="fw-bolder text-gray-900 mb-5">Добре Дошъл <br> <small class="fs-6 link-primary fw-bold">{{ object.user.email}}</small> </h1>
+                       
 							<!--end::Title-->
 							<!--begin::Text-->
 							<div class="fw-semibold fs-6 text-gray-500 mb-2">Моля попълнете данните по-долу:</div>
@@ -92,22 +93,24 @@
                             {% endif %}
                         </div>
 
-                        <div class="fv-row mb-8">
-                            {{ form.region }}
-                            {% if form.region.errors %}
-                                <div class="alert alert-danger mt-2">
-                                    {% for error in form.region.errors %}
-                                        {{ error }}
-                                    {% endfor %}
-                                </div>
-                            {% endif %}
-                        </div>
+                        
                             
                             <div class="fv-row mb-8">
                             {{ form.manager }}
                             {% if form.manager.errors %}
                                 <div class="alert alert-danger mt-2">
                                     {% for error in form.manager.errors %}
+                                        {{ error }}
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                            
+                             <div class="fv-row mb-8">
+                            {{ form.regions }}
+                            {% if form.regions.errors %}
+                                <div class="alert alert-danger mt-2">
+                                    {% for error in form.regions.errors %}
                                         {{ error }}
                                     {% endfor %}
                                 </div>
