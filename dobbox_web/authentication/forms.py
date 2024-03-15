@@ -3,12 +3,13 @@ from django import forms
 from django.contrib.auth import get_user_model, password_validation, authenticate
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, AuthenticationForm, PasswordChangeForm, \
     SetPasswordForm, PasswordResetForm
+from django.contrib.auth.models import Group
 from django.core.exceptions import ValidationError
 from django.shortcuts import redirect
 from django.utils.translation import gettext_lazy as _
 
 from .models import DobboxUser, UserData
-from ..nomenclatures.models import Regions, City
+from ..nomenclatures.models import Regions, Office
 
 UserModel = get_user_model()
 
@@ -96,29 +97,32 @@ class WelcomeUserDataForm(forms.ModelForm):
     )
 
     provincial_city = forms.ModelChoiceField(
-        queryset=City.objects.filter(category='ОБЛ. ГРАД'),  # Първоначално празно, ще се попълва с JS
+        queryset=Office.objects.filter(category='ОБЛ. ГРАД'),  # Първоначално празно, ще се попълва с JS
         widget=forms.Select(attrs={'class': 'form-control bg-transparent', 'id': 'id_provincial_city'}),
-        label="Областен град",
-        empty_label="Изберете областен град след избор на регион"
+        label="Офис",
+        empty_label="Изберете  офиса ви след избор на регион"
     )
 
     class Meta:
         model = UserData
-        fields = ['full_name', 'regions', 'provincial_city']
+        fields = ['full_name', 'regions', 'provincial_city',]
 
     def save(self, commit=True):
         instance = super(WelcomeUserDataForm, self).save(commit=False)
 
         if 'provincial_city' in self.cleaned_data and self.cleaned_data['provincial_city'] is not None:
-            instance.provincial_city = self.cleaned_data['provincial_city']
+            instance.office = self.cleaned_data['provincial_city']
         if commit:
             instance.save()
-
 
         if 'manager' in self.cleaned_data and self.cleaned_data['manager'] is not None:
             instance.user.manager = self.cleaned_data['manager']
             instance.user.save()
+
+        sr_group, created = Group.objects.get_or_create(name='SR')
+        instance.user.groups.add(sr_group)
         return instance
+
 
 
 class PasswordChangeCustomForm(SetPasswordForm):

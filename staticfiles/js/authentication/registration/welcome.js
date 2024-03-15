@@ -4,10 +4,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function fetchCities(regionId) {
         // Проверете дали regionId не е празно или null
-
+        if (!regionId) {
+            return;
+        }
 
         // Стартиране на AJAX заявка
-        fetch(`authentication/get-provincial-cities/?region_id=${regionId}`)
+        fetch(`authentication/get-offices/?region_id=${regionId}`)
             .then(response => response.json())
             .then(data => {
                 // Изчистване на съществуващите опции
@@ -15,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Добавяне на празна опция
                 citiesSelect.add(new Option('Изберете областен град след избор на регион', ''));
                 // Попълване с новите опции
-                data.provincial_cities.forEach(function(city) {
+                data.offices.forEach(function(city) {
                     citiesSelect.add(new Option(city.name, city.id));
                 });
             })

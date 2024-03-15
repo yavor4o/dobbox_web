@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.core.exceptions import ImproperlyConfigured
 
+
 class ImportExportPermissionMixin:
     def get_model_info(self):
         if hasattr(self, 'model'):
@@ -20,3 +21,11 @@ class ImportExportPermissionMixin:
         app_label, model_name = self.get_model_info()
         codename = f'{app_label}.can_export'
         return request.user.has_perm(codename)
+
+
+class SuperuserOnlyAdminMixin:
+    def get_readonly_fields(self, request, obj=None):
+        readonly_fields = super().get_readonly_fields(request, obj)
+        if not request.user.is_superuser:
+            return readonly_fields + ('is_superuser',)
+        return readonly_fields

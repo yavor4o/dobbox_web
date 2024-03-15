@@ -5,7 +5,7 @@ from .models import DobboxUser, Regions
 from import_export import resources, fields
 from import_export.widgets import ForeignKeyWidget
 from .models import DobboxUser, UserData
-from ..nomenclatures.models import City
+from ..nomenclatures.models import Office
 
 
 class DobboxUserResource(resources.ModelResource):
@@ -42,7 +42,7 @@ class CityResource(resources.ModelResource):
         widget=ForeignKeyWidget(Regions, 'code'))
 
     class Meta:
-        model = City
+        model = Office
         skip_unchanged = True
         report_skipped = True
         import_id_fields = ('name',)
