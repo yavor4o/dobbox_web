@@ -116,6 +116,16 @@
                                 </div>
                             {% endif %}
                         </div>
+                             <div class="fv-row mb-8">
+                            {{ form.provincial_city}}
+                            {% if form.provincial_city.errors %}
+                                <div class="alert alert-danger mt-2">
+                                    {% for error in form.provincial_city.errors %}
+                                        {{ error }}
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
                             
                             
 
@@ -166,6 +176,7 @@
 		<!--begin::Global Javascript Bundle(mandatory for all pages)-->
 		<script src="{% static 'js/plugins/global/plugins.bundle.js' %}"></script>
 		<script src="{% static 'js/scripts.bundle.js' %}"></script>
+         <script src="{% static 'js/authentication/registration/welcome.js' %}"></script>
 
 		<!--end::Global Javascript Bundle-->
 		<!--end::Javascript-->

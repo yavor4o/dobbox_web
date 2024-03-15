@@ -8,7 +8,7 @@ from django.shortcuts import redirect
 from django.utils.translation import gettext_lazy as _
 
 from .models import DobboxUser, UserData
-from ..nomenclatures.models import Regions
+from ..nomenclatures.models import Regions, City
 
 UserModel = get_user_model()
 
@@ -95,15 +95,26 @@ class WelcomeUserDataForm(forms.ModelForm):
         empty_label="Изберете регион"
     )
 
+    provincial_city = forms.ModelChoiceField(
+        queryset=City.objects.filter(category='ОБЛ. ГРАД'),  # Първоначално празно, ще се попълва с JS
+        widget=forms.Select(attrs={'class': 'form-control bg-transparent', 'id': 'id_provincial_city'}),
+        label="Областен град",
+        empty_label="Изберете областен град след избор на регион"
+    )
+
     class Meta:
         model = UserData
-        fields = ['full_name', 'regions']
+        fields = ['full_name', 'regions', 'provincial_city']
 
     def save(self, commit=True):
         instance = super(WelcomeUserDataForm, self).save(commit=False)
+
+        if 'provincial_city' in self.cleaned_data and self.cleaned_data['provincial_city'] is not None:
+            instance.provincial_city = self.cleaned_data['provincial_city']
         if commit:
             instance.save()
-            self.save_m2m()  # Запазва many-to-many данните, ако има такива
+
+
         if 'manager' in self.cleaned_data and self.cleaned_data['manager'] is not None:
             instance.user.manager = self.cleaned_data['manager']
             instance.user.save()

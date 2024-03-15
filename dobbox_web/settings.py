@@ -31,6 +31,8 @@ INSTALLED_APPS = [
 
     # other apps
     'import_export',
+    'dal',
+    'dal_select2',
 ]
 
 MIDDLEWARE = [
@@ -133,4 +135,3 @@ DEFAULT_FROM_EMAIL = 'admin@data.dobbox.net'
 
 IMPORT_EXPORT_IMPORT_PERMISSION_CODE = "can_import"
 IMPORT_EXPORT_EXPORT_PERMISSION_CODE = "can_export"
-
