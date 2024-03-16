@@ -15,9 +15,7 @@
 									<!--end::Breadcrumb-->
 								</div>
 								<!--end::Toolbar wrapper=-->
-								<!--begin::Toolbar wrapper=-->
-
-								<!--end::Toolbar wrapper=-->
+								
 							</div>
 							<!--end::Toolbar container=-->
 						</div>
@@ -59,15 +57,15 @@
 														<div class="d-flex flex-column">
 															<!--begin::Name-->
 															<div class="d-flex align-items-center mb-2">
-																<a href="#" class="text-gray-900 text-hover-primary fs-2 fw-bold me-1">{{ request.user.userdata.full_name }}</a>
-																<a href="#">
+																<a class="text-primary text-hover-primary fs-2 fw-bold me-1">{{ request.user.userdata.full_name }}</a>
+																<a >
 																	<i class="ki-outline ki-verify fs-1 text-primary"></i>
 																</a>
 															</div>
 															<!--end::Name-->
 															<!--begin::Info-->
 															<div class="d-flex flex-wrap fw-semibold fs-6 mb-4 pe-2">
-																<a href="#" class="d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2">
+																<a  class="d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2">
 																<i class="ki-outline ki-profile-circle fs-4 me-1"></i>
 
                                                                 {% for group in request.user.groups.all %}
@@ -76,17 +74,15 @@
                                                                     <span class="badge badge-light-success fw-bold fs-8 px-2 py-1 ms-2">Няма групи</span>
                                                                 {% endfor %}
                                                                 </a>
-																<a href="#" class="d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2">
+																<a class="d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2">
 																<i class="ki-outline ki-geolocation fs-4 me-1"></i>{{ request.user.userdata.office }}</a>
-																<a href="#" class="d-flex align-items-center text-gray-400 text-hover-primary mb-2">
+																<a  class="d-flex align-items-center text-gray-400 text-hover-primary mb-2">
 																<i class="ki-outline ki-sms fs-4"></i> {{ request.user.email }}</a>
 															</div>
 															<!--end::Info-->
 														</div>
 														<!--end::User-->
-														<!--begin::Actions-->
-
-														<!--end::Actions-->
+														
 													</div>
 													<!--end::Title-->
 													<!--begin::Stats-->
@@ -138,9 +134,7 @@
 															<!--end::Stats-->
 														</div>
 														<!--end::Wrapper-->
-														<!--begin::Progress-->
-
-														<!--end::Progress-->
+														
 													</div>
 													<!--end::Stats-->
 												</div>
@@ -227,7 +221,7 @@
 												<!--end::Label-->
 												<!--begin::Col-->
 												<div class="col-lg-8">
-													<a href="#" class="fw-semibold fs-6 text-gray-800 text-hover-primary">{{ request.user.userdata.regions}}</a>
+													<a  class="fw-semibold fs-6 text-gray-800 text-hover-primary">{{ request.user.userdata.regions}}</a>
 												</div>
 												<!--end::Col-->
 											</div>
@@ -327,9 +321,7 @@
 					<!--end::Wrapper container-->
 				</div>
 
-    <script>
-        let csrfToken = "{% csrf_token %}";
-    </script>
+   
     <script src="{% static 'js/plugins/global/plugins.bundle.js' %}"></script>
     <script src="{% static 'js/scripts.bundle.js' %}"></script>
     <!--end::Global Javascript Bundle-->

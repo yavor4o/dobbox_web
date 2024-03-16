@@ -1,8 +1,8 @@
 $('#userRequestHistory').on('click', function () {
     // Показване на индикатора преди изпращането на заявката
-    var timeline = $('#kt_modal_history_asset_request .timeline'); // Селектор към елемента на времевата линия в модала
+    let timeline = $('#kt_modal_history_asset_request .timeline'); // Селектор към елемента на времевата линия в модала
     timeline.addClass('d-flex justify-content-center align-items-center').css('min-height', '100px'); // Добавете минимална височина, за да се види ефекта
-    var loadingIndicator = $('<div class="loading-indicator spinner-border text-primary text-center d-flex justify-content-center align-items-center" role="status"><span class="visually-hidden">Зареждане...</span></div>');
+    let loadingIndicator = $('<div class="loading-indicator spinner-border text-primary text-center d-flex justify-content-center align-items-center" role="status"><span class="visually-hidden">Зареждане...</span></div>');
 
     timeline.append(loadingIndicator);
 
@@ -10,10 +10,10 @@ $('#userRequestHistory').on('click', function () {
 
     // Изчакване на 2 секунди преди да изпратим AJAX заявката
     setTimeout(function () {
-        var searchInput = $('#searchInput'); // Селектор към инпут полето за търсене
+        let searchInput = $('#searchInput'); // Селектор към инпут полето за търсене
 
         searchInput.on('keyup', function (e) {
-        var searchTerm = e.target.value;
+        let searchTerm = e.target.value;
         console.log(e.target.value)
 
 
@@ -26,7 +26,7 @@ $('#userRequestHistory').on('click', function () {
                 success: function (response) {
 
 
-                    var assets = response; // Предполага се, че отговорът съдържа масив с активи
+                    let assets = response; // Предполага се, че отговорът съдържа масив с активи
                     // Преди добавянето на динамично съдържание, премахнете класовете за центриране
                     timeline.removeClass('d-flex justify-content-center align-items-center').css('min-height', '0'); // Връщане на оригиналното състояние
                     timeline.empty(); // Изчистване на съществуващото съдържание на времевата линия
@@ -37,9 +37,9 @@ $('#userRequestHistory').on('click', function () {
 
                         // Ако има активи, генериране на HTML за всеки актив и добавянето му към времевата линия
                         assets.forEach(function (asset) {
-                            var localDate = new Date(asset.created_at).toLocaleString();
-                            var badgeClass = asset.asset_direction === 'Изходящо' ? 'badge-light-danger' : 'badge-light-success';
-                            var assetHTML = `
+                            let localDate = new Date(asset.created_at).toLocaleString();
+                            let badgeClass = asset.asset_direction === 'Изходящо' ? 'badge-light-danger' : 'badge-light-success';
+                            let assetHTML = `
                             <div class="d-flex flex-stack py-5 border-bottom border-gray-300 border-bottom-dashed">
                                 <div class="d-flex align-items-center">
                                 <div class="ms-6">
@@ -87,7 +87,7 @@ $('#userRequestHistory').on('click', function () {
 
 $('#kt_modal_history_asset_request').on('hidden.bs.modal', function () {
     // Изчистване на времевата линия при затваряне на модала
-    var timeline = $('#kt_modal_history_asset_request .timeline');
+    let timeline = $('#kt_modal_history_asset_request .timeline');
     timeline.empty(); // Изчиства всичко от времевата линия, включително индикатора за зареждане
 
     // Премахване на стиловете, добавени за центриране, и връщане на оригиналния стил, ако е необходимо
@@ -101,11 +101,11 @@ $('#kt_modal_history_asset_request').on('hidden.bs.modal', function () {
 "use strict";
 
 // Class definition
-var KTUserRequestAssets = function () {
+let KTUserRequestAssets = function () {
     // Private functions
-var dataTable;
+let dataTable;
     // Функция за инициализация на DataTable
-    var initUserRequestAssetsTable = function() {
+    let initUserRequestAssetsTable = function() {
         dataTable = $('#kt_user_request_assets_table').DataTable({
             "processing": true,
             "serverSide": true,
@@ -126,7 +126,7 @@ var dataTable;
                             "targets": 5, // Индексът на колоната за датата
                             "render": function (data, type, full, meta) {
                                 // Проверка дали има стойност в full.created_at и форматиране на датата
-                                var createdDate = full.created_at ? new Date(full.created_at).toLocaleDateString() : ''; // Използване на български формат за дата
+                                let createdDate = full.created_at ? new Date(full.created_at).toLocaleDateString() : ''; // Използване на български формат за дата
                                 return '<span style="font-size: 8px;">' + createdDate + '</span>';
                             }
 
@@ -134,9 +134,9 @@ var dataTable;
                 {
                         "targets": 1, // Индексът на колоната за статуса и транспорта
                         "render": function (data, type, full, meta) {
-                            var badgeClass = '';
-                            var transportBadgeClass = full.self_transport === 'Yes' ? 'badge badge-light-success' : ' badge badge-light-dark';
-                            var transportInfo = full.self_transport === 'Yes' ? 'Транспорт Девин' : 'Транспортна фирма';
+                            let badgeClass = '';
+                            let transportBadgeClass = full.self_transport === 'Yes' ? 'badge badge-light-success' : ' badge badge-light-dark';
+                            let transportInfo = full.self_transport === 'Yes' ? 'Транспорт Девин' : 'Транспортна фирма';
 
 
                             switch (full.status_name) {
@@ -172,7 +172,7 @@ var dataTable;
                         "targets": 6, // Индексът на комбинираната колона
                         "render": function (data, type, full, meta) {
                             if (type === 'display') {
-                                var cost = parseFloat(data) || 0; // Преобразува данните в число, ако не са валидни, връща 0
+                                let cost = parseFloat(data) || 0; // Преобразува данните в число, ако не са валидни, връща 0
                                 return cost.toFixed(0) + ' лв.'; // Форматира числото до два десетични знака и добавя 'лв.'
                             }
 
@@ -216,8 +216,8 @@ var dataTable;
         });
     }
 
-    var handleToggle = function () {
-        var link = document.querySelector('#kt_toggle_link');
+    let handleToggle = function () {
+        let link = document.querySelector('#kt_toggle_link');
 
         link.addEventListener('click', function (e) {
     e.preventDefault();
@@ -255,26 +255,26 @@ KTUtil.onDOMContentLoaded(function () {
 "use strict";
 
 // Обединен клас за графики и карти
-var KTChartsAndCardsWidget = function () {
-    var chart1 = {
+let KTChartsAndCardsWidget = function () {
+    let chart1 = {
         self: null,
         rendered: false
     };
-    var chart2 = {
+    let chart2 = {
         canvas: null,
         ctx: null
     };
 
 
     // Инициализация на графиката за KTChartsWidget18
-        var initChart1 = function(data) {
+        let initChart1 = function(data) {
             if (!data || !Array.isArray(data.monthlyData)) {
                 console.error("Data is not provided or monthlyData is not an array.");
                 return;
             }
 
     // Тук дефинираме element, така че да можем да го използваме за създаване на графиката
-    var element = document.getElementById("kt_charts_widget_18_chart");
+    let element = document.getElementById("kt_charts_widget_18_chart");
     if (!element) {
         console.error("Element for chart1 not found.");
         return;
@@ -287,15 +287,15 @@ var KTChartsAndCardsWidget = function () {
     }
 
     // Извличане на данни за графиката
-    var totalEstimateCosts = data.monthlyData.map(item => `${item.totalEstimateCost.toFixed(2)}`);
+    let totalEstimateCosts = data.monthlyData.map(item => `${item.totalEstimateCost.toFixed(2)}`);
 
-    var monthNames = data.monthlyData.map(item => monthNumberToName(parseInt(item.month)));
+    let monthNames = data.monthlyData.map(item => monthNumberToName(parseInt(item.month)));
 
-        var height = parseInt(KTUtil.css(element, 'height'));
-        var labelColor = KTUtil.getCssVariableValue('--bs-gray-900');
-        var borderColor = KTUtil.getCssVariableValue('--bs-border-dashed-color');
+        let height = parseInt(KTUtil.css(element, 'height'));
+        let labelColor = KTUtil.getCssletiableValue('--bs-gray-900');
+        let borderColor = KTUtil.getCssletiableValue('--bs-border-dashed-color');
 
-        var options = {
+        let options = {
             series: [{
                 name: 'Разход',
                 data: totalEstimateCosts
@@ -348,7 +348,7 @@ var KTChartsAndCardsWidget = function () {
                 },
                 labels: {
                     style: {
-                        colors: KTUtil.getCssVariableValue('--bs-gray-500'),
+                        colors: KTUtil.getCssletiableValue('--bs-gray-500'),
                         fontSize: '13px'
                     }
                 },
@@ -364,7 +364,7 @@ var KTChartsAndCardsWidget = function () {
             yaxis: {
                 labels: {
                     style: {
-                        colors: KTUtil.getCssVariableValue('--bs-gray-500'),
+                        colors: KTUtil.getCssletiableValue('--bs-gray-500'),
                         fontSize: '13px'
                     },
                     formatter: function(val) {
@@ -406,7 +406,7 @@ var KTChartsAndCardsWidget = function () {
                     }
                 }
             },
-            colors: [KTUtil.getCssVariableValue('--bs-primary'), KTUtil.getCssVariableValue('--bs-primary-light')],
+            colors: [KTUtil.getCssletiableValue('--bs-primary'), KTUtil.getCssletiableValue('--bs-primary-light')],
             grid: {
                 borderColor: borderColor,
                 strokeDashArray: 4,
@@ -430,15 +430,15 @@ var KTChartsAndCardsWidget = function () {
 
 
     // Инициализация на карта за KTCardsWidget171
-    var initChart2 = function(data) {
+    let initChart2 = function(data) {
     if (!data) {
         console.error('No data provided for chart2.');
         return;
     }
 
-    var currentDate = new Date();
-    var currentMonth = currentDate.toLocaleString('default', { month: 'long' }).charAt(0).toUpperCase() + currentDate.toLocaleString('default', { month: 'long' }).slice(1);
-    var currentYear = currentDate.getFullYear();
+    let currentDate = new Date();
+    let currentMonth = currentDate.toLocaleString('default', { month: 'long' }).charAt(0).toUpperCase() + currentDate.toLocaleString('default', { month: 'long' }).slice(1);
+    let currentYear = currentDate.getFullYear();
 
     // Актуализация на текста с данните
     document.querySelector('#totalEstimateCost').textContent = `${data.totalEstimateCost.toFixed(2).toLocaleString()} лв`;
@@ -447,27 +447,27 @@ var KTChartsAndCardsWidget = function () {
     document.querySelector('#totalAssetCount').textContent = `Съоръжения ${data.totalAssetsCount} бр.`;
     document.querySelector('#monthText').textContent = `Разходи за месец ${currentMonth} ${currentYear} година`;
 
-    var el = document.getElementById('kt_card_widget_171_chart');
+    let el = document.getElementById('kt_card_widget_171_chart');
 if (!el) {
     console.error('Element not found');
     return;
 }
 
 // Тук дефинираме 'options' преди да го използваме
-    var options = {
+    let options = {
         size: parseInt(el.getAttribute('data-kt-size') || '70'),
         lineWidth: parseInt(el.getAttribute('data-kt-line') || '11'),
         rotate: parseInt(el.getAttribute('data-kt-rotate') || '145'),
     };
 
     // Намиране на canvas елемента в дива
-    var canvas = document.querySelector('#kt_card_widget_171_chart canvas');
+    let canvas = document.querySelector('#kt_card_widget_171_chart canvas');
     if (!canvas) {
         console.error('Canvas element not found');
         return;
     }
 
-    var ctx = canvas.getContext('2d');
+    let ctx = canvas.getContext('2d');
     // Уверете се, че размерите на canvas са коректно зададени
     canvas.width = canvas.parentElement.getAttribute('data-kt-size');
     canvas.height = canvas.parentElement.getAttribute('data-kt-size');

@@ -1,14 +1,14 @@
 "use strict";
 
 // Class definition
-var KTAccountSettingsProfileDetails = function () {
-    // Private variables
-    var form;
-    var submitButton;
-    var validation;
+let KTAccountSettingsProfileDetails = function () {
+    // Private letiables
+    let form;
+    let submitButton;
+    let validation;
 
     // Private functions
-    var initValidation = function () {
+    let initValidation = function () {
         // Init form validation rules. For more info check the FormValidation plugin's official documentation:https://formvalidation.io/
         validation = FormValidation.formValidation(
             form,
@@ -101,7 +101,7 @@ var KTAccountSettingsProfileDetails = function () {
         });
     }
 
-    var handleForm = function () {
+    let handleForm = function () {
         submitButton.addEventListener('click', function (e) {
             e.preventDefault();
 

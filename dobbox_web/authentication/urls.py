@@ -13,4 +13,5 @@ urlpatterns = [
     path('welcome/<int:pk>/', WelcomeUserView.as_view(), name='welcome'),
     path('get-offices/', get_offices, name='get-offices'),
 
+
 ]

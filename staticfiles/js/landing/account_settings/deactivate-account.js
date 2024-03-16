@@ -1,15 +1,20 @@
 "use strict";
 
+
+
+
+
+
 // Class definition
-var KTAccountSettingsDeactivateAccount = function () {
-    // Private variables
-    var form;
-    var validation;
-    var submitButton;
+let KTAccountSettingsDeactivateAccount = function () {
+    // Private letiables
+    let form;
+    let validation;
+    let submitButton;
 
     // Private functions
-    var initValidation = function () {
-        // Init form validation rules. For more info check the FormValidation plugin's official documentation:https://formvalidation.io/
+    let initValidation = function () {
+
         validation = FormValidation.formValidation(
             form,
             {
@@ -17,7 +22,7 @@ var KTAccountSettingsDeactivateAccount = function () {
                     deactivate: {
                         validators: {
                             notEmpty: {
-                                message: 'Please check the box to deactivate your account'
+                                message: 'Моля поствете отметка за деактивиране на акаунта ви.'
                             }
                         }
                     }
@@ -25,7 +30,6 @@ var KTAccountSettingsDeactivateAccount = function () {
                 plugins: {
                     trigger: new FormValidation.plugins.Trigger(),
                     submitButton: new FormValidation.plugins.SubmitButton(),
-                    //defaultSubmit: new FormValidation.plugins.DefaultSubmit(), // Uncomment this line to enable normal button submit after form validation
                     bootstrap: new FormValidation.plugins.Bootstrap5({
                         rowSelector: '.fv-row',
                         eleInvalidClass: '',
@@ -36,62 +40,103 @@ var KTAccountSettingsDeactivateAccount = function () {
         );
     }
 
-    var handleForm = function () {
-        submitButton.addEventListener('click', function (e) {
-            e.preventDefault();
+    let handleForm = function () {
+    submitButton.addEventListener('click', function (e) {
+        e.preventDefault();
 
-            validation.validate().then(function (status) {
-                if (status == 'Valid') {
-
-                    swal.fire({
-                        text: "Are you sure you would like to deactivate your account?",
-                        icon: "warning",
-                        buttonsStyling: false,
-                        showDenyButton: true,
-                        confirmButtonText: "Yes",
-                        denyButtonText: 'No',
-                        customClass: {
-                            confirmButton: "btn btn-light-primary",
-                            denyButton: "btn btn-danger"
-                        }
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            Swal.fire({
-                                text: 'Your account has been deactivated.', 
-                                icon: 'success',
-                                confirmButtonText: "Ok",
-                                buttonsStyling: false,
-                                customClass: {
-                                    confirmButton: "btn btn-light-primary"
-                                }
-                            })
-                        } else if (result.isDenied) {
-                            Swal.fire({
-                                text: 'Account not deactivated.', 
-                                icon: 'info',
-                                confirmButtonText: "Ok",
-                                buttonsStyling: false,
-                                customClass: {
-                                    confirmButton: "btn btn-light-primary"
-                                }
-                            })
-                        }
-                    });
-
-                } else {
-                    swal.fire({
-                        text: "Sorry, looks like there are some errors detected, please try again.",
-                        icon: "error",
-                        buttonsStyling: false,
-                        confirmButtonText: "Ok, got it!",
-                        customClass: {
-                            confirmButton: "btn btn-light-primary"
-                        }
-                    });
-                }
-            });
+        validation.validate().then(function (status) {
+            if (status == 'Valid') {
+                swal.fire({
+                    text: "Наистина ли желаете да деактивирате вашият акаунт?Процесът е необратим и вие ще загубите всички данни!",
+                    icon: "warning",
+                    buttonsStyling: false,
+                    showDenyButton: true,
+                    confirmButtonText: "Да",
+                    denyButtonText: 'Отказ',
+                    customClass: {
+                        confirmButton: "btn btn-light-primary",
+                        denyButton: "btn btn-danger"
+                    }
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Swal.fire({
+                            title: 'Моля въведете вашата парола за валидация!',
+                            text: "Това е последната стъпка в която все още може да се откажете.",
+                            input: 'password',
+                            inputAttributes: {
+                                autocapitalize: 'off',
+                                autocorrect: 'off'
+                            },
+                            showCancelButton: true,
+                            cancelButtonText: 'Отказвам се',
+                            confirmButtonText: 'Потвърди',
+                            showLoaderOnConfirm: true,
+                            preConfirm: (password) => {
+                                return fetch('/validate-password-and-deactivate/', {
+                                    method: 'POST',
+                                    headers: {
+                                        'Content-Type': 'application/x-www-form-urlencoded',
+                                        'X-CSRFToken': csrftoken,
+                                    },
+                                    body: `password=${encodeURIComponent(password)}`
+                                })
+                                .then(response => {
+                                    if (!response.ok) {
+                                        throw new Error('Паролата е невалидна.');
+                                    }
+                                    return response.json();
+                                })
+                                .then(data => {
+                                    if (data.status === 'success') {
+                                        Swal.fire({
+                                            title: 'Деактивиран!',
+                                            text: 'Вашият акаунт беше деактивиран заедно със всички ваши данни.',
+                                            icon: 'success',
+                                            confirmButtonText: 'ОК'
+                                        }).then((result) => {
+                                            if (result.isConfirmed || result.isDismissed) {
+                                                window.location.href = '/';
+                                            }
+                                        });
+                                    } else {
+                                        throw new Error(data.message ? data.message : 'Възникна грешка.');
+                                    }
+                                })
+                                .catch(error => {
+                                    Swal.showValidationMessage(
+                                        `Request failed: ${error}`
+                                    );
+                                });
+                            },
+                            allowOutsideClick: () => !Swal.isLoading()
+                        })
+                    } else if (result.isDenied) {
+                        Swal.fire({
+                            text: 'Деактивацията е прекратена.',
+                            icon: 'info',
+                            confirmButtonText: "Ok",
+                            buttonsStyling: false,
+                            customClass: {
+                                confirmButton: "btn btn-light-primary"
+                            }
+                        })
+                    }
+                });
+            } else {
+                swal.fire({
+                    text: "Извинявайте, системата има някакви проблеми, моля свържете се с нас.",
+                    icon: "error",
+                    buttonsStyling: false,
+                    confirmButtonText: "OK!",
+                    customClass: {
+                        confirmButton: "btn btn-light-primary"
+                    }
+                });
+            }
         });
-    }
+    });
+}
+
 
     // Public methods
     return {

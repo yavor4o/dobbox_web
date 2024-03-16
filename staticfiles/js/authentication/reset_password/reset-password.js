@@ -1,5 +1,5 @@
 // Елемент за индикация
-var signInButton = document.querySelector("#kt_password_reset_submit");
+let signInButton = document.querySelector("#kt_password_reset_submit");
 
 // Обработка на клик събитието на бутона
 signInButton.addEventListener("click", function() {
@@ -7,7 +7,7 @@ signInButton.addEventListener("click", function() {
     signInButton.setAttribute("data-kt-indicator", "on");
 
     // Показване на спинъра и текста за зареждане
-    var indicatorProgress = signInButton.nextElementSibling;
+    let indicatorProgress = signInButton.nextElementSibling;
     indicatorProgress.style.display = 'inline-block';
 
     // Деактивиране на индикатора след 3 секунди

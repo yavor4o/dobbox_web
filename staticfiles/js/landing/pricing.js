@@ -1,18 +1,18 @@
 "use strict";
 
 // Class definition
-var KTPricingGeneral = function () {
-    // Private variables
-    var element;
-	var planPeriodMonthButton;
-	var planPeriodAnnualButton;
+let KTPricingGeneral = function () {
+    // Private letiables
+    let element;
+	let planPeriodMonthButton;
+	let planPeriodAnnualButton;
 
-	var changePlanPrices = function(type) {
-		var items = [].slice.call(element.querySelectorAll('[data-kt-plan-price-month]'));
+	let changePlanPrices = function(type) {
+		let items = [].slice.call(element.querySelectorAll('[data-kt-plan-price-month]'));
 
 		items.map(function (item) {
-			var monthPrice = item.getAttribute('data-kt-plan-price-month');
-			var annualPrice = item.getAttribute('data-kt-plan-price-annual');
+			let monthPrice = item.getAttribute('data-kt-plan-price-month');
+			let annualPrice = item.getAttribute('data-kt-plan-price-annual');
 
 			if ( type === 'month' ) {
 				item.innerHTML = monthPrice;
@@ -22,7 +22,7 @@ var KTPricingGeneral = function () {
 		});
 	}
 
-    var handlePlanPeriodSelection = function(e) {
+    let handlePlanPeriodSelection = function(e) {
 
         // Handle period change
         planPeriodMonthButton.addEventListener('click', function (e) {

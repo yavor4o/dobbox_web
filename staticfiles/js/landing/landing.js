@@ -1,10 +1,10 @@
 "use strict";
 
 // Class definition
-var KTLandingPage = function () {
+let KTLandingPage = function () {
     // Private methods
-    var initTyped = function() {
-        var typed = new Typed("#kt_landing_hero_text", {
+    let initTyped = function() {
+        let typed = new Typed("#kt_landing_hero_text", {
             strings: ["The Best Theme Ever", "The Most Trusted Theme", "#1 Selling Theme"],
             typeSpeed: 50
         });

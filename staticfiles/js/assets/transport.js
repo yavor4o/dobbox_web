@@ -8,13 +8,13 @@ $.ajaxSetup({
     }
 });
 // Class definition
-var KTTablesTransport = function () {
-    var parentTable;
-    var childTable;
+let KTTablesTransport = function () {
+    let parentTable;
+    let childTable;
 
 
     // Function to load data into the child table
-    var loadAssetRequests = function (transportRequestId) {
+    let loadAssetRequests = function (transportRequestId) {
         $.ajax({
             url: '/assets/get-assets-requests/' + transportRequestId,
             method: 'GET',
@@ -70,7 +70,7 @@ var KTTablesTransport = function () {
                 {
                     "targets": 2, // Индексът на датата
                     "render": function (data, type, full, meta) {
-                        var createdDate = full.timestamp ? new Date(full.timestamp).toLocaleString() : ''; // Проверка и форматиране на датата
+                        let createdDate = full.timestamp ? new Date(full.timestamp).toLocaleString() : ''; // Проверка и форматиране на датата
                         return '<span style="font-size: 10px;">' + createdDate + '</span>';
                     }
                 },
@@ -78,7 +78,7 @@ var KTTablesTransport = function () {
                     "targets": 3,
                     "render": function (data, type, full, meta) {
                         if (type === 'display') {
-                            var cost = parseFloat(data) || 0; // Преобразува данните в число, ако не са валидни, връща 0
+                            let cost = parseFloat(data) || 0; // Преобразува данните в число, ако не са валидни, връща 0
                             return cost.toFixed(2) + ' лв.'; // Форматира числото до два десетични знака и добавя 'лв.'
                         }
 
@@ -90,7 +90,7 @@ var KTTablesTransport = function () {
                     "targets": 4,
                     "render": function (data, type, full, meta) {
                         if (type === 'display') {
-                            var cost = parseFloat(data) || 0; // Преобразува данните в число, ако не са валидни, връща 0
+                            let cost = parseFloat(data) || 0; // Преобразува данните в число, ако не са валидни, връща 0
                             return cost.toFixed(2) + ' лв.'; // Форматира числото до два десетични знака и добавя 'лв.'
                         }
 
@@ -102,7 +102,7 @@ var KTTablesTransport = function () {
                     "targets": 5,
                     "render": function (data, type, full, meta) {
                         if (type === 'display') {
-                            var cost = parseFloat(data) || 0; // Преобразува данните в число, ако не са валидни, връща 0
+                            let cost = parseFloat(data) || 0; // Преобразува данните в число, ако не са валидни, връща 0
                             return cost.toFixed(2) + ' лв.'; // Форматира числото до два десетични знака и добавя 'лв.'
                         }
 
@@ -114,7 +114,7 @@ var KTTablesTransport = function () {
                     "targets": 6,
                     "render": function (data, type, full, meta) {
                         if (type === 'display') {
-                            var cost = parseFloat(data) || 0; // Преобразува данните в число, ако не са валидни, връща 0
+                            let cost = parseFloat(data) || 0; // Преобразува данните в число, ако не са валидни, връща 0
                             return cost.toFixed(1 ) ; // Форматира числото до два десетични знака
                         }
 
@@ -162,8 +162,8 @@ var KTTablesTransport = function () {
 
         parentTable.on('select', function (e, dt, type, indexes) {
             if (type === 'row') {
-                var data = dt.row({ selected: true }).data();
-                var transportRequestId = data.id;
+                let data = dt.row({ selected: true }).data();
+                let transportRequestId = data.id;
                 loadAssetRequests(transportRequestId);
             }
         }).on('deselect', function () {
@@ -193,7 +193,7 @@ var KTTablesTransport = function () {
                 {
                     "targets": 6, // Индексът на датата
                     "render": function (data, type, full, meta) {
-                        var createdDate = full.created_at ? new Date(full.created_at).toLocaleString() : ''; // Проверка и форматиране на датата
+                        let createdDate = full.created_at ? new Date(full.created_at).toLocaleString() : ''; // Проверка и форматиране на датата
                         return '<span style="font-size: 9px;">' + createdDate + '</span>';
                     }
                 },
@@ -259,7 +259,7 @@ var KTTablesTransport = function () {
         });
     }
 
-    var handleSearchDatatable = () => {
+    let handleSearchDatatable = () => {
         const filterSearch = document.querySelector('[data-kt-transport-filter="search"]');
         filterSearch.addEventListener('keyup', function (e) {
             parentTable.search(e.target.value).draw();
@@ -268,24 +268,24 @@ var KTTablesTransport = function () {
 
 
 $('#kt_table_transport_requests_table tbody').on('click', '.details-control', function () {
-    var data = childTable.row($(this).closest('tr')).data();
-    var transportId = data ? data.number : null; // Използвайте 'number' за да вземете ID-то
+    let data = childTable.row($(this).closest('tr')).data();
+    let transportId = data ? data.number : null; // Използвайте 'number' за да вземете ID-то
 
 });
 
 
-    var initDaterangepicker = () => {
-    var input = $("#kt_ecommerce_report_sales_daterangepicker");
+    let initDaterangepicker = () => {
+    let input = $("#kt_ecommerce_report_sales_daterangepicker");
 
     function cb(start, end) {
-    var displayFormat = 'DD-MM-YYYY';
+    let displayFormat = 'DD-MM-YYYY';
     if (start.isValid() && end.isValid()) {
-        var formattedStart = start.format(displayFormat);
-        var formattedEnd = end.format(displayFormat);
+        let formattedStart = start.format(displayFormat);
+        let formattedEnd = end.format(displayFormat);
         input.val(formattedStart + ' - ' + formattedEnd);
 
-        var startInUTC = start.utc().format('YYYY-MM-DD');
-        var endInUTC = end.utc().format('YYYY-MM-DD');
+        let startInUTC = start.utc().format('YYYY-MM-DD');
+        let endInUTC = end.utc().format('YYYY-MM-DD');
 
         $('#start_date_input').val(startInUTC);
         $('#end_date_input').val(endInUTC);
@@ -333,9 +333,9 @@ $('#kt_table_transport_requests_table tbody').on('click', '.details-control', fu
     });
 };
 
-var exportButtons = () => {
+let exportButtons = () => {
         const documentTitle = 'Справка за заявен транспорт';
-        var buttons = new $.fn.DataTable.Buttons(parentTable, {
+        let buttons = new $.fn.DataTable.Buttons(parentTable, {
             buttons: [
                 {
                     extend: 'copyHtml5',
@@ -391,7 +391,7 @@ var exportButtons = () => {
         url: '/assets/get-transport-companies',
         type: 'GET',
         success: function (companies_data) {
-            var select = $('#transportCompanies');
+            let select = $('#transportCompanies');
             select.empty();
             select.append($('<option>', {
                 value: '',
@@ -420,7 +420,7 @@ var exportButtons = () => {
 
 
 $('#transportCompanies').on('change', function() {
-    var selectedId = $(this).val(); // Вземете избраната стойност
+    let selectedId = $(this).val(); // Вземете избраната стойност
                 $('#selectedTransportCompany').val(selectedId); // Актуализирайте скритото поле
                 parentTable.ajax.reload();
 });
@@ -429,10 +429,10 @@ $('#transportCompanies').on('change', function() {
 
 //Функция за извеждане на модала с информация за AКТИВИТЕ по заявките.
 
-    var handleAssetsRequests = () => {
+    let handleAssetsRequests = () => {
         $('#kt_table_transport_requests_table').on('click', '.details-control', function () {
-            var data = childTable.row($(this).closest('tr')).data();
-            var assetRequestId = data ? data.number : null; // Използвайте 'number' за да вземете ID-то
+            let data = childTable.row($(this).closest('tr')).data();
+            let assetRequestId = data ? data.number : null; // Използвайте 'number' за да вземете ID-то
 
 
             $.ajax({
@@ -440,13 +440,13 @@ $('#transportCompanies').on('change', function() {
                 type: 'POST',
                 data: { assetRequestId: assetRequestId },
                 success: function (response) {
-                    var assets = response.assets;
-                    var timeline = $('.timeline');
+                    let assets = response.assets;
+                    let timeline = $('.timeline');
                     timeline.empty();
 
                     // Генериране и добавяне на новото съдържание
                     assets.forEach(function (asset) {
-                        var badgeClass = '';
+                        let badgeClass = '';
                         switch (asset.asset_direction) {
                             case 'Изходящо':
                                 badgeClass = 'badge-light-danger';
@@ -458,7 +458,7 @@ $('#transportCompanies').on('change', function() {
                             default:
                                 badgeClass = 'badge-secondary';
                         }
-                        var assetHTML = ` <div class="d-flex flex-stack py-5 border-bottom border-gray-300 border-bottom-dashed">
+                        let assetHTML = ` <div class="d-flex flex-stack py-5 border-bottom border-gray-300 border-bottom-dashed">
 									<!--begin::Details-->
 									<div class="d-flex align-items-center">
 

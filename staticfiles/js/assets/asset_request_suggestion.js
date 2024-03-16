@@ -1,17 +1,17 @@
 // Функция за обработка на избора на контрагент пру пускане на за явка за транспорт Стъпка 3 ( Данни за Клиент)
 
 document.querySelector('[name="outlet_code"]').addEventListener('input', function () {
-    var query = this.value;
-    var inputField = this;
+    let query = this.value;
+    let inputField = this;
 
     // Премахване на стария контейнер за предложения, ако съществува
-    var existingSuggestionsContainer = document.querySelector('.suggestions-container');
+    let existingSuggestionsContainer = document.querySelector('.suggestions-container');
     if (existingSuggestionsContainer) {
         existingSuggestionsContainer.remove();
     }
 
     // Създаване на нов контейнер за предложения
-    var suggestionsContainer = document.createElement('div');
+    let suggestionsContainer = document.createElement('div');
     suggestionsContainer.classList.add('suggestions-container');
 
     if (query.length >= 2) {
@@ -22,7 +22,7 @@ document.querySelector('[name="outlet_code"]').addEventListener('input', functio
                 suggestionsContainer.classList.add('list-group'); // Добавяне на Bootstrap клас за списък
 
                 suggestions.forEach(suggestion => {
-                    var suggestionDiv = document.createElement('div');
+                    let suggestionDiv = document.createElement('div');
                     suggestionDiv.textContent = suggestion.code + ' - ' + suggestion.name;
                     suggestionDiv.classList.add('list-group-item', 'list-group-item-action', 'suggestion-item'); // Добавяне на Bootstrap класове
                     suggestionDiv.addEventListener('click', function () {
@@ -31,7 +31,7 @@ document.querySelector('[name="outlet_code"]').addEventListener('input', functio
                         // suggestionsContainer.appendChild(suggestionDiv);
 
                         // Скриване на контейнера за предложения
-                        var existingSuggestionsContainer = document.querySelector('.suggestions-container');
+                        let existingSuggestionsContainer = document.querySelector('.suggestions-container');
                         if (existingSuggestionsContainer) {
                             existingSuggestionsContainer.remove();
                         }
@@ -47,7 +47,7 @@ document.querySelector('[name="outlet_code"]').addEventListener('input', functio
                                 document.querySelector('.object-address-display').textContent = data.address || '-';
                                 document.querySelector('.object-telephone-display').textContent = data.telephone || '-';
                                 // Актуализирайте стойността на скритото поле
-                                var objectNumber = data.code || '-';
+                                let objectNumber = data.code || '-';
                                 document.querySelector('input[name="object_number"]').value = objectNumber !== '-' ? objectNumber : '';
                                 // Добавете код за другите полета, ако е необходимо
                             });
@@ -67,8 +67,8 @@ document.querySelector('[name="outlet_code"]').addEventListener('input', functio
 document.querySelector('.edit-telephone').addEventListener('click', function (event) {
     event.preventDefault();
 
-    var telephoneDisplay = document.querySelector('.object-telephone-display');
-    var editInput = document.querySelector('.edit-telephone-input');
+    let telephoneDisplay = document.querySelector('.object-telephone-display');
+    let editInput = document.querySelector('.edit-telephone-input');
 
     telephoneDisplay.style.display = 'none';
     this.style.display = 'none';

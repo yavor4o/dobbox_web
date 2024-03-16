@@ -11,20 +11,20 @@ $.ajaxSetup({
 
 
 // Class definition - Тук са функциите които отговарят за саото пускане на заявка в модалния прозорец.
-var CreateRequest = function () {
+let CreateRequest = function () {
     // Elements
-    var modal;
-    var modalEl;
-    var stepper;
-    var form;
-    var formSubmitButton;
-    var formContinueButton;
-    var stepperObj;
-    var validations = [];
+    let modal;
+    let modalEl;
+    let stepper;
+    let form;
+    let formSubmitButton;
+    let formContinueButton;
+    let stepperObj;
+    let validations = [];
 
 
     // Private Functions
-    var initStepper = function () {
+    let initStepper = function () {
         // Initialize Stepper
         stepperObj = new KTStepper(stepper);
 
@@ -80,7 +80,7 @@ var CreateRequest = function () {
             updateIncomingAssetsValidation()
 
             // Validate form before change stepper step
-            var validator = validations[stepper.getCurrentStepIndex() - 1]; // get validator for currnt step
+            let validator = validations[stepper.getCurrentStepIndex() - 1]; // get validator for currnt step
 
             if (validator) {
                 validator.validate().then(function (status) {
@@ -121,7 +121,7 @@ var CreateRequest = function () {
         });
     }
 
-    var handleForm = function () {
+    let handleForm = function () {
         formSubmitButton.addEventListener('click', function (e) {
             e.preventDefault();
             // Проверете валидността на всички стъпки
@@ -132,7 +132,7 @@ var CreateRequest = function () {
                     formSubmitButton.disabled = true;
 
                     // Събиране на данните от формата
-                    var formData = {
+                    let formData = {
                         movementType: null,
                         actions: [],
                         objectInfo: {
@@ -145,7 +145,7 @@ var CreateRequest = function () {
                         movementTypes: []
                     };
 
-                    var selectedMovementType = document.querySelector('input[name="transport_direction"]:checked');
+                    let selectedMovementType = document.querySelector('input[name="transport_direction"]:checked');
                     if (selectedMovementType) {
                         formData.movementType = selectedMovementType.value;
                     }
@@ -158,17 +158,17 @@ var CreateRequest = function () {
                     });
 
                     $('#kt_docs_advanced .form-group.row').each(function () {
-                        var movementType = $(this).find('input[type="radio"]:checked').val();
-                        var tagifyFieldId = $(this).find('[data-kt-repeater="tagify"]').attr('id');
-                        var tags = tagifyData[tagifyFieldId] || []; // Използване на данните от tagifyData
+                        let movementType = $(this).find('input[type="radio"]:checked').val();
+                        let tagifyFieldId = $(this).find('[data-kt-repeater="tagify"]').attr('id');
+                        let tags = tagifyData[tagifyFieldId] || []; // Използване на данните от tagifyData
                         formData.movementTypes.push({
                             movement: movementType,
                             tags: tags
                         });
                     });
                     // Добавяне на брой бурета и стелажи
-                    var barrelCount = document.querySelector('[data-kt-dialer="true"][data-barrel="true"] input').value;
-                    var rackCount = document.querySelector('[data-kt-dialer="true"][data-rack="true"] input').value;
+                    let barrelCount = document.querySelector('[data-kt-dialer="true"][data-barrel="true"] input').value;
+                    let rackCount = document.querySelector('[data-kt-dialer="true"][data-rack="true"] input').value;
 
                     // Добавяне на броя бурета и стелажи към formData
                     formData.barrelCount = barrelCount;
@@ -194,7 +194,7 @@ var CreateRequest = function () {
                             },
                             error: function (xhr, status, error) {
                                 // Обработка на грешка от сървъра
-                                var errorMessage = xhr.responseJSON && xhr.responseJSON.error ? xhr.responseJSON.error : "Възникна грешка при обработка на заявката.";
+                                let errorMessage = xhr.responseJSON && xhr.responseJSON.error ? xhr.responseJSON.error : "Възникна грешка при обработка на заявката.";
                                 console.error("Error occurred:", errorMessage);
 
                                 // Показване на съобщение за грешка на клиента
@@ -235,7 +235,7 @@ var CreateRequest = function () {
     };
 
 
-    var initValidation = function () {
+    let initValidation = function () {
         // Init form validation rules. For more info check the FormValidation plugin's official documentation:https://formvalidation.io/
 
         // Step 1
@@ -316,7 +316,7 @@ var CreateRequest = function () {
                             callback: {
                                 message: 'Не сте въвели съществуващ номер на обект',
                                 callback: function (input) {
-                                    var objectNumber = document.querySelector(".object-code-display").textContent;
+                                    let objectNumber = document.querySelector(".object-code-display").textContent;
                                     return objectNumber !== '-';
                                 }
                             }
@@ -386,21 +386,21 @@ var CreateRequest = function () {
     }
 
 
-    var tagifyData = {}; // Глобална променлива за съхранение на таговете
+    let tagifyData = {}; // Глобална променлива за съхранение на таговете
 
     function handleTagChange(e) {
-        var tagifyInstance = e.detail.tagify;
-        var tags = tagifyInstance.value.map(tag => tag.value);
+        let tagifyInstance = e.detail.tagify;
+        let tags = tagifyInstance.value.map(tag => tag.value);
         console.log("Tagify Change: ", tags);
         tagifyData[tagifyInstance.DOM.originalInput.id] = tags; // Запазване на таговете в tagifyData
     }
 
 
     // Функция за инициализация на Tagify
-    var initTagify = function () {
+    let initTagify = function () {
         // Инициализация на Tagify за всеки елемент
         document.querySelectorAll('[data-kt-repeater="tagify"]').forEach(function (tagifyInput) {
-            var tagify = new Tagify(tagifyInput, {
+            let tagify = new Tagify(tagifyInput, {
                 tagTextProp: 'BC',
                 placeholder: "Моля въвведете BC/SN",
                 enforceWhitelist: true,
@@ -419,7 +419,7 @@ var CreateRequest = function () {
             });
             // Динамично зареждане на данни при въвеждане на текст
             tagify.on('input', function (e) {
-                var value = e.detail.value;
+                let value = e.detail.value;
                 tagify.settings.whitelist.length = 0; // ресетиране на текущия whitelist
 
                 // AJAX заявка към сървъра с търсената стойност
@@ -493,7 +493,7 @@ var CreateRequest = function () {
 
 
 // Обработчик за промяна на чекбокса
-    var handleCheckboxChange = function () {
+    let handleCheckboxChange = function () {
 
         // // Задаване на началното състояние на чекбоксовете като непроверени
         // $('input[type="checkbox"][name="answer_question"]').prop('checked', false);
@@ -507,7 +507,7 @@ var CreateRequest = function () {
 
         $('input[type="checkbox"][name="answer_question"]').change(function () {
             // Логика за "Ще извеждам съоръжение"
-            var isEquipmentExitChecked = $('input[type="checkbox"][name="answer_question"][value="Ще извеждам съоръжение"]').is(':checked');
+            let isEquipmentExitChecked = $('input[type="checkbox"][name="answer_question"][value="Ще извеждам съоръжение"]').is(':checked');
             if (isEquipmentExitChecked) {
                 $('#outgoing_movement').show(); // Показване на секцията за изходящи активи
             } else {
@@ -538,7 +538,7 @@ var CreateRequest = function () {
         $('input[type="radio"][name="transport_direction"]:checked').trigger('change');
 
             // Логика за "буре" и "стелаж"
-            var isBarrelRackChecked = $('input[type="checkbox"][name="answer_question"][value="Ще нося стелаж/буре"]').is(':checked');
+            let isBarrelRackChecked = $('input[type="checkbox"][name="answer_question"][value="Ще нося стелаж/буре"]').is(':checked');
             if (isBarrelRackChecked) {
                 $('.additional-options').show();
             } else {
@@ -550,8 +550,8 @@ var CreateRequest = function () {
 
     // Функция за обновяване на валидацията
     function updateOutgoingAssetsValidation() {
-        var isEquipmentExitChecked = $('input[type="checkbox"][name="answer_question"][value="Ще извеждам съоръжение"]').is(':checked');
-        var isOutgoingMovementVisible = $('#outgoing_movement').is(':visible'); // Проверка дали елементът е видим
+        let isEquipmentExitChecked = $('input[type="checkbox"][name="answer_question"][value="Ще извеждам съоръжение"]').is(':checked');
+        let isOutgoingMovementVisible = $('#outgoing_movement').is(':visible'); // Проверка дали елементът е видим
 
         if (isEquipmentExitChecked && isOutgoingMovementVisible) {
             // Ако полето вече не е добавено, добавете го
@@ -620,7 +620,7 @@ var CreateRequest = function () {
             url: '/assets/get-transport-companies',
             type: 'GET',
             success: function (companies_data) {
-                var select = $('#floatingSelect');
+                let select = $('#floatingSelect');
                 select.empty();
                 select.append($('<option>', {
                     value: '',

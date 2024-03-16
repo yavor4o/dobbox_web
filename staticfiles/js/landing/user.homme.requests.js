@@ -11,13 +11,13 @@ $.ajaxSetup({
 });
 
 // Class definition
-var KTAppTransportRequests = function () {
-    // Shared variables
-    var table;
-    var datatable;
+let KTAppTransportRequests = function () {
+    // Shared letiables
+    let table;
+    let datatable;
 
     // Private functions
-    var initDatatable = function () {
+    let initDatatable = function () {
         // Set date data order
         const tableRows = table.querySelectorAll('tbody tr');
 
@@ -82,17 +82,17 @@ var KTAppTransportRequests = function () {
         "searchable": false,
         "render": function (data, type, row) {
             // Използвайте `row.asset_id` за да получите правилното ID на актива
-            var assetId = row.asset_id; // Уверете се, че това е правилното име на полето, което съдържа ID на актива
+            let assetId = row.asset_id; // Уверете се, че това е правилното име на полето, което съдържа ID на актива
 
-            var isApproved = row.status === "потвърдена" || row.transport_id === "" ;
-            var TransportRequested = row.transport_id !== "" || row.transport_id === "self transport";
-            var cancelRequest = row.status === "потвърдена" || row.asset_request_status_id === 6;
-            var cancelRequestButton = '';
+            let isApproved = row.status === "потвърдена" || row.transport_id === "" ;
+            let TransportRequested = row.transport_id !== "" || row.transport_id === "self transport";
+            let cancelRequest = row.status === "потвърдена" || row.asset_request_status_id === 6;
+            let cancelRequestButton = '';
 
 
 
-            var approvedIconClass = isApproved ? "ki-duotone ki-check-square fs-2x text-secondary secondary-btn btn btn-link disabled" : "ki-duotone ki-check-square fs-2x text-success success-btn btn btn-link";
-            var deleteIconClass = TransportRequested || cancelRequest ? "ki-duotone ki-trash-square fs-2x text-secondary secondary-btn btn btn-link disabled" : "ki-duotone ki-trash-square fs-2x text-danger delete-btn btn btn-link";
+            let approvedIconClass = isApproved ? "ki-duotone ki-check-square fs-2x text-secondary secondary-btn btn btn-link disabled" : "ki-duotone ki-check-square fs-2x text-success success-btn btn btn-link";
+            let deleteIconClass = TransportRequested || cancelRequest ? "ki-duotone ki-trash-square fs-2x text-secondary secondary-btn btn btn-link disabled" : "ki-duotone ki-trash-square fs-2x text-danger delete-btn btn btn-link";
 
             return `
                 <i class="${approvedIconClass}" data-asset-id="${assetId}"><span class="path1"></span><span class="path2"></span></i>
@@ -107,7 +107,7 @@ var KTAppTransportRequests = function () {
                             "targets": 7, // Индексът на колоната за датата
                             "render": function (data, type, full, meta) {
                                 // Проверка дали има стойност в full.created_at и форматиране на датата
-                                var createdDate = full.created_at ? new Date(full.created_at).toLocaleDateString() : ''; // Използване на български формат за дата
+                                let createdDate = full.created_at ? new Date(full.created_at).toLocaleDateString() : ''; // Използване на български формат за дата
                                 return '<span style="font-size: 8px;">' + createdDate + '</span>';
                             }
 
@@ -117,7 +117,7 @@ var KTAppTransportRequests = function () {
                             "targets": 4, // Индексът на колоната за статуса
                             "render": function (data, type, full, meta) {
                                 // Тук можете да добавите различни класове в зависимост от стойността на статуса
-                                var badgeClass = '';
+                                let badgeClass = '';
                                 switch (data) {
                                     case 'Входящо':
                                         badgeClass = 'badge badge-light-success';
@@ -138,7 +138,7 @@ var KTAppTransportRequests = function () {
                             "targets": 10, // Индексът на колоната за статуса
                             "render": function (data, type, full, meta) {
                                 // Тук можете да добавите различни класове в зависимост от стойността на статуса
-                                var badgeClass = '';
+                                let badgeClass = '';
                                 switch (data) {
                                     case 'потвърдена':
                                         badgeClass = 'badge badge-light-primary';
@@ -159,7 +159,7 @@ var KTAppTransportRequests = function () {
                             "targets": 8, // Индексът на колоната за статуса
                             "render": function (data, type, full, meta) {
                                 // Тук можете да добавите различни класове в зависимост от стойността на статуса
-                                var badgeClass = '';
+                                let badgeClass = '';
                                 switch (data) {
                                     case 'В изчакване':
                                         badgeClass = 'badge-light-warning';
@@ -173,7 +173,7 @@ var KTAppTransportRequests = function () {
                             "targets": 9, // Индексът на колоната за статуса
                             "render": function (data, type, full, meta) {
                                 // Тук можете да добавите различни класове в зависимост от стойността на статуса
-                                var badgeClass = '';
+                                let badgeClass = '';
                                 switch (data) {
                                     case 'self transport':
                                         badgeClass = 'badge badge-light-primary';
@@ -234,7 +234,7 @@ var KTAppTransportRequests = function () {
 
 
     // Search Datatable --- official docs reference: https://datatables.net/reference/api/search()
-    var handleSearchDatatable = () => {
+    let handleSearchDatatable = () => {
         const filterSearch = document.querySelector('[data-kt-assets-movements-filter="search"]');
         filterSearch.addEventListener('keyup', function (e) {
             datatable.search(e.target.value).draw();
@@ -244,7 +244,7 @@ var KTAppTransportRequests = function () {
     // Функция за одобрение на заявката за транспорт
     function approveAsset() {
         $('#kt_assets_movements_table').on('click', '.success-btn', function () {
-            var requestId = $(this).data('asset-id');
+            let requestId = $(this).data('asset-id');
 
             Swal.fire({
                 text: "Сигурни ли сте че искате да потвърдите позициониране?",
@@ -281,7 +281,7 @@ var KTAppTransportRequests = function () {
     // Функция за обработка на изтриване на актив
     function deleteAsset()  {
         $('#kt_assets_movements_table').on('click', '.delete-btn', function () {
-            var requestId = $(this).data('asset-id');
+            let requestId = $(this).data('asset-id');
 
             // Използване на SweetAlert2 за потвърждение на действието
             Swal.fire({

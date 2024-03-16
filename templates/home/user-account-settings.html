@@ -62,15 +62,15 @@
 														<div class="d-flex flex-column">
 															<!--begin::Name-->
 															<div class="d-flex align-items-center mb-2">
-																<a href="#" class="text-gray-900 text-hover-primary fs-2 fw-bold me-1">{{ request.user.userdata.full_name }}</a>
-																<a href="#">
+																<a  class="text-primary text-hover-primary fs-2 fw-bold me-1">{{ request.user.userdata.full_name }}</a>
+																<a>
 																	<i class="ki-outline ki-verify fs-1 text-primary"></i>
 																</a>
 															</div>
 															<!--end::Name-->
 															<!--begin::Info-->
 															<div class="d-flex flex-wrap fw-semibold fs-6 mb-4 pe-2">
-																<a href="#" class="d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2">
+																<a  class="d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2">
 																<i class="ki-outline ki-profile-circle fs-4 me-1"></i>
 
                                                                 {% for group in request.user.groups.all %}
@@ -79,17 +79,15 @@
                                                                     <span class="badge badge-light-success fw-bold fs-8 px-2 py-1 ms-2">Няма групи</span>
                                                                 {% endfor %}
                                                                 </a>
-																<a href="#" class="d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2">
+																<a class="d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2">
 																<i class="ki-outline ki-geolocation fs-4 me-1"></i>{{ request.user.userdata.office }}</a>
-																<a href="#" class="d-flex align-items-center text-gray-400 text-hover-primary mb-2">
-																<i class="ki-outline ki-sms fs-4"></i> {{ request.user.email }}</a>
+																<a class="d-flex align-items-center text-gray-400 text-hover-primary mb-2">
+																<i class="ki-outline ki-sms fs-4" id="email-user"></i> {{ request.user.email }}</a>
 															</div>
 															<!--end::Info-->
 														</div>
 														<!--end::User-->
-														<!--begin::Actions-->
-
-														<!--end::Actions-->
+														
 													</div>
 													<!--end::Title-->
 													<!--begin::Stats-->
@@ -140,8 +138,7 @@
 															</div>
 															<!--end::Stats-->
 														</div>
-														<!--end::Wrapper-->
-														<!--begin::Progress-->
+														
 
 														<!--end::Progress-->
 													</div>
@@ -209,32 +206,37 @@
                                                         </div>
                                                     </div>
                                                 {% if form.non_field_errors %}
-                            <div class="notice d-flex bg-light-warning rounded border-warning border border-dashed mb-2 p-6">
-                                <!--begin::Icon-->
-                                <i class="ki-outline ki-information fs-2tx text-warning me-4"></i>
-                                <!--end::Icon-->
-                            
-                                <!--begin::Wrapper-->
-                                <div class="d-flex flex-stack flex-grow-1">
-                                    <!--begin::Content-->
-                                    <div class="fw-semibold">
-                                        <h4 class="text-gray-900 fw-bold">Внимание!</h4>
-                                        <div class="fs-6 text-gray-700">
-                                            {% for error in form.non_field_errors %}
-                                                {{ error }}
-                                            {% endfor %}
-                                        </div>
-                                    </div>
-                                    <!--end::Content-->
-                                </div>
-                                <!--end::Wrapper-->
-                            </div>
-                            {% endif %}
-    <div class="card-footer d-flex justify-content-end py-6 px-9">
-        <button type="reset" class="btn btn-light btn-active-light-primary me-2">Отказ</button>
-        <button type="submit" class="btn btn-primary" id="kt_account_profile_details_submit">Запази</button>
-    </div>
-</form>
+                                                    <div class="notice d-flex bg-light-warning rounded border-warning border border-dashed mb-2 p-6">
+                                                        <!--begin::Icon-->
+                                                        <i class="ki-outline ki-information fs-2tx text-warning me-4"></i>
+                                                        <!--end::Icon-->
+
+                                                        <!--begin::Wrapper-->
+                                                        <div class="d-flex flex-stack flex-grow-1">
+                                                            <!--begin::Content-->
+                                                            <div class="fw-semibold">
+                                                                <h4 class="text-gray-900 fw-bold">Внимание!</h4>
+                                                                <div class="fs-6 text-gray-700">
+                                                                    {% for error in form.non_field_errors %}
+                                                                        {{ error }}
+                                                                    {% endfor %}
+                                                                </div>
+                                                            </div>
+                                                            <!--end::Content-->
+                                                        </div>
+                                                        <!--end::Wrapper-->
+                                                    </div>
+                                                    {% endif %}
+                                                    <div class="card-footer d-flex justify-content-end py-6 px-9">
+                                                        <button type="reset" class="btn btn-light btn-active-light-primary me-2">Отказ</button>
+                                                        <button type="submit" class="btn btn-primary" id="kt_account_profile_details_submit">Запази
+                                                        <span class="indicator-progress">
+                                                            Авторизация...
+                                                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                                                        </span>
+                                                        </button>
+                                                    </div>
+                                        </form>
 
 											<!--end::Form-->
 										</div>
@@ -246,7 +248,7 @@
 										<!--begin::Card header-->
 										<div class="card-header border-0 cursor-pointer" role="button" data-bs-toggle="collapse" data-bs-target="#kt_account_signin_method">
 											<div class="card-title m-0">
-												<h3 class="fw-bold m-0">Sign-in Method</h3>
+												<h3 class="fw-bold m-0">Данни за вход</h3>
 											</div>
 										</div>
 										<!--end::Card header-->
@@ -258,39 +260,46 @@
 												<div class="d-flex flex-wrap align-items-center">
 													<!--begin::Label-->
 													<div id="kt_signin_email">
-														<div class="fs-6 fw-bold mb-1">Email Address</div>
-														<div class="fw-semibold text-gray-600">support@keenthemes.com</div>
+														<div class="fs-6 fw-bold mb-1">Имейл</div>
+														<div class="fw-semibold text-gray-600">{{ request.user.email }}</div>
 													</div>
 													<!--end::Label-->
 													<!--begin::Edit-->
 													<div id="kt_signin_email_edit" class="flex-row-fluid d-none">
 														<!--begin::Form-->
 														<form id="kt_signin_change_email" class="form" novalidate="novalidate">
+                                                             {% csrf_token %}
 															<div class="row mb-6">
 																<div class="col-lg-6 mb-4 mb-lg-0">
 																	<div class="fv-row mb-0">
-																		<label for="emailaddress" class="form-label fs-6 fw-bold mb-3">Enter New Email Address</label>
-																		<input type="email" class="form-control form-control-lg form-control-solid" id="emailaddress" placeholder="Email Address" name="emailaddress" value="support@keenthemes.com" />
+																		<label for="email" class="form-label fs-6 fw-bold mb-3">Въведете нов Имейл Адрес</label>
+																		<input type="email" class="form-control form-control-lg form-control-solid" id="emailaddress" placeholder="Email Address" name="email" autocomplete="new-email" value={{ request.user.email }} />
 																	</div>
 																</div>
 																<div class="col-lg-6">
 																	<div class="fv-row mb-0">
-																		<label for="confirmemailpassword" class="form-label fs-6 fw-bold mb-3">Confirm Password</label>
-																		<input type="password" class="form-control form-control-lg form-control-solid" name="confirmemailpassword" id="confirmemailpassword" />
+																		<label for="confirmemailpassword" class="form-label fs-6 fw-bold mb-3">Потвърдете паролата си</label>
+																		<input type="password" class="form-control form-control-lg form-control-solid" name="confirmemailpassword" id="confirmemailpassword" autocomplete="new-password" />
 																	</div>
 																</div>
 															</div>
 															<div class="d-flex">
-																<button id="kt_signin_submit" type="button" class="btn btn-primary me-2 px-6">Update Email</button>
-																<button id="kt_signin_cancel" type="button" class="btn btn-color-gray-400 btn-active-light-primary px-6">Cancel</button>
+																<button id="kt_signin_submit" type="button" class="btn btn-primary me-2 px-6">Запази
+                                                                <span class="indicator-progress">
+                                                                    Авторизация...
+                                                                    <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                                                                </span>
+                                                                </button>
+																<button id="kt_signin_cancel" type="button" class="btn btn-color-gray-400 btn-active-light-primary px-6">Отказ</button>
 															</div>
+                                                            
 														</form>
 														<!--end::Form-->
 													</div>
 													<!--end::Edit-->
 													<!--begin::Action-->
 													<div id="kt_signin_email_button" class="ms-auto">
-														<button class="btn btn-light btn-active-light-primary">Change Email</button>
+														<button class="btn btn-light btn-active-light-primary">Промени Имейл</button>
 													</div>
 													<!--end::Action-->
 												</div>
@@ -302,7 +311,7 @@
 												<div class="d-flex flex-wrap align-items-center mb-10">
 													<!--begin::Label-->
 													<div id="kt_signin_password">
-														<div class="fs-6 fw-bold mb-1">Password</div>
+														<div class="fs-6 fw-bold mb-1">Парола</div>
 														<div class="fw-semibold text-gray-600">************</div>
 													</div>
 													<!--end::Label-->
@@ -313,35 +322,39 @@
 															<div class="row mb-1">
 																<div class="col-lg-4">
 																	<div class="fv-row mb-0">
-																		<label for="currentpassword" class="form-label fs-6 fw-bold mb-3">Current Password</label>
-																		<input type="password" class="form-control form-control-lg form-control-solid" name="currentpassword" id="currentpassword" />
+																		<label for="currentpassword" class="form-label fs-6 fw-bold mb-3">Текуща парола</label>
+																		<input type="password" class="form-control form-control-lg form-control-solid" name="old_password" id="currentpassword" autocomplete="currentpassword" />
 																	</div>
 																</div>
 																<div class="col-lg-4">
 																	<div class="fv-row mb-0">
-																		<label for="newpassword" class="form-label fs-6 fw-bold mb-3">New Password</label>
-																		<input type="password" class="form-control form-control-lg form-control-solid" name="newpassword" id="newpassword" />
+																		<label for="newpassword" class="form-label fs-6 fw-bold mb-3">Нова парола</label>
+																		<input type="password" class="form-control form-control-lg form-control-solid" name="new_password1" id="newpassword" autocomplete="newpassword" />
 																	</div>
 																</div>
 																<div class="col-lg-4">
 																	<div class="fv-row mb-0">
-																		<label for="confirmpassword" class="form-label fs-6 fw-bold mb-3">Confirm New Password</label>
-																		<input type="password" class="form-control form-control-lg form-control-solid" name="confirmpassword" id="confirmpassword" />
+																		<label for="confirmpassword" class="form-label fs-6 fw-bold mb-3">Потвърди новата паролата</label>
+																		<input type="password" class="form-control form-control-lg form-control-solid" name="new_password2" id="confirmpassword" autocomplete="confirmpassword" />
 																	</div>
 																</div>
 															</div>
-															<div class="form-text mb-5">Password must be at least 8 character and contain symbols</div>
 															<div class="d-flex">
-																<button id="kt_password_submit" type="button" class="btn btn-primary me-2 px-6">Update Password</button>
-																<button id="kt_password_cancel" type="button" class="btn btn-color-gray-400 btn-active-light-primary px-6">Cancel</button>
+																<button type="submit" class="btn btn-primary" id="kt_password_submit">Запази
+                                                                    <span class="indicator-progress">
+                                                                        Авторизация...
+                                                                        <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                                                                    </span>
+                                                                </button>
+																<button id="kt_password_cancel" type="button" class="btn btn-color-gray-400 btn-active-light-primary px-6">Отказ</button>
 															</div>
 														</form>
 														<!--end::Form-->
-													</div>
+													    </div>
 													<!--end::Edit-->
 													<!--begin::Action-->
 													<div id="kt_signin_password_button" class="ms-auto">
-														<button class="btn btn-light btn-active-light-primary">Reset Password</button>
+														<button class="btn btn-light btn-active-light-primary">Промени парола</button>
 													</div>
 													<!--end::Action-->
 												</div>
@@ -380,7 +393,7 @@
 															<!--begin::Content-->
 															<div class="fw-semibold">
 																<h4 class="text-gray-900 fw-bold">С това действие вие ще Деактивирате акаунта си</h4>
-																<div class="fs-6 text-gray-700">За допълнителна сигурност това изисква да потвърдите имейла си, когато нулирате  регистрацията си.
+																<div class="fs-6 text-gray-700">За допълнителна сигурност това изисква да въведете <span class="text-primary fw-bold">вашата парола</span>, когато нулирате  регистрацията си.
 																<br />
 
 															</div>
@@ -399,7 +412,9 @@
 													<button id="kt_account_deactivate_account_submit" type="submit" class="btn btn-danger fw-semibold">Деактивиране на акаунт</button>
 												</div>
 												<!--end::Card footer-->
+                                                     </div>
 											</form>
+
 											<!--end::Form-->
 										</div>
 										<!--end::Content-->
@@ -432,30 +447,17 @@
 			<!--end::Page-->
 		</div>
 		<!--end::App-->
-		<!--begin::Drawers-->
 
 
-		<!--end::Modals-->
-		<!--begin::Javascript-->
-		<script>var hostUrl = "assets/";</script>
-
-    <script>
-        let csrfToken = "{% csrf_token %}";
-    </script>
+        <!--begin::Javascript-->
     <script src="{% static 'js/plugins/global/plugins.bundle.js' %}"></script>
     <script src="{% static 'js/scripts.bundle.js' %}"></script>
     <!--end::Global Javascript Bundle-->
-
-    <script src="{% static 'js/plugins/custom/datatables/datatables.bundle.js' %}"></script>
 		<!--end::Vendors Javascript-->
 		<!--begin::Custom Javascript(used for this page only)-->
-{#		<script src="{% static 'js/landing/account_settings/signin-methods.js' %}"></script>#}
-{#        <script src="{% static 'js/landing/account_settings/profile-details.js' %}"></script>#}
-{#        <script src="{% static 'js/landing/account_settings/deactivate-account.js' %}"></script>#}
-{#        <script src="{% static 'assets/js/custom/pages/user-profile/general.js' %}"></script>#}
-        <script src="{% static 'assets/js/widgets.bundle.js' %}"></script>
-        <script src="{% static 'assets/js/custom/widgets.js' %}"></script>
-
+		<script src="{% static 'js/landing/account_settings/signin-methods.js' %}"></script>
+		<script src="{% static 'js/landing/account_settings/overview.js' %}" ></script>
+        <script src="{% static 'js/landing/account_settings/deactivate-account.js' %}"></script>
 		<!--end::Custom Javascript-->
 		<!--end::Javascript-->
 	</body>

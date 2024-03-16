@@ -17,7 +17,7 @@
     
     //Използва се за асинхронно зареждане на Google Maps JavaScript API
     function loadGoogleMapsApi() {
-        var script = document.createElement('script');
+        let script = document.createElement('script');
         script.type = 'text/javascript';
         script.src = 'https://maps.googleapis.com/maps/api/js?key=' + window.googleMapsApiKey + '&loading=async&callback&callback=onGoogleMapsApiLoaded';
         document.body.appendChild(script);
@@ -25,12 +25,12 @@
     
     //Генерира карта маршрут за транспортната фирма по обекти във вид на маршрут.
     function initMap(start_coordinates, coordinates, mapContainerId) {
-    var startLat = parseFloat(start_coordinates[0]);
-    var startLng = parseFloat(start_coordinates[1]);
+    let startLat = parseFloat(start_coordinates[0]);
+    let startLng = parseFloat(start_coordinates[1]);
     console.log(start_coordinates);
 
     // Инициализация на картата
-    var map = new google.maps.Map(document.getElementById(mapContainerId), {
+    let map = new google.maps.Map(document.getElementById(mapContainerId), {
         zoom: 12,
         center: {lat: startLat, lng: startLng}
     });
@@ -44,7 +44,7 @@
     }
 
     // Подготовка на waypoints от предоставените координати
-    var waypoints = coordinates.map(function(coord) {
+    let waypoints = coordinates.map(function(coord) {
         return {
             location: coord,
             stopover: true
@@ -52,11 +52,11 @@
     });
 
     // Създаване и конфигуриране на DirectionsService и DirectionsRenderer
-    var directionsService = new google.maps.DirectionsService();
-    var directionsDisplay = new google.maps.DirectionsRenderer();
+    let directionsService = new google.maps.DirectionsService();
+    let directionsDisplay = new google.maps.DirectionsRenderer();
     directionsDisplay.setMap(map);
 
-    var request = {
+    let request = {
         origin: start_coordinates,
         destination: start_coordinates,
         waypoints: waypoints, // Добавяне на waypoints
@@ -75,14 +75,14 @@
 
     
     // Class definition
-    var TransportRequest = function () {
-        // Define shared variables
-        var datatable;
-        var table;
+    let TransportRequest = function () {
+        // Define shared letiables
+        let datatable;
+        let table;
         // Това е функцията за подтаблицата с активите към основната таблица със заявките
-        var formatSubTable = function (rowData) {
-            var subTableId = 'child_data_ajax_' + rowData.id;
-            var div = $('<div/>').attr('id', subTableId);
+        let formatSubTable = function (rowData) {
+            let subTableId = 'child_data_ajax_' + rowData.id;
+            let div = $('<div/>').attr('id', subTableId);
     
             // Изпращане на AJAX заявка към сървъра
             $.ajax({
@@ -90,11 +90,11 @@
                 type: 'POST',
                 data: {assetRequestId: rowData.id},
                 success: function (response) {
-                    var assets = response.assets;
-                    var status = response.status;
+                    let assets = response.assets;
+                    let status = response.status;
     
                     // Инициализирайте DataTable
-                    var subTable = $('<table ></table>').attr('id', subTableId).addClass('table align-middle table-row-dashed fs-9 text-dark gy-5').appendTo(div);
+                    let subTable = $('<table ></table>').attr('id', subTableId).addClass('table align-middle table-row-dashed fs-9 text-dark gy-5').appendTo(div);
     
                     // Инициализирайте DataTable с настройки за сортиране
                     subTable.DataTable({
@@ -117,8 +117,8 @@
                             {
                                 title: "Действия",
                                 render: function (data, type, row) {
-                                    var isApproved = status === "Заявен транспорт" || status === "Анулирана" || status === "Изпълнена";
-                                    var checkIconClass = isApproved ? "ki-duotone ki-trash-square fs-2x text-secondary secondary-btn btn btn-link disabled" : "ki-duotone ki-trash-square fs-2x text-danger delete-btn btn btn-link";
+                                    let isApproved = status === "Заявен транспорт" || status === "Анулирана" || status === "Изпълнена";
+                                    let checkIconClass = isApproved ? "ki-duotone ki-trash-square fs-2x text-secondary secondary-btn btn btn-link disabled" : "ki-duotone ki-trash-square fs-2x text-danger delete-btn btn btn-link";
     
                                     return `
                                                
@@ -137,7 +137,7 @@
                                 "targets": 5, // Индексът на колоната за статуса
                                 "render": function (data, type, full, meta) {
                                     // Тук можете да добавите различни класове в зависимост от стойността на статуса
-                                    var badgeClass = '';
+                                    let badgeClass = '';
                                     switch (data) {
                                         case 'Входящо':
                                             badgeClass = 'badge badge-light-success';
@@ -178,7 +178,7 @@
                     url: '/assets/asset-statuses',
                     type: 'GET',
                     success: function (statuses) {
-                        var filterSelect = $('#deliveryFilter');
+                        let filterSelect = $('#deliveryFilter');
                         $.each(statuses, function (index, status) {
                             filterSelect.append($('<option>', {
                                 value: status,
@@ -190,13 +190,13 @@
             })
     
         // Функция за основната таблица със заявките
-        var initTransportRequestData = function () {
+        let initTransportRequestData = function () {
 
                     // Определяне на текущия рут
-            var currentPath = window.location.pathname;
+            let currentPath = window.location.pathname;
 
             // Задаване на различен брой редове за показване в таблицата в зависимост от рута
-            var pageLength;
+            let pageLength;
             if (currentPath === "/assets/transport-request") {
                 pageLength = 10; // Стандартен брой редове за /assets/transport-request
             } else if (currentPath === "/console/dashboard") {
@@ -311,17 +311,17 @@
     
                         "searchable": false,
                         render: function (data, type, row) {
-                            var isApproved = row.status_name === "Одобрена" || row.status_name === "ТранспортSR" || row.status_name === "Заявен транспорт" || row.status_name === "Анулирана" || row.status_name === "Изпълнена";
-                            var TransportRequested = row.status_name === "Заявен транспорт";
-                            var cancelRequest = row.status_name === "Анулирана" || row.status_name === "Изпълнена";
-                            var cancelRequestButton = '';
+                            let isApproved = row.status_name === "Одобрена" || row.status_name === "ТранспортSR" || row.status_name === "Заявен транспорт" || row.status_name === "Анулирана" || row.status_name === "Изпълнена";
+                            let TransportRequested = row.status_name === "Заявен транспорт";
+                            let cancelRequest = row.status_name === "Анулирана" || row.status_name === "Изпълнена";
+                            let cancelRequestButton = '';
     
                             if (TransportRequested) {
                                 cancelRequestButton = '<i class="ki-duotone ki-cross-square fs-2x text-danger cancel-btn btn btn-link" data-asset-id="' + row.id + '"><span class="path1"></span><span class="path2"></span></i>';
                             }
     
-                            var approvedIconClass = isApproved ? "ki-duotone ki-check-square fs-2x text-secondary secondary-btn btn btn-link disabled" : "ki-duotone ki-check-square fs-2x text-success success-btn btn btn-link";
-                            var deleteIconClass = TransportRequested || cancelRequest ? "ki-duotone ki-trash-square fs-2x text-secondary secondary-btn btn btn-link disabled" : "ki-duotone ki-trash-square fs-2x text-danger request-delete-btn btn btn-link";
+                            let approvedIconClass = isApproved ? "ki-duotone ki-check-square fs-2x text-secondary secondary-btn btn btn-link disabled" : "ki-duotone ki-check-square fs-2x text-success success-btn btn btn-link";
+                            let deleteIconClass = TransportRequested || cancelRequest ? "ki-duotone ki-trash-square fs-2x text-secondary secondary-btn btn btn-link disabled" : "ki-duotone ki-trash-square fs-2x text-danger request-delete-btn btn btn-link";
     
                             return `
                                 <i class="${approvedIconClass}" data-asset-id="${row.id}"><span class="path1"></span><span class="path2"></span></i>
@@ -337,8 +337,8 @@
                     {
                         "targets": 7, // Индексът на комбинираната колона
                         "render": function (data, type, full, meta) {
-                            var username = full.username ? full.username : ''; // Проверка за username
-                            var createdDate = full.created_at ? new Date(full.created_at).toLocaleString() : ''; // Проверка и форматиране на датата
+                            let username = full.username ? full.username : ''; // Проверка за username
+                            let createdDate = full.created_at ? new Date(full.created_at).toLocaleString() : ''; // Проверка и форматиране на датата
                             return '<span style="font-size: 10px;">' + createdDate + "<br>" + username + '</span>';
                         }
                     },
@@ -346,7 +346,7 @@
                         "targets": 8, // Индексът на комбинираната колона
                         "render": function (data, type, full, meta) {
                             if (type === 'display') {
-                                var cost = parseFloat(data) || 0; // Преобразува данните в число, ако не са валидни, връща 0
+                                let cost = parseFloat(data) || 0; // Преобразува данните в число, ако не са валидни, връща 0
                                 return cost.toFixed(2) + ' лв.'; // Форматира числото до два десетични знака и добавя 'лв.'
                             }
     
@@ -357,9 +357,9 @@
                     {
                         "targets": 3, // Индексът на колоната за статуса и транспорта
                         "render": function (data, type, full, meta) {
-                            var badgeClass = '';
-                            var transportBadgeClass = full.self_transport === 'Yes' ? 'badge badge-light-success' : ' badge badge-light-dark';
-                            var transportInfo = full.self_transport === 'Yes' ? 'Транспорт Девин' : 'Транспортна фирма';
+                            let badgeClass = '';
+                            let transportBadgeClass = full.self_transport === 'Yes' ? 'badge badge-light-success' : ' badge badge-light-dark';
+                            let transportInfo = full.self_transport === 'Yes' ? 'Транспорт Девин' : 'Транспортна фирма';
     
     
                             switch (full.status_name) {
@@ -458,7 +458,7 @@
 
     // Функция за превключване на редовете
         function toggleRow(tr) {
-            var row = datatable.row(tr);
+            let row = datatable.row(tr);
     
             if (row.child.isShown()) {
                 // Свиване на реда
@@ -469,7 +469,7 @@
                 tr.find('.toggle-off').show();
             } else {
                 // Разтягане на реда
-                var rowData = row.data();
+                let rowData = row.data();
                 row.child(formatSubTable(rowData)).show();
                 tr.addClass('shown');
                 tr.addClass('table-active');
@@ -481,9 +481,9 @@
     // Функция за одобрение на заявката за транспорт
         function approveAsset() {
             $('#kt_assets_table tbody').on('click', '.success-btn', function () {
-                var requestId = $(this).data('asset-id');
+                let requestId = $(this).data('asset-id');
                 console.log(requestId)
-                var action = 'success'
+                let action = 'success'
     
                 Swal.fire({
                     text: "Сигурни ли сте че искате да одобрите заявката?",
@@ -518,8 +518,8 @@
     // Функция за анулиране на заявката за транспорт
         function cancelRequest() {
             $('#kt_assets_table tbody').on('click', '.cancel-btn', function () {
-                var requestId = $(this).data('asset-id');
-                var action = 'cancel'
+                let requestId = $(this).data('asset-id');
+                let action = 'cancel'
     
                 Swal.fire({
                     text: "Сигурни ли сте че искате да анулирате заявката?",
@@ -554,7 +554,7 @@
     
     
         // Search Datatable --- official docs reference: https://datatables.net/reference/api/search()
-        var handleSearchDatatable = () => {
+        let handleSearchDatatable = () => {
             const filterSearch = document.querySelector('[data-kt-assets-table-filter="search"]');
             filterSearch.addEventListener('keyup', function (e) {
                 datatable.search(e.target.value).draw();
@@ -562,7 +562,7 @@
         }
     
         // Function to handle the filter operation
-        var handleFilterDatatable = function () {
+        let handleFilterDatatable = function () {
             const applyButton = document.querySelector('#applyFilter');
     
     
@@ -575,7 +575,7 @@
         }
     
         // Reset Filter
-        var handleResetForm = function () {
+        let handleResetForm = function () {
             // Select reset button
             const resetButton = document.querySelector('[data-kt-assets-table-filter="reset"]');
             const deliveryFilterSelect = $('#deliveryFilter'); // Пременлива за филтър елемента
@@ -597,10 +597,10 @@
     
     
         // Функция за обработка на изтриване на цяла заявка
-        var handleDeleteRequest = () => {
+        let handleDeleteRequest = () => {
             $('#kt_assets_table tbody').on('click', '.request-delete-btn', function () {
-                var requestId = $(this).data('asset-id');
-                var row = $(this).closest('tr');
+                let requestId = $(this).data('asset-id');
+                let row = $(this).closest('tr');
     
                 // Използване на SweetAlert2 за потвърждение на действието
                 Swal.fire({
@@ -639,11 +639,11 @@
     
     
         // Функция за обработка на изтриване на актив
-        var handleDeleteAsset = () => {
+        let handleDeleteAsset = () => {
             $('#kt_assets_table tbody').on('click', '.delete-btn', function () {
-                var assetId = $(this).data('asset-id');
-                var subTableId = $(this).closest('.dataTable').attr('id');
-                var row = $(this).closest('tr');
+                let assetId = $(this).data('asset-id');
+                let subTableId = $(this).closest('.dataTable').attr('id');
+                let row = $(this).closest('tr');
     
                 // Използване на SweetAlert2 за потвърждение на действието
                 Swal.fire({
@@ -708,9 +708,9 @@
     
     //Функция за извеждане на модала с информация за историята на одобренията.
     
-        var handleHistoryAsset = () => {
+        let handleHistoryAsset = () => {
             $('#kt_assets_table tbody').on('click', '.warning-btn', function () {
-                var assetId = $(this).data('asset-id');
+                let assetId = $(this).data('asset-id');
                 // Актуализация на заглавието на модала с ID на заявката
                 $('#modal_history_transport').text('История на заявка № ' + assetId);
     
@@ -719,18 +719,18 @@
                     type: 'GET',
                     success: function (response) {
                         response.sort(function (a, b) {
-                            var dateA = new Date(a.updated_at), dateB = new Date(b.updated_at);
+                            let dateA = new Date(a.updated_at), dateB = new Date(b.updated_at);
                             return dateA - dateB; // сортира възходящо
                         });
     
                         // Очистване на текущото съдържание на модала
-                        var timeline = $('.timeline');
+                        let timeline = $('.timeline');
                         timeline.empty();
     
                         // Генериране и добавяне на новото съдържание
                         response.forEach(function (historyItem) {
-                            var formattedDate = new Date(historyItem.updated_at).toLocaleString();
-                            var badgeClass = '';
+                            let formattedDate = new Date(historyItem.updated_at).toLocaleString();
+                            let badgeClass = '';
     
                             switch (historyItem.status) {
                                 case 'В изчакване':
@@ -754,7 +754,7 @@
                                 default:
                                     badgeClass = 'badge-secondary';
                             }
-                            var timelineItem = `
+                            let timelineItem = `
                             <div class="timeline-item">
                                 <div class="timeline-line w-40px"></div>
                                 <div class="timeline-icon symbol symbol-circle symbol-40px me-4">
@@ -795,9 +795,9 @@
     
     
         // Обработчик на събития
-        var handleTransportRoute = () => {
+        let handleTransportRoute = () => {
         $('#kt_assets_table tbody').on('click', '.primary-btn', function() {
-            var requestId = $(this).data('asset-id');
+            let requestId = $(this).data('asset-id');
     
             $.ajax({
                     url: '/assets/get-object-coordinates',
@@ -810,7 +810,7 @@
     
     
                     // Показване на допълнителната информация в стилизирани блокчета
-                    var additionalInfoHtml = `
+                    let additionalInfoHtml = `
                         <div id="additional-info" class="d-flex flex-wrap justify-content-center mt-4">
                             <div class="border border-gray-300 border-dashed rounded min-w-50px py-3 px-4 me-7 mb-3">
                                 <div class="fs-6 text-primary fw-bold">${response.estimated_request_cost.toFixed(2)} лв.</div>
@@ -854,7 +854,7 @@
     
     
         // Init toggle toolbar Тук на база тази функция с чекбоксовете се обработва и логиката за пускане на заявка за транспорт от множество заявки
-        var initToggleToolbar = () => {
+        let initToggleToolbar = () => {
             // Select all checkboxes
             const checkboxes = table.querySelectorAll('[type="checkbox"]');
     
@@ -900,12 +900,12 @@
                         contentType: 'application/json',
                         data: JSON.stringify({assetIds: selectedIds}),
                         success: function (response) {
-                            var totalAssetsCount = response.total_assets_count; // Общ брой активи
-                            var requests = response.requests; // Информация за заявките
-                            var costInfo = response.cost_info; // Информация за цените
+                            let totalAssetsCount = response.total_assets_count; // Общ брой активи
+                            let requests = response.requests; // Информация за заявките
+                            let costInfo = response.cost_info; // Информация за цените
     
-                            var assetsInfoHtml = requests.map(request => {
-                                var assetsDetails = request.assets.map(asset =>
+                            let assetsInfoHtml = requests.map(request => {
+                                let assetsDetails = request.assets.map(asset =>
                                     `<div class="d-flex flex-stack py-5 border-bottom border-gray-300 border-bottom-dashed">
                                 <div class="d-flex align-items-start">
                                     <div>
@@ -927,7 +927,7 @@
                             }).join('');
     
                             // Генериране на HTML за допълнителната информация от cost_info
-                            var costInfoHtml = `
+                            let costInfoHtml = `
                             <div id="additional-info" class="d-flex flex-wrap justify-content-center mb-5">
                                 <div class="border border-gray-300 border-dashed rounded min-w-10px py-1 px-1 me-2 mb-3">
                                     <div class="fs-7 text-primary fw-bold">${costInfo.total_cost.toFixed(2)} лв.</div>
@@ -1035,7 +1035,7 @@
     
     // Toggle toolbars
         const toggleToolbars = () => {
-            // Define variables
+            // Define letiables
             const toolbarBase = document.querySelector('[data-kt-assets-table-toolbar="base"]');
             const toolbarSelected = document.querySelector('[data-kt-assets-table-toolbar="selected"]');
             const selectedCount = document.querySelector('[data-kt-assets-table-select="selected_count"]');
@@ -1072,7 +1072,7 @@
             url: '/assets/get-transport-companies',
             type: 'GET',
             success: function(companies_data) {
-                var select = $('#floatingSelect');
+                let select = $('#floatingSelect');
                 select.empty();
                 select.append($('<option>', {
                     value: '',

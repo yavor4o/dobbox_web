@@ -2,9 +2,9 @@
 "use strict";
 
 // Class definition
-var KTTablesWidget5 = function () {
-    var table;
-    var datatable;
+let KTTablesWidget5 = function () {
+    let table;
+    let datatable;
 
     // Private methods
     const initDatatable = () => {
@@ -47,7 +47,7 @@ var KTTablesWidget5 = function () {
                     "targets": 2,
                     "render": function (data, type, full, meta) {
                         if (type === 'display') {
-                            var cost = parseFloat(data) || 0; // Преобразува данните в число, ако не са валидни, връща 0
+                            let cost = parseFloat(data) || 0; // Преобразува данните в число, ако не са валидни, връща 0
                             return cost.toFixed(2) + ' лв.'; // Форматира числото до два десетични знака и добавя 'лв.'
                         }
 
@@ -102,24 +102,24 @@ KTUtil.onDOMContentLoaded(function () {
 "use strict";
 
 // Обединен клас за графики и карти
-var KTChartsAndCardsWidgetDashboard = function () {
-    var chart1 = {
+let KTChartsAndCardsWidgetDashboard = function () {
+    let chart1 = {
         self: null,
         rendered: false
     };
-    var chart2 = {
+    let chart2 = {
         canvas: null,
         ctx: null
     };
 
-    var chart5 = {
+    let chart5 = {
         self: null,
         rendered: false
     };
 
 
     // Инициализация на графиката за KTChartsWidget18
-        var initChart3 = function(data) {
+        let initChart3 = function(data) {
             if (!data || !Array.isArray(data.monthlyData)) {
                 console.error("Data is not provided or monthlyData is not an array.");
                 return;
@@ -127,7 +127,7 @@ var KTChartsAndCardsWidgetDashboard = function () {
 
 
     // Тук дефинираме element, така че да можем да го използваме за създаване на графиката
-    var element = document.getElementById("kt_charts_widget_100_chart");
+    let element = document.getElementById("kt_charts_widget_100_chart");
     if (!element) {
         console.error("Element for chart1 not found.");
         return;
@@ -140,15 +140,15 @@ var KTChartsAndCardsWidgetDashboard = function () {
     }
 
     // Извличане на данни за графиката
-    var totalEstimateCosts = data.monthlyData.map(item => `${item.totalEstimateCost.toFixed(2)}`);
+    let totalEstimateCosts = data.monthlyData.map(item => `${item.totalEstimateCost.toFixed(2)}`);
 
-    var monthNames = data.monthlyData.map(item => monthNumberToName(parseInt(item.month)));
+    let monthNames = data.monthlyData.map(item => monthNumberToName(parseInt(item.month)));
 
-        var height = parseInt(KTUtil.css(element, 'height'));
-        var labelColor = KTUtil.getCssVariableValue('--bs-gray-900');
-        var borderColor = KTUtil.getCssVariableValue('--bs-border-dashed-color');
+        let height = parseInt(KTUtil.css(element, 'height'));
+        let labelColor = KTUtil.getCssletiableValue('--bs-gray-900');
+        let borderColor = KTUtil.getCssletiableValue('--bs-border-dashed-color');
 
-        var options = {
+        let options = {
             series: [{
                 name: 'Разход',
                 data: totalEstimateCosts
@@ -201,7 +201,7 @@ var KTChartsAndCardsWidgetDashboard = function () {
                 },
                 labels: {
                     style: {
-                        colors: KTUtil.getCssVariableValue('--bs-gray-500'),
+                        colors: KTUtil.getCssletiableValue('--bs-gray-500'),
                         fontSize: '13px'
                     }
                 },
@@ -217,7 +217,7 @@ var KTChartsAndCardsWidgetDashboard = function () {
             yaxis: {
                 labels: {
                     style: {
-                        colors: KTUtil.getCssVariableValue('--bs-gray-500'),
+                        colors: KTUtil.getCssletiableValue('--bs-gray-500'),
                         fontSize: '13px'
                     },
                     formatter: function(val) {
@@ -259,7 +259,7 @@ var KTChartsAndCardsWidgetDashboard = function () {
                     }
                 }
             },
-            colors: [KTUtil.getCssVariableValue('--bs-primary'), KTUtil.getCssVariableValue('--bs-primary-light')],
+            colors: [KTUtil.getCssletiableValue('--bs-primary'), KTUtil.getCssletiableValue('--bs-primary-light')],
             grid: {
                 borderColor: borderColor,
                 strokeDashArray: 4,
@@ -283,15 +283,15 @@ var KTChartsAndCardsWidgetDashboard = function () {
 
 
 
-        var initChart4 = function(data) {
+        let initChart4 = function(data) {
             if (!data) {
                 console.error('No data provided for chart2.');
                 return;
             }
 
-            var currentDate = new Date();
-            var currentMonth = currentDate.toLocaleString('default', {month: 'long'}).charAt(0).toUpperCase() + currentDate.toLocaleString('default', {month: 'long'}).slice(1);
-            var currentYear = currentDate.getFullYear();
+            let currentDate = new Date();
+            let currentMonth = currentDate.toLocaleString('default', {month: 'long'}).charAt(0).toUpperCase() + currentDate.toLocaleString('default', {month: 'long'}).slice(1);
+            let currentYear = currentDate.getFullYear();
 
             // // Актуализация на текста с данните
             document.querySelector('#totalEstimateCost').innerHTML = `Общ разход <strong class=" fs-4 text-primary">${data.totalEstimateCost.toFixed(2).toLocaleString()} лв</strong>`;
@@ -300,14 +300,14 @@ var KTChartsAndCardsWidgetDashboard = function () {
             document.querySelector('#totalAssetCount').textContent = `Съоръжения ${data.totalAssetsCount} бр.`;
             // document.querySelector('#monthText').textContent = `Разходи за месец ${currentMonth} ${currentYear} година`;
 
-            var el = document.getElementById('kt_card_widget_101_chart');
+            let el = document.getElementById('kt_card_widget_101_chart');
             if (!el) {
                 console.error('Element not found');
                 return;
             }
 
             // Тук дефинираме 'options' преди да го използваме
-            var options = {
+            let options = {
                 size: parseInt(el.getAttribute('data-kt-size') || '70'),
                 lineWidth: parseInt(el.getAttribute('data-kt-line') || '11'),
                 rotate: parseInt(el.getAttribute('data-kt-rotate') || '145'),
@@ -316,13 +316,13 @@ var KTChartsAndCardsWidgetDashboard = function () {
 
 
     // Намиране на canvas елемента в дива
-    var canvas = document.querySelector('#kt_card_widget_101_chart canvas');
+    let canvas = document.querySelector('#kt_card_widget_101_chart canvas');
     if (!canvas) {
         console.error('Canvas element not found');
         return;
     }
 
-    var ctx = canvas.getContext('2d');
+    let ctx = canvas.getContext('2d');
     // Уверете се, че размерите на canvas са коректно зададени
     canvas.width = canvas.parentElement.getAttribute('data-kt-size');
     canvas.height = canvas.parentElement.getAttribute('data-kt-size');
@@ -372,13 +372,13 @@ var KTChartsAndCardsWidgetDashboard = function () {
         };
 
 
-    var initChart5 = function(data) {
+    let initChart5 = function(data) {
     if (!data) { // Променете тук value_by_asm на valueByAsm
         console.error("Data is not provided or value by asm is not an array.");
         return;
     }
 
-    var element = document.getElementById("kt_charts_widget_5");
+    let element = document.getElementById("kt_charts_widget_5");
 
     if (!element) {
         return;
@@ -386,14 +386,14 @@ var KTChartsAndCardsWidgetDashboard = function () {
     
 
 
-    var borderColor = KTUtil.getCssVariableValue('--bs-border-dashed-color');
-    var chartData = data.valueByAsm.map(item => parseFloat(item.total_estimated_cost).toFixed(2));
-    var categories = data.valueByAsm.map(item => {
-        var names = item.manager_name.split(' ');
+    let borderColor = KTUtil.getCssletiableValue('--bs-border-dashed-color');
+    let chartData = data.valueByAsm.map(item => parseFloat(item.total_estimated_cost).toFixed(2));
+    let categories = data.valueByAsm.map(item => {
+        let names = item.manager_name.split(' ');
         return names.length > 1 ? names[0] + ' ' + names[names.length - 1] : item.manager_name;
     });
     // Променете опциите за графиката, използвайки данните от сървъра
-    var options = {
+    let options = {
     series: [{
         data: chartData,
         show: true
@@ -428,7 +428,7 @@ var KTChartsAndCardsWidgetDashboard = function () {
                     return val
                 },
                 style: {
-                    colors: KTUtil.getCssVariableValue('--bs-gray-400'),
+                    colors: KTUtil.getCssletiableValue('--bs-gray-400'),
                     fontSize: '9px',
                     fontWeight: '200',
                     align: 'right'
@@ -441,7 +441,7 @@ var KTChartsAndCardsWidgetDashboard = function () {
         yaxis: {
             labels: {
                 style: {
-                    colors: KTUtil.getCssVariableValue('--bs-gray-800'),
+                    colors: KTUtil.getCssletiableValue('--bs-gray-800'),
                     fontSize: '10px',
                     fontWeight: '600'
                 },
@@ -511,38 +511,38 @@ $(document).ready(function() {
         type: 'GET',
         success: function(data) {
             data.forEach(function(budget) {
-                var managerId = budget.manager_id;
+                let managerId = budget.manager_id;
 
                 // Обновяване на елемента за общия бюджет
-                var budgetElementId = 'budget_' + managerId;
-                var budgetElement = document.getElementById(budgetElementId);
+                let budgetElementId = 'budget_' + managerId;
+                let budgetElement = document.getElementById(budgetElementId);
                 if (budgetElement) {
                 budgetElement.innerHTML = '<i class="ki-duotone ki-bank me-1 fs-4"> <span class="path1"></span> <span class="path2"></span> </i> <span class="text-dark fs-8">' + budget.budget.toFixed(0) + ' лв.</span>';
             }
 
 
                 // Обновяване на елемента за изразходван бюджет
-                var spent_budgetElementId = 'spent_budget_' + managerId;
-                var spent_budgetElement = document.getElementById(spent_budgetElementId);
+                let spent_budgetElementId = 'spent_budget_' + managerId;
+                let spent_budgetElement = document.getElementById(spent_budgetElementId);
                 if (spent_budgetElement) {
                     spent_budgetElement.innerHTML = '<i class="ki-duotone ki-courier-express me-1 fs-4"> <span class="path1"></span> <span class="path2"></span> <span class="path3"></span> <span class="path4"></span> <span class="path5"></span> <span class="path6"></span> <span class="path7"></span> </i> <span class="text-dark fs-8">' + budget.spent_amount.toFixed(0) + ' лв.</span>';
                 }
 
                 // Обновяване на елемента за остатъка от бюджета
-                var leftBudgetElementId = 'left_budget_' + managerId;
-                var leftBudgetElement = document.getElementById(leftBudgetElementId);
+                let leftBudgetElementId = 'left_budget_' + managerId;
+                let leftBudgetElement = document.getElementById(leftBudgetElementId);
                 if (leftBudgetElement) {
-                    var leftBudget = budget.budget - budget.spent_amount;
-                    var leftBudgetFormatted = leftBudget.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                    let leftBudget = budget.budget - budget.spent_amount;
+                    let leftBudgetFormatted = leftBudget.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                     leftBudgetElement.innerHTML = '<span class="fw-bolder fs-6 text-gray-900">' + leftBudgetFormatted + ' лв. остатък</span>';
                 }
                 // Изчисляване на процента на изпълнение на бюджета
-                var percentExecuted = (budget.spent_amount / budget.budget) * 100;
-                var percentFormatted = percentExecuted.toFixed(0);
+                let percentExecuted = (budget.spent_amount / budget.budget) * 100;
+                let percentFormatted = percentExecuted.toFixed(0);
 
                 // Обновяване на елемента за процента
-                var percentElementId = 'percent_' + managerId;
-                var percentElement = document.getElementById(percentElementId);
+                let percentElementId = 'percent_' + managerId;
+                let percentElement = document.getElementById(percentElementId);
                 if (percentElement) {
                     percentElement.innerHTML = '<span class="fw-bold fs-6 text-gray-500">' + percentFormatted + '%</span>';
                 }
@@ -551,8 +551,8 @@ $(document).ready(function() {
 
 
                 // Обновяване на прогресбара
-                var progressBarId = 'progresbar_' + managerId;
-                var progressBar = document.getElementById(progressBarId);
+                let progressBarId = 'progresbar_' + managerId;
+                let progressBar = document.getElementById(progressBarId);
                 if (progressBar) {
 
 

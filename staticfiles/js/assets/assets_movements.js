@@ -11,13 +11,13 @@ $.ajaxSetup({
 });
 
 // Class definition
-var KTAppTransportRequests = function () {
-    // Shared variables
-    var table;
-    var datatable;
+let KTAppTransportRequests = function () {
+    // Shared letiables
+    let table;
+    let datatable;
 
     // Private functions
-    var initDatatable = function () {
+    let initDatatable = function () {
         // Set date data order
         const tableRows = table.querySelectorAll('tbody tr');
 
@@ -67,7 +67,7 @@ var KTAppTransportRequests = function () {
                 {
                     "targets": 6, // Индексът на датата
                     "render": function (data, type, full, meta) {
-                        var createdDate = full.created_at ? new Date(full.created_at).toLocaleString() : ''; // Проверка и форматиране на датата
+                        let createdDate = full.created_at ? new Date(full.created_at).toLocaleString() : ''; // Проверка и форматиране на датата
                         return '<span style="font-size: 10px;">' + createdDate + '</span>';
                     }
                 },
@@ -75,7 +75,7 @@ var KTAppTransportRequests = function () {
                             "targets": 3, // Индексът на колоната за статуса
                             "render": function (data, type, full, meta) {
                                 // Тук можете да добавите различни класове в зависимост от стойността на статуса
-                                var badgeClass = '';
+                                let badgeClass = '';
                                 switch (data) {
                                     case 'Входящо':
                                         badgeClass = 'badge badge-light-success';
@@ -96,7 +96,7 @@ var KTAppTransportRequests = function () {
                             "targets": 9, // Индексът на колоната за статуса
                             "render": function (data, type, full, meta) {
                                 // Тук можете да добавите различни класове в зависимост от стойността на статуса
-                                var badgeClass = '';
+                                let badgeClass = '';
                                 switch (data) {
                                     case 'Потвърдена':
                                         badgeClass = 'badge badge-light-primary';
@@ -119,7 +119,7 @@ var KTAppTransportRequests = function () {
                             "targets": 7, // Индексът на колоната за статуса
                             "render": function (data, type, full, meta) {
                                 // Тук можете да добавите различни класове в зависимост от стойността на статуса
-                                var badgeClass = '';
+                                let badgeClass = '';
                                 switch (data) {
                                     case 'няма транспорт ID':
                                         badgeClass = 'badge badge-light-secondary';
@@ -133,7 +133,7 @@ var KTAppTransportRequests = function () {
                             "targets": 8, // Индексът на колоната за статуса
                             "render": function (data, type, full, meta) {
                                 // Тук можете да добавите различни класове в зависимост от стойността на статуса
-                                var badgeClass = '';
+                                let badgeClass = '';
                                 switch (data) {
                                     case 'self transport':
                                         badgeClass = 'badge badge-light-primary';
@@ -193,18 +193,18 @@ var KTAppTransportRequests = function () {
     }
 
     // Init daterangepicker
-var initDaterangepicker = () => {
-    var input = $("#kt_ecommerce_report_sales_daterangepicker");
+let initDaterangepicker = () => {
+    let input = $("#kt_ecommerce_report_sales_daterangepicker");
 
     function cb(start, end) {
-    var displayFormat = 'DD-MM-YYYY';
+    let displayFormat = 'DD-MM-YYYY';
     if (start.isValid() && end.isValid()) {
-        var formattedStart = start.format(displayFormat);
-        var formattedEnd = end.format(displayFormat);
+        let formattedStart = start.format(displayFormat);
+        let formattedEnd = end.format(displayFormat);
         input.val(formattedStart + ' - ' + formattedEnd);
 
-        var startInUTC = start.utc().format('YYYY-MM-DD');
-        var endInUTC = end.utc().format('YYYY-MM-DD');
+        let startInUTC = start.utc().format('YYYY-MM-DD');
+        let endInUTC = end.utc().format('YYYY-MM-DD');
 
         $('#start_date_input').val(startInUTC);
         $('#end_date_input').val(endInUTC);
@@ -259,9 +259,9 @@ $(document).ready(function () {
 
 
     // Hook export buttons
-    var exportButtons = () => {
+    let exportButtons = () => {
         const documentTitle = 'Движение на съоръжения';
-        var buttons = new $.fn.dataTable.Buttons(table, {
+        let buttons = new $.fn.dataTable.Buttons(table, {
             buttons: [
                 {
                     extend: 'copyHtml5',
@@ -307,7 +307,7 @@ $(document).ready(function () {
 
 
     // Search Datatable --- official docs reference: https://datatables.net/reference/api/search()
-    var handleSearchDatatable = () => {
+    let handleSearchDatatable = () => {
         const filterSearch = document.querySelector('[data-kt-assets-movements-filter="search"]');
         filterSearch.addEventListener('keyup', function (e) {
             datatable.search(e.target.value).draw();
