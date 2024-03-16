@@ -135,3 +135,5 @@ DEFAULT_FROM_EMAIL = 'admin@data.dobbox.net'
 
 IMPORT_EXPORT_IMPORT_PERMISSION_CODE = "can_import"
 IMPORT_EXPORT_EXPORT_PERMISSION_CODE = "can_export"
+
+LOGIN_URL = 'login'

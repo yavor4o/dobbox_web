@@ -70,11 +70,10 @@ class DobboxUserChangeForm(UserChangeForm):
     manager = ManagerChoiceField(queryset=DobboxUser.objects.filter(is_staff=True))
 
     class Meta:
-        model = UserModel
+        model = UserData
         fields = '__all__'
 
-    def __init__(self, *args, **kwargs):
-        super(DobboxUserChangeForm, self).__init__(*args, **kwargs)
+
 
 
 class WelcomeUserDataForm(forms.ModelForm):
