@@ -199,8 +199,8 @@
             let pageLength;
             if (currentPath === "/assets/transport-request") {
                 pageLength = 10; // Стандартен брой редове за /assets/transport-request
-            } else if (currentPath === "/console/dashboard") {
-                pageLength = 3; // Намален брой редове за /console/dashboard
+            } else if (currentPath === "/console_html/dashboard") {
+                pageLength = 3; // Намален брой редове за /console_html/dashboard
             } else {
                 pageLength = 10; // Стандартен брой редове за всички останали рутове
             }
@@ -241,7 +241,7 @@
                     "url": "/assets/asset-requests",
                         "data": function (d) {
                                     // Проверка на текущия рут и задаване на филтри
-                                    if (window.location.pathname === '/console/dashboard') {
+                                    if (window.location.pathname === '/console_html/dashboard') {
                                         d.filterStatusName = 'В изчакване,Одобрена'; // Задаване на начални филтри
                                     } else {
                                         // Запазване на съществуващата логика за филтриране
@@ -451,7 +451,7 @@
             datatable.button('.buttons-excel').trigger();
         });
 
-        // За рута /console/dashboard
+        // За рута /console_html/dashboard
         $('#export-button-dashboard').on('click', function () {
             datatable.button('.buttons-excel').trigger();
         });

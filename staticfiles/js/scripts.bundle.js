@@ -3792,7 +3792,7 @@ var KTScroll = function(element, options) {
         height = height - _getElementSpacing(the.element); 
 
         // Height dependencies
-        //console.log('Q:' + JSON.stringify(dependencies));
+        //console_html.log('Q:' + JSON.stringify(dependencies));
 
         if ( dependencies !== null ) {
             var elements = document.querySelectorAll(dependencies);

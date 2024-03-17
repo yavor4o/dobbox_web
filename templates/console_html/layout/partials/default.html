@@ -1,0 +1,36 @@
+{% extends 'console_html/base_console.html' %}
+{% load static %}
+{% block content %}
+                <!--begin::App-->
+                <div class="d-flex flex-column flex-root app-root" id="kt_app_root">
+                    <!--begin::Page-->
+                    <div class="app-page  flex-column flex-column-fluid " id="kt_app_page">
+                        <!--begin::Header-->
+                        {% include 'console_html/layout/partials/_header.html' %}
+                
+                        <!--begin::Wrapper-->
+                        <div class="app-wrapper  flex-column flex-row-fluid " id="kt_app_wrapper">
+                
+                            {% include 'console_html/layout/partials/_sidebar.html' %}
+                
+                            <!--begin::Main-->
+                            <div class="app-main flex-column flex-row-fluid" id="kt_app_main">
+                                <!--begin::Content wrapper-->
+                                <div class="d-flex flex-column flex-column-fluid">
+
+                                    {% include 'console_html/layout/dashboard.html' %}
+                
+                                </div>
+                                <!--end::Content wrapper-->
+                
+                                {% include 'console_html/layout/partials/_footer.html' %}
+                
+                                            </div>
+                            <!--end:::Main-->
+                                    </div>
+                        <!--end::Wrapper-->
+                            </div>
+                    <!--end::Page-->
+                </div>
+                <!--end::App-->
+{% endblock %}

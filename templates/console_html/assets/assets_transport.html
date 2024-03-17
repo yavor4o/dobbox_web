@@ -1,0 +1,360 @@
+{% include 'index.html'%}
+		<!--begin::App-->
+		<div class="d-flex flex-column flex-root app-root" id="kt_app_root">
+			<!--begin::Page-->
+			<div class="app-page flex-column flex-column-fluid" id="kt_app_page">
+				<!--begin::Header-->
+				  {% include 'layout/partials/_header.html' %}
+				<!--end::Header-->
+				<!--begin::Wrapper-->
+				<div class="app-wrapper flex-column flex-row-fluid" id="kt_app_wrapper">
+					<!--begin::Sidebar-->
+                          {% include 'layout/partials/_sidebar.html' %}
+					<!--end::Sidebar-->
+					<!--begin::Main-->
+					<div class="app-main flex-column flex-row-fluid" id="kt_app_main">
+						<!--begin::Content wrapper-->
+						<div class="d-flex flex-column flex-column-fluid">
+							<!--begin::Toolbar-->
+                            <div id="kt_app_toolbar" class="app-toolbar pt-7 pt-lg-10">
+									<!--begin::Toolbar wrapper-->
+									<div class="app-toolbar-wrapper d-flex flex-stack flex-wrap gap-4 w-100">
+										<!--begin::Page title-->
+										<div class="page-title d-flex flex-column justify-content-center gap-1 me-3 ms-10">
+											<!--begin::Breadcrumb-->
+											<ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7">
+												<!--begin::Item-->
+												<li class="breadcrumb-item text-gray-700 fw-bold lh-1 mx-n1">
+													<a href="{{ url_for('dashboard.dashboard') }}" class="text-hover-primary">
+														<i class="ki-outline ki-home text-gray-700 fs-6"></i>
+													</a>
+												</li>
+												<!--end::Item-->
+												<!--begin::Item-->
+												<li class="breadcrumb-item">
+													<i class="ki-outline ki-right fs-7 text-gray-700"></i>
+												</li>
+												<!--end::Item-->
+												<!--begin::Item-->
+												<li class="breadcrumb-item text-gray-700 fw-bold lh-1 mx-n1">Съоръжения</li>
+												<!--end::Item-->
+												<!--begin::Item-->
+												<li class="breadcrumb-item">
+													<i class="ki-outline ki-right fs-7 text-gray-700"></i>
+												</li>
+												<!--end::Item-->
+												<!--begin::Item-->
+												<li class="breadcrumb-item text-gray-500 mx-n1">Транспорт</li>
+												<!--end::Item-->
+											</ul>
+											<!--end::Breadcrumb-->
+											<!--begin::Title-->
+											<h1 class="page-heading d-flex flex-column justify-content-center text-dark fw-bold fs-3 ms-n1">Справка за заявен транспорт</h1>
+											<!--end::Title-->
+										</div>
+										<!--end::Page title-->
+
+									</div>
+									<!--end::Toolbar wrapper-->
+								</div>
+							<!--end::Toolbar-->
+							<!--begin::Content-->
+							<div id="kt_app_content" class="app-content flex-column-fluid">
+								<!--begin::Content container-->
+								<div id="kt_app_content_container" class="app-container container-fluid">
+									<!--begin::Search Navbar-->
+
+									<!--end::Navbar-->
+									<!--begin::details View-->
+
+									<!--end::details View-->
+									<!--begin::Row-->
+                                    <div class="row mb-10 gy-5 g-xl-10">
+
+										<!--begin::Col-->
+										<div >
+											<!--begin::Table Widget 5-->
+											<div class="card card-flush h-xl-100">
+												<!--begin::Card header-->
+												<div class="card-header pt-7">
+													<!--begin::Title-->
+													<h3 class="card-title align-items-start flex-column">
+														<span class="card-label fw-bold text-dark">Транспорт</span>
+														<span class="text-gray-400 mt-1 fw-semibold fs-8">генерирани заявки за транспорт</span>
+													</h3>
+													<!--end::Title-->
+													<!--begin::Actions-->
+													<div class="card-toolbar">
+														<!--begin::Filters-->
+														<div class="d-flex flex-stack flex-wrap gap-10">
+															<!--begin::Destination-->
+															<div class="d-flex align-items-center fw-bold">
+																<!--begin::Label-->
+																<div class="text-muted fs-7 me-2">Компания</div>
+																<!--end::Label-->
+																<!--begin::Select-->
+                                                                <select class="form-select form-select-transparent text-dark fs-7 lh-1 fw-bold py-0 ps-3 w-auto" id="transportCompanies"  data-hide-search="false" data-dropdown-css-class="w-200px">
+                                                                    <option></option>
+                                                                    <!-- Опции добавени чрез JavaScript -->
+
+                                                                </select>
+                                                                <input type="hidden" id="selectedTransportCompany">
+
+																<!--end::Select-->
+															</div>
+															<!--end::Destination-->
+															<!--begin::Status-->
+															<div class="d-flex align-items-center fw-bold">
+
+                                                                <!--begin::Daterangepicker-->
+                                                                <div class="d-flex align-items-center position-relative my-1">
+                                                                    <i class="ki-outline ki-calendar-add fs-2 position-absolute ms-4"></i>
+                                                                    <input class="form-control form-control-solid w-100 mw-250px text-gray-600 m-1 text-end me-5 fs-6" placeholder="Моля изберете период" id="kt_ecommerce_report_sales_daterangepicker" />
+                                                                    <input type="hidden" id="start_date_input">
+                                                                    <input type="hidden" id="end_date_input">
+                                                                </div>
+                                                                <!--end::Daterangepicker-->
+                                                                </div>
+															<!--end::Status-->
+                                                            <!--begin::Export buttons-->
+                                                    <div id="kt_ecommerce_report_sales_export" class="d-none"></div>
+                                                    <!--end::Export buttons-->
+
+														</div>
+
+														<!--begin::Filters-->
+                                                        <div class="position-relative me-md-2">
+														<i class="ki-outline ki-magnifier fs-3 text-gray-500 position-absolute top-50 translate-middle ms-6"></i>
+														<input type="text" data-kt-transport-filter="search" class="form-control form-control-solid w-250px ps-12" placeholder="Търси по SN или Баркод" />
+													    </div>
+
+
+
+
+                                                    <!--begin::Export dropdown-->
+												<button type="button" class="btn btn-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
+												<i class="ki-outline ki-exit-up fs-2"></i>Eкспорт</button>
+												<!--begin::Menu-->
+												<div id="kt_ecommerce_report_sales_export_menu" class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-200px py-4" data-kt-menu="true">
+													<!--begin::Menu item-->
+													<div class="menu-item px-3">
+														<a href="#" class="menu-link px-3" data-kt-ecommerce-export="copy">Копирай данните</a>
+													</div>
+													<!--end::Menu item-->
+													<!--begin::Menu item-->
+													<div class="menu-item px-3">
+														<a href="#" class="menu-link px-3" data-kt-ecommerce-export="excel">Експорт в Excel</a>
+													</div>
+													<!--end::Menu item-->
+													<!--begin::Menu item-->
+													<div class="menu-item px-3">
+														<a href="#" class="menu-link px-3" data-kt-ecommerce-export="csv">Експорт в CSV</a>
+													</div>
+													<!--end::Menu item-->
+													<!--begin::Menu item-->
+													<div class="menu-item px-3">
+														<a href="#" class="menu-link px-3" data-kt-ecommerce-export="pdf">Експорт в PDF</a>
+													</div>
+													<!--end::Menu item-->
+												</div>
+                                                        </div>
+													<!--end::Actions-->
+												<!--end::Menu-->
+												<!--end::Export dropdown-->
+												</div>
+												<!--end::Card header-->
+												<!--begin::Card body-->
+												<div class="card-body">
+													<!--begin::Table-->
+													<table class="table align-middle table-row-dashed fs-6 gy-3" id="kt_table_transport_table">
+														<!--begin::Table head-->
+														<thead>
+															<!--begin::Table row-->
+															<tr class="text-center text-gray-400 fw-bold fs-8 text-uppercase gs-0">
+																<th class="text-center">Номер</th>
+																<th class="text-center">Компания</th>
+																<th class="text-center">Дата</th>
+																<th class="text-center">Обща цена</th>
+																<th class="text-center">Цена за км.</th>
+																<th class="text-center">Цена за активи</th>
+                                                                <th class="text-center">Километри</th>
+															</tr>
+															<!--end::Table row-->
+														</thead>
+														<!--end::Table head-->
+														<!--begin::Table body-->
+														<tbody class="fw-semibold fs-8 text-center text-gray-600">
+
+                                                        <!-- тук се генерират данните от таблицата автоматично -->
+
+
+														</tbody>
+														<!--end::Table body-->
+													</table>
+													<!--end::Table-->
+												</div>
+												<!--end::Card body-->
+											</div>
+											<!--end::Table Widget 5-->
+										</div>
+										<!--end::Col-->
+									</div>
+
+									<!--end::Row-->
+									<!--begin::Row-->
+									<div class="row gy-5 g-xl-10">
+
+										<!--begin::Col-->
+										<div class="col-xl-12">
+											<!--begin::Table Widget 5-->
+											<div class="card card-flush h-xl-100  ">
+												<!--begin::Card header-->
+												<div class="card-header pt-2">
+													<!--begin::Title-->
+													<p class="card-title align-items-start flex-column">
+														<span class="card-label fw-bold text-dark">Свързани заявки </span>
+														<span class="text-gray-400 mt-1 fw-semibold fs-8">към заявеният транспорт</span>
+													</p>
+													<!--end::Title-->
+												</div>
+												<!--end::Card header-->
+												<!--begin::Card body-->
+												<div class="card-body">
+													<!--begin::Table-->
+													<table class="table align-middle table-row-dashed fs-6 " id="kt_table_transport_requests_table">
+														<!--begin::Table head-->
+														<thead>
+															<!--begin::Table row-->
+															<tr class="text-center text-gray-400 fw-bold fs-6 text-uppercase gs-0">
+                                                                <th class="text-center fs-7">Инфо</th>
+                                                                <th class=" text-center fs-7 min-w-150px">НОМЕР</th>
+																<th class=" text-center fs-7 min-w-150px">СТАТУС</th>
+																<th class="text-center fs-7 pe-3 min-w-100px">ТИП ДВИЖЕНИЕ</th>
+																<th class="text-center fs-7 pe-3 min-w-150px">ОБЕКТ</th>
+																<th class="text-center fs-7 pe-3 min-w-100px">ГРАД</th>
+																<th class="text-center fs-7 pe-3 min-w-100px">ДАТА</th>
+																<th class="text-center fs-7 pe-0 min-w-75px">ТП</th>
+															</tr>
+															<!--end::Table row-->
+														</thead>
+														<!--end::Table head-->
+														<!--begin::Table body-->
+														<tbody class=" text-center fw-bold text-gray-600 fs-8">
+															 <!-- тук се генерират данните от таблицата автоматично -->
+														</tbody>
+														<!--end::Table body-->
+													</table>
+													<!--end::Table-->
+												</div>
+												<!--end::Card body-->
+											</div>
+											<!--end::Table Widget 5-->
+										</div>
+										<!--end::Col-->
+                                        <!--begin::Col-->
+
+										<!--end::Col-->
+									</div>
+									<!--end::Row-->
+								</div>
+								<!--end::Content container-->
+							</div>
+							<!--end::Content-->
+						</div>
+						<!--end::Content wrapper-->
+						<!--begin::Footer-->
+						{% include 'layout/partials/_footer.html' %}
+						<!--end::Footer-->
+					</div>
+					<!--end:::Main-->
+				</div>
+				<!--end::Wrapper-->
+			</div>
+			<!--end::Page-->
+		</div>
+		<!--end::App-->
+		<!--begin::Modal-->
+<div class="modal fade" id="kt_modal_view_assets" tabindex="-1" aria-hidden="true">
+			<!--begin::Modal dialog-->
+			<div class="modal-dialog mw-650px">
+				<!--begin::Modal content-->
+				<div class="modal-content">
+					<!--begin::Modal header-->
+					<div class="modal-header pb-0 border-0 justify-content-end">
+						<!--begin::Close-->
+						<div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+							<i class="ki-outline ki-cross fs-1"></i>
+						</div>
+						<!--end::Close-->
+					</div>
+					<!--begin::Modal header-->
+					<!--begin::Modal body-->
+					<div class="modal-body scroll-y mx-5 mx-xl-18 pt-0 pb-15">
+						<!--begin::Heading-->
+						<div class="text-center mb-13">
+							<!--begin::Title-->
+							<h1 class="mb-3">Свързани Активи</h1>
+							<!--end::Title-->
+							<!--begin::Description-->
+							<div class="text-muted fw-semibold fs-5">това са свързаните активи по избраната
+							<a  class="link-primary fw-bold">заявка</a>.</div>
+							<!--end::Description-->
+						</div>
+						<!--end::Heading-->
+						<!--begin::Users-->
+						<div class="mb-15">
+							<!--begin::List-->
+							<div class="mh-375px scroll-y me-n7 pe-7">
+								<!--begin::User-->
+                            <div class="timeline">
+                                <!-- Тук ще се добавят активите на заявката динамично -->
+                            </div>
+
+							</div>
+							<!--end::List-->
+						</div>
+						<!--end::Users-->
+						<!--begin::Notice-->
+
+						<!--end::Notice-->
+					</div>
+					<!--end::Modal body-->
+				</div>
+				<!--end::Modal content-->
+			</div>
+			<!--end::Modal dialog-->
+		</div>
+        <!--end::Modal-->
+		<!--begin::Activities drawer-->
+		{% include 'partials/_drawers.html' %}
+		<!--end::Activities drawer-->
+		<!--begin::Chat drawer-->
+		<
+		<!--end::Chat drawer-->
+		<!--begin::Chat drawer-->
+
+		<!--end::Chat drawer-->
+		<!--end::Drawers-->
+		<!--begin::Scrolltop-->
+		<div id="kt_scrolltop" class="scrolltop" data-kt-scrolltop="true">
+			<i class="ki-outline ki-arrow-up"></i>
+		</div>
+		<!--end::Scrolltop-->
+
+		<!--begin::Javascript-->
+		<script>var hostUrl = "/static";</script>
+		<!--begin::Global Javascript Bundle(mandatory for all pages)-->
+
+<!--end::Global Javascript Bundle-->
+
+
+<script src="{{ url_for('static', filename='assets/js/custom/apps/assets/transport.js') }}"></script>
+<script>
+    let csrfToken = "{{ csrf_token() }}";
+</script>
+
+{#    <!--end::Custom Javascript-->#}
+{#		<!--end::Javascript-->#}
+	</body>
+	<!--end::Body-->
+</html>

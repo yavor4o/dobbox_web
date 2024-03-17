@@ -1,0 +1,85 @@
+<div class="card card-flush h-lg-100">
+    <!--begin::Header-->
+    <div class="card-header pt-5">
+        <!--begin::Title-->
+        <h3 class="card-title align-items-start flex-column">
+            <span class="card-label fw-bold text-gray-900">Съотношение на разходите</span>
+            <span id="totalEstimateCost" class="  text-gray-500 mt-1 fw-semibold fs-6"></span>
+        </h3>
+        <!--end::Title-->
+
+        <!--begin::Toolbar-->
+        <div class="card-toolbar">
+            <!--begin::Label-->
+            <span id="totalAssetCount" class="badge badge-light-primary fs-base mt-n3">
+
+            </span>
+            <!--end::Label-->
+        </div>
+        <!--end::Toolbar-->
+    </div>
+    <!--end::Header-->
+
+    <!--begin::Card body-->
+    <div class="card-body d-flex align-items-end pt-6">
+        <!--begin::Row-->
+        <div class="row align-items-center mx-0 w-100">
+            <!--begin::Col-->
+            <div class="col-7 px-0">
+                <!--begin::Labels-->
+                <div class="d-flex flex-column content-justify-center">
+                    <!--begin::Label-->
+                    <div class="d-flex fs-6 fw-semibold align-items-center">
+                        <!--begin::Bullet-->
+                        <div class="bullet bg-success me-3" style="border-radius: 3px;width: 12px;height: 12px"></div>
+                        <!--end::Bullet-->
+
+                        <!--begin::Label-->
+                        <div class="fs-7 fw-bold text-gray-600 me-5">Разход за витрини</div>
+                        <!--end::Label-->
+
+                        <!--begin::Stats-->
+                        <div id="totalAssetPrice" class="ms-auto fw-bolder text-gray-700 text-end"></div>
+
+                        <!--end::Stats-->
+                    </div>
+                    <!--end::Label-->
+
+                    <!--begin::Label-->
+                    <div class="d-flex fs-6 fw-semibold align-items-center my-4">
+                        <!--begin::Bullet-->
+                        <div class="bullet bg-primary me-3" style="border-radius: 3px;width: 12px;height: 12px"></div>
+                        <!--end::Bullet-->
+
+                        <!--begin::Label-->
+                        <div class="fs-7 fw-bold text-gray-600 ">Разход КМ:</div>
+                        <!--end::Label-->
+
+                        <!--begin::Stats-->
+                         <div id="totalPricePerKilometer" class="ms-auto fw-bolder text-gray-700 text-end"></div>
+
+                        <!--end::Stats-->
+                    </div>
+                    <!--end::Label-->
+
+                    <!--begin::Label-->
+
+                    <!--end::Label-->
+                </div>
+                <!--end::Labels-->
+            </div>
+            <!--end::Col-->
+
+            <!--begin::Col-->
+            <div class="col-5 d-flex justify-content-end px-0">
+                <!--begin::Chart-->
+                <div id="kt_card_widget_101_chart" class="min-h-auto h-120px w-120px" data-kt-size="120" data-kt-line="18">
+                <span></span><canvas height="0" width="0"></canvas></div>
+                <!--end::Chart-->
+            </div>
+            <!--end::Col-->
+        </div>
+        <!--end::Row-->
+    </div>
+    <!--end::Card body-->
+</div>

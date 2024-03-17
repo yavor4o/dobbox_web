@@ -14,7 +14,8 @@
 		<meta property="og:url" content="https://dobbox.net" />
 		<meta property="og:site_name" content="Dobbox | WEB" />
 		<link rel="canonical" href="https://dobbox.net" />
-    <link rel="shortcut icon" href="{% static 'media/logos/logo-bo.png' %}" />
+        <link rel="shortcut icon" href="{% static 'media/logos/logo-bo.png' %}" />
+          
     <!--begin::Fonts(mandatory for all pages)-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
     <!--end::Fonts-->
@@ -59,7 +60,7 @@
                             <!--end::Logo wrapper-->
                             <!--begin::Logo image-->
                             <a href="{% url 'landing' %}">
-                                <img alt="Logo" src="{% static 'media/logos/logo-user.png' %}"
+                                <img alt="Logo" src="{% static 'media/logos/logo-bo.png' %}"
                                     class="h-30px h-lg-40px theme-light-show" />
 
                             </a>
@@ -129,13 +130,34 @@
                                                         <span class="badge badge-light-success fw-bold fs-8 px-2 py-1 ms-2">Няма групи</span>
                                                     {% endfor %}
                                                 </div>
-                                                <a  class="fw-semibold text-muted text-hover-primary fs-9">
+                                                <a href="#" class="fw-semibold text-muted text-hover-primary fs-9">
                                                      {{ request.user.userdata.full_name }}</a>
                                             </div>
                                             <!--end::Username-->
                                         </div>
                                     </div>
                                     <!--end::Menu item-->
+                                    <!--begin::Menu separator-->
+                                    <div class="separator my-2"></div>
+                                        <!--end::Menu separator-->
+                                    {% if request.user.is_authenticated and request.user.is_staff %}
+                                                <div class="menu-item px-5">
+                                                    <a href="{% url 'admin:index' %}" class="menu-link px-5">
+                                                        Администрация
+                                                        <span class="ms-2 lh-0" data-bs-toggle="tooltip" title="Вход в системната администрация.">
+                                                            <i class="ki-outline ki-information-5 fs-5"></i>
+                                                        </span>
+                                                    </a>
+                                                </div>
+                                        <div class="menu-item px-5">
+                                                    <a href="{% url 'console:console home' %}" class="menu-link px-5">
+                                                        Dashboard
+                                                        <span class="ms-2 lh-0" data-bs-toggle="tooltip" title="Към Системата.">
+                                                            <i class="ki-outline ki-information-5 fs-5"></i>
+                                                        </span>
+                                                    </a>
+                                                </div>
+                                    {% endif %}
                                     <!--begin::Menu separator-->
                                     <div class="separator my-2"></div>
                                     <!--end::Menu separator-->
@@ -159,7 +181,15 @@
                                     <!--begin::Menu separator-->
                                     <div class="separator my-2"></div>
                                     <!--end::Menu separator-->
-                                   
+                                    <!--begin::Menu item-->
+
+                                    <!--end::Menu item-->
+                                    <!--begin::Menu separator-->
+
+                                    <!--end::Menu separator-->
+                                    <!--begin::Menu item-->
+
+                                    <!--end::Menu item-->
 
                                     <!--begin::Menu item-->
                                     <div class="menu-item px-5">

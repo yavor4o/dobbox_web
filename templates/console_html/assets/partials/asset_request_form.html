@@ -1,0 +1,516 @@
+<div class="stepper stepper-links d-flex flex-column" id="kt_create_account_stepper">
+                                                                    <!--begin::Nav-->
+                                                                    <div class="stepper-nav py-5">
+                                                                        <!--begin::Step 1-->
+                                                                        <div class="stepper-item current" data-kt-stepper-element="nav">
+                                                                            <h3 class="stepper-title">Тип Движение</h3>
+                                                                        </div>
+                                                                        <!--end::Step 1-->
+                                                                        <!--begin::Step 2-->
+                                                                        <div class="stepper-item" data-kt-stepper-element="nav">
+                                                                            <h3 class="stepper-title">Въпросник</h3>
+                                                                        </div>
+                                                                        <!--end::Step 2-->
+                                                                        <!--begin::Step 3-->
+                                                                        <div class="stepper-item" data-kt-stepper-element="nav">
+                                                                            <h3 class="stepper-title">Данни за обекта</h3>
+                                                                        </div>
+                                                                        <!--end::Step 3-->
+                                                                        <!--begin::Step 4-->
+                                                                        <div class="stepper-item" data-kt-stepper-element="nav">
+                                                                            <h3 class="stepper-title">Съоръжения</h3>
+                                                                        </div>
+                                                                        <!--end::Step 4-->
+                                                                        <!--begin::Step 5-->
+                                                                        <div class="stepper-item" data-kt-stepper-element="nav">
+                                                                            <h3 class="stepper-title">Завършване</h3>
+                                                                        </div>
+                                                                        <!--end::Step 5-->
+                                                                    </div>
+                                                                    <!--end::Nav-->
+                                                                    <!--begin::Form-->
+                                                                    <form class="mx-auto mw-600px w-100 py-10" novalidate="novalidate" id="kt_create_account_form">
+                                                                        <!--begin::Step 1-->
+                                                                        <div class="current" data-kt-stepper-element="content">
+                                                                            <!--begin::Wrapper-->
+                                                                            <div class="w-100">
+                                                                                <!--begin::Heading-->
+                                                                                <div class="pb-10 pb-lg-15">
+                                                                                    <!--begin::Title-->
+                                                                                    <h2 class="fw-bold d-flex align-items-center text-dark">Моля изберете типа на движението
+                                                                                    <span class="ms-1" data-bs-toggle="tooltip" title="Избирате опцията която е подходяща за типа на движението.">
+                                                                                        <i class="ki-outline ki-information-5 text-gray-500 fs-6"></i>
+                                                                                    </span></h2>
+                                                                                    <!--end::Title-->
+                                                                                    <!--begin::Notice-->
+                                                                                    <div class="text-muted fw-semibold fs-6">Ако имате затруднения или въпроси не се колебайте да се свържете с
+                                                                                    <a  class="link-primary fw-bold">Явор Добрев</a>.</div>
+                                                                                    <!--end::Notice-->
+                                                                                </div>
+                                                                                <!--end::Heading-->
+                                                                                <!--begin::Input group-->
+
+                                                                                <div class="mb-10 fv-row">
+                                                                                    <!--begin::Label-->
+
+                                                                                    <!--end::Label-->
+                                                                                    <!--begin::Row-->
+                                                                                    <div class="row mb-2" data-kt-buttons="true">
+                                                                                        <!--begin::Col-->
+
+                                                                                        <!--end::Col-->
+                                                                                        <!--begin::Col-->
+                                                                                        <div class="col">
+                                                                                            <!--begin::Option-->
+                                                                                            <label class="btn btn-outline btn-outline-dashed btn-active-light-primary w-100 p-4 active">
+                                                                                                <input type="radio" class="btn-check" name="account_team_size" checked="checked" value="Склад-Обект" />
+                                                                                                <span class="fw-bold fs-3">Склад-Обект</span>
+                                                                                            </label>
+                                                                                            <!--end::Option-->
+                                                                                        </div>
+                                                                                        <!--end::Col-->
+                                                                                        <!--begin::Col-->
+                                                                                        <div class="col">
+                                                                                            <!--begin::Option-->
+                                                                                            <label class="btn btn-outline btn-outline-dashed btn-active-light-primary w-100 p-4">
+                                                                                                <input type="radio" class="btn-check" name="account_team_size" value="Обект-Склад" />
+                                                                                                <span class="fw-bold fs-3">Обект-Склад</span>
+                                                                                            </label>
+                                                                                            <!--end::Option-->
+                                                                                        </div>
+                                                                                        <!--end::Col-->
+                                                                                        <!--begin::Col-->
+                                                                                        <div class="col">
+                                                                                            <!--begin::Option-->
+                                                                                            <label class="btn btn-outline btn-outline-dashed btn-active-light-primary w-100 p-4">
+                                                                                                <input type="radio" class="btn-check" name="account_team_size" value="Обект-Обект" />
+                                                                                                <span class="fw-bold fs-3">Обект-Обект</span>
+                                                                                            </label>
+                                                                                            <!--end::Option-->
+                                                                                        </div>
+                                                                                        <!--end::Col-->
+                                                                                    </div>
+                                                                                    <!--end::Row-->
+                                                                                    <!--begin::Hint-->
+                                                                                    <div class="form-text">На база типа на движението ще се определят следващите действия.</div>
+                                                                                    <!--end::Hint-->
+                                                                                </div>
+                                                                                <!--end::Input group-->
+                                                                            </div>
+                                                                            <!--end::Wrapper-->
+                                                                        </div>
+                                                                        <!--end::Step 1-->
+                                                                        <!--begin::Step 2-->
+                                                                        <div data-kt-stepper-element="content">
+                                                                            <!--begin::Wrapper-->
+                                                                            <div class="w-100">
+                                                                                <!--begin::Heading-->
+                                                                                <div class="pb-10 pb-lg-15">
+                                                                                    <!--begin::Title-->
+                                                                                    <h2 class="fw-bold text-dark">Моля изберете правилните за вас отговори</h2>
+                                                                                    <!--end::Title-->
+                                                                                    <!--begin::Notice-->
+                                                                                    <div class="text-muted fw-semibold fs-6">Ако имате затруднения или въпроси не се колебайте да се свържете с
+                                                                                    <a  class="link-primary fw-bold">Явор Добрев</a>.</div>
+                                                                                    <!--end::Notice-->
+                                                                                </div>
+                                                                                <!--end::Heading-->
+                                                                                <!--begin::Input group-->
+
+                                                                                <!--end::Input group-->
+                                                                                <!--begin::Input group-->
+
+                                                                                <!--end::Input group-->
+                                                                                <!--begin::Input group-->
+                                                                                <div class="mb-0 fv-row">
+                                                                                    <!--begin::Label-->
+                                                                                    <label class="d-flex align-items-center form-label mb-5">Моля изберете действие
+                                                                                    <span class="ms-1" data-bs-toggle="tooltip" title="Monthly billing will be based on your account plan">
+                                                                                        <i class="ki-outline ki-information-5 text-gray-500 fs-6"></i>
+                                                                                    </span></label>
+                                                                                    <!--end::Label-->
+                                                                                    <!--begin::Options-->
+                                                                                    <div class="mb-0">
+                                                                                        <!--begin:Option-->
+                                                                                        <label class="d-flex flex-stack mb-5 cursor-pointer">
+                                                                                            <!--begin:Label-->
+                                                                                            <span class="d-flex align-items-center me-2">
+                                                                                                <!--begin::Icon-->
+                                                                                                <span class="symbol symbol-50px me-6">
+                                                                                                    <span class="symbol-label">
+                                                                                                        <i class="ki-duotone ki-exit-left fs-1"> <span class="path1"></span> <span class="path2"></span> </i>
+                                                                                                    </span>
+                                                                                                </span>
+                                                                                                <!--end::Icon-->
+                                                                                                <!--begin::Description-->
+                                                                                                <span class="d-flex flex-column">
+                                                                                                    <span class="fw-bold text-gray-800 text-hover-primary fs-5">Ще извеждам съоръжение</span>
+                                                                                                    <span class="fs-6 fw-semibold text-muted">след като доставя съоръжението/та, ще извеждам от обекта други</span>
+                                                                                                </span>
+                                                                                                <!--end:Description-->
+                                                                                            </span>
+                                                                                            <!--end:Label-->
+                                                                                            <!--begin:Input-->
+                                                                                            <span class="form-check form-check-custom form-check-solid">
+                                                                                                <input class="form-check-input" type="checkbox" name="account_plan" value="Ще извеждам съоръжение" />
+                                                                                            </span>
+                                                                                            <!--end:Input-->
+                                                                                        </label>
+                                                                                        <!--end::Option-->
+                                                                                        <!--begin:Option-->
+                                                                                        <label class="d-flex flex-stack mb-5 cursor-pointer">
+                                                                                            <!--begin:Label-->
+                                                                                            <span class="d-flex align-items-center me-2">
+                                                                                                <!--begin::Icon-->
+                                                                                                <span class="symbol symbol-50px me-6">
+                                                                                                    <span class="symbol-label">
+                                                                                                        <i class="ki-duotone ki-delivery fs-1"> <span class="path1"></span> <span class="path2"></span> <span class="path3"></span> <span class="path4"></span> <span class="path5"></span> </i>
+                                                                                                    </span>
+                                                                                                </span>
+                                                                                                <!--end::Icon-->
+                                                                                                <!--begin::Description-->
+                                                                                                <span class="d-flex flex-column">
+                                                                                                    <span class="fw-bold text-gray-800 text-hover-primary fs-5">Ще си нося съоръжението сам.</span>
+                                                                                                    <span class="fs-6 fw-semibold text-muted">ще осъществя доставката с пикапа си</span>
+                                                                                                </span>
+                                                                                                <!--end:Description-->
+                                                                                            </span>
+                                                                                            <!--end:Label-->
+                                                                                            <!--begin:Input-->
+                                                                                            <span class="form-check form-check-custom form-check-solid">
+                                                                                                <input class="form-check-input" type="checkbox"  name="account_plan" value="Ще си нося съоръжението сам" />
+                                                                                            </span>
+                                                                                            <!--end:Input-->
+                                                                                        </label>
+                                                                                        <!--end::Option-->
+                                                                                        <label class="d-flex flex-stack mb-5 cursor-pointer">
+                                                                                            <!--begin:Label-->
+                                                                                            <span class="d-flex align-items-center me-2">
+                                                                                                <!--begin::Icon-->
+                                                                                                <span class="symbol symbol-50px me-6">
+                                                                                                    <span class="symbol-label">
+                                                                                                        <i class="ki-duotone ki-plus-circle fs-1"> <span class="path1"></span> <span class="path2"></span> </i>
+                                                                                                    </span>
+                                                                                                </span>
+                                                                                                <!--end::Icon-->
+                                                                                                <!--begin::Description-->
+                                                                                                <span class="d-flex flex-column">
+                                                                                                    <span class="fw-bold text-gray-800 text-hover-primary fs-5">Ще нося стелаж/буре</span>
+                                                                                                    <span class="fs-6 fw-semibold text-muted">освен активите ще нося и буре/плочки/стелаж</span>
+                                                                                                </span>
+                                                                                                <!--end:Description-->
+                                                                                            </span>
+                                                                                            <!--end:Label-->
+                                                                                            <!--begin:Input-->
+                                                                                            <span class="form-check form-check-custom form-check-solid">
+                                                                                                <input class="form-check-input" type="checkbox" name="account_plan" value="Ще нося стелаж/буре" />
+                                                                                            </span>
+                                                                                            <!--end:Input-->
+                                                                                        </label>
+
+                                                                                    </div>
+                                                                                    <!--end::Options-->
+                                                                                </div>
+                                                                                <!--end::Input group-->
+                                                                            </div>
+                                                                            <!--end::Wrapper-->
+                                                                        </div>
+                                                                        <!--end::Step 2-->
+                                                                        <!--begin::Step 3-->
+                                                                        <div data-kt-stepper-element="content">
+                                                                            <!--begin::Wrapper-->
+                                                                            <div class="w-100">
+                                                                                <!--begin::Heading-->
+                                                                                <div class="pb-10 pb-lg-12">
+                                                                                    <!--begin::Title-->
+                                                                                    <h2 class="fw-bold text-dark">Избор на обект</h2>
+                                                                                    <!--end::Title-->
+                                                                                    <!--begin::Notice-->
+                                                                                    <div class="text-muted fw-semibold fs-6">Ако имате затруднения или въпроси не се колебайте да се свържете с
+                                                                                    <a  class="link-primary fw-bold">Явор Добрев</a>.</div>
+                                                                                    <!--end::Notice-->
+                                                                                </div>
+                                                                                <!--end::Heading-->
+                                                                                <!--begin::Input group-->
+                                                                                <div class="fv-row mb-10">
+                                                                                    <!--begin::Label-->
+                                                                                    <label class="form-label required">Моля въведете Номер на обекта</label>
+                                                                                    <!--end::Label-->
+                                                                                    <!--begin::Input-->
+                                                                                    <input name="business_name" class="form-control form-control-lg form-control-solid" value="" />
+                                                                                    <!--end::Input-->
+                                                                                </div>
+                                                                                <div class="fv-row mb-10 border border-dashed border-gray-300 rounded  px-7 py-3 mb-5">
+                                                                                    <div class="card-body p-9">
+                                                                                        <!--begin::Row-->
+                                                                                        <div class="row mb-7">
+                                                                                            <!--begin::Label-->
+                                                                                            <label class="col-lg-4 fw-semibold text-muted">Номер на обекта</label>
+                                                                                            <!--end::Label-->
+
+                                                                                            <!--begin::Col-->
+                                                                                            <div class="col-lg-8">
+                                                                                                <span class="fw-bold fs-6 text-gray-800">1480359698749</span>
+                                                                                            </div>
+                                                                                            <!--end::Col-->
+                                                                                        </div>
+                                                                                        <div class="row mb-7">
+                                                                                            <!--begin::Label-->
+                                                                                            <label class="col-lg-4 fw-semibold text-muted">Наименование</label>
+                                                                                            <!--end::Label-->
+
+                                                                                            <!--begin::Col-->
+                                                                                            <div class="col-lg-8">
+                                                                                                <span class="fw-bold fs-6 text-gray-800">Супермаркет Корал</span>
+                                                                                            </div>
+                                                                                            <!--end::Col-->
+                                                                                        </div>
+                                                                                        <!--end::Row-->
+
+                                                                                        <!--begin::Input group-->
+                                                                                        <div class="row mb-7">
+                                                                                            <!--begin::Label-->
+                                                                                            <label class="col-lg-4 fw-semibold text-muted">Град</label>
+                                                                                            <!--end::Label-->
+
+                                                                                            <!--begin::Col-->
+                                                                                            <div class="col-lg-8 fv-row">
+                                                                                                <span class="fw-semibold text-gray-800 fs-6">Добрич</span>
+                                                                                            </div>
+                                                                                            <!--end::Col-->
+                                                                                        </div>
+                                                                                        <div class="row mb-7">
+                                                                                            <!--begin::Label-->
+                                                                                            <label class="col-lg-4 fw-semibold text-muted">Адрес</label>
+                                                                                            <!--end::Label-->
+
+                                                                                            <!--begin::Col-->
+                                                                                            <div class="col-lg-8 fv-row">
+                                                                                                <span class="fw-semibold text-gray-800 fs-6">ул. Добричка Епопея №17</span>
+                                                                                            </div>
+                                                                                            <!--end::Col-->
+                                                                                        </div>
+                                                                                        <!--end::Input group-->
+
+                                                                                        <!--begin::Input group-->
+                                                                                        <div class="row mb-7">
+                                                                                           <!--begin::Label-->
+                                                                                           <label class="col-lg-4 fw-semibold text-muted">
+                                                                                                Телефон
+
+                                                                                                <span class="ms-1" data-bs-toggle="tooltip" title="Това е телефона който е въведен за обекта/фирмата.">
+                                                                                                    <i class="ki-outline ki-information-5 text-gray-500 fs-6"></i></span>
+                                                                                            </label>
+                                                                                            <!--end::Label-->
+
+                                                                                            <!--begin::Col-->
+                                                                                            <div class="col-lg-8 d-flex align-items-center">
+                                                                                                <span class="fw-bold fs-6 text-gray-800 me-2">+359 888 03 55 88</span>
+                                                                                                <span class="badge badge-success">Коригирай</span>
+                                                                                            </div>
+                                                                                            <!--end::Col-->
+                                                                                        </div>
+
+
+
+                                                                                <!--begin::Notice-->
+                                                                                <div class="notice d-flex bg-light-warning rounded border-warning border border-dashed  p-6">
+                                                                                            <!--begin::Icon-->
+                                                                                        <i class="ki-outline ki-information fs-2tx text-warning me-4"></i>        <!--end::Icon-->
+
+                                                                                    <!--begin::Wrapper-->
+                                                                                    <div class="d-flex flex-stack flex-grow-1 ">
+                                                                                                    <!--begin::Content-->
+                                                                                            <div class=" fw-semibold">
+                                                                                                                    <h4 class="text-gray-900 fw-bold">Внимание!</h4>
+
+                                                                                                                    <div class="fs-6 text-gray-700 ">Моля огледайте внимателно данните за <a class="fw-bold text-link">обекта</a>.</div>
+                                                                                                            </div>
+                                                                                            <!--end::Content-->
+
+                                                                                            </div>
+                                                                                    <!--end::Wrapper-->
+                                                                                </div>
+                                                                                <!--end::Notice-->
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <!--end::Input group-->
+
+                                                                            </div>
+                                                                            <!--end::Wrapper-->
+                                                                        </div>
+                                                                        <!--end::Step 3-->
+                                                                        <!--begin::Step 4-->
+                                                                        <div data-kt-stepper-element="content">
+                                                                            <!--begin::Wrapper-->
+                                                                            <div class="w-100">
+                                                                                <!--begin::Heading-->
+                                                                                <div class="pb-10 pb-lg-15">
+                                                                                    <!--begin::Title-->
+                                                                                    <h2 class="fw-bold text-dark">Детайли за съоръженията</h2>
+                                                                                    <!--end::Title-->
+                                                                                    <!--begin::Notice-->
+                                                                                    <div class="text-muted fw-semibold fs-6">If you need more info, please check out
+                                                                                    <a href="#" class="text-primary fw-bold">Help Page</a>.</div>
+                                                                                    <!--end::Notice-->
+                                                                                </div>
+                                                                                <!--end::Heading-->
+                                                                                <!--begin::Input group-->
+
+                                                                                <!--end::Input group-->
+                                                                                <!--begin::Input group-->
+
+                                                                                <!--end::Input group-->
+                                                                                <!--begin::Input group-->
+                                                                                <!--begin::Repeater-->
+                                                                                <!--begin::Repeater-->
+                                                                                <div id="kt_docs_repeater_advanced">
+                                                                                    <!--begin::Form group-->
+                                                                                    <div class="form-group">
+                                                                                        <div data-repeater-list="kt_docs_repeater_advanced">
+                                                                                            <div data-repeater-item>
+                                                                                                <div class="form-group row mb-12">
+                                                                                                    <div class="col-md-4">
+                                                                                                        <label class="form-label">Движение:
+                                                                                                            <span class="ms-1" data-bs-toggle="tooltip" title="Избирате актива дали ще влиза в обект или ще излиза.">
+                                                                                                                <i class="ki-outline ki-information-5 text-gray-500 fs-6"></i>
+                                                                                                            </span>
+                                                                                                        </label>
+                                                                                                        <select class="form-select" data-kt-repeater="select2" data-hide-search="true" data-placeholder="Select an option" >
+                                                                                                            <option></option>
+                                                                                                            <option value="Входящо" selected>Входящо</option>
+                                                                                                            <option value="Изходящо">Изходящо</option>
+
+                                                                                                        </select>
+                                                                                                    </div>
+
+                                                                                                    <div class="col-md-7">
+                                                                                                        <label class="form-label">Моля изберете активи:
+                                                                                                            <span class="ms-1" data-bs-toggle="tooltip" title="От тук може да избирате активи.">
+                                                                                                                <i class="ki-outline ki-information-5 text-gray-500 fs-6"></i>
+                                                                                                            </span>
+                                                                                                        </label>
+                                                                                                        <input class="form-control" data-kt-repeater="tagify"/>
+                                                                                                    </div>
+                                                                                                    <div class="col-md-1">
+                                                                                                        <a  data-repeater-delete class="btn btn-flex btn-sm btn-light-danger mt-3 mt-md-9">
+                                                                                                            <i class="ki-duotone ki-trash fs-3"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span><span class="path5"></span></i>
+
+                                                                                                        </a>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <!--end::Form group-->
+
+                                                                                    <!--begin::Form group-->
+                                                                                    <div class="form-group">
+                                                                                        <a  data-repeater-create class="btn btn-flex btn-light-primary">
+                                                                                            <i class="ki-duotone ki-plus fs-3"></i>
+                                                                                            Add
+                                                                                        </a>
+                                                                                    </div>
+                                                                                    <!--end::Form group-->
+                                                                                </div>
+                                                                                <!--end::Repeater-->
+                                                                                <!--end::Repeater-->
+                                                                                <!--end::Input group-->
+                                                                                <!--begin::Input group-->
+                                                                                <div class="d-flex flex-stack">
+                                                                                    <!--begin::Label-->
+                                                                                    <div class="me-5">
+                                                                                        <label class="fs-6 fw-semibold form-label">Save Card for further billing?</label>
+                                                                                        <div class="fs-7 fw-semibold text-muted">If you need more info, please check budget planning</div>
+                                                                                    </div>
+                                                                                    <!--end::Label-->
+                                                                                    <!--begin::Switch-->
+                                                                                    <label class="form-check form-switch form-check-custom form-check-solid">
+                                                                                        <input class="form-check-input" type="checkbox" value="1" checked="checked" />
+                                                                                        <span class="form-check-label fw-semibold text-muted">Save Card</span>
+                                                                                    </label>
+                                                                                    <!--end::Switch-->
+                                                                                </div>
+                                                                                <!--end::Input group-->
+                                                                            </div>
+                                                                            <!--end::Wrapper-->
+                                                                        </div>
+                                                                        <!--end::Step 4-->
+                                                                        <!--begin::Step 5-->
+                                                                        <div data-kt-stepper-element="content">
+                                                                            <!--begin::Wrapper-->
+                                                                            <div class="w-100">
+                                                                                <!--begin::Heading-->
+                                                                                <div class="pb-8 pb-lg-10">
+                                                                                    <!--begin::Title-->
+                                                                                    <h2 class="fw-bold text-dark">Your Are Done!</h2>
+                                                                                    <!--end::Title-->
+                                                                                    <!--begin::Notice-->
+                                                                                    <div class="text-muted fw-semibold fs-6">If you need more info, please
+                                                                                    <a href="../../demo55/dist/.html" class="link-primary fw-bold">Sign In</a>.</div>
+                                                                                    <!--end::Notice-->
+                                                                                </div>
+                                                                                <!--end::Heading-->
+                                                                                <!--begin::Body-->
+                                                                                <div class="mb-0">
+                                                                                    <!--begin::Text-->
+                                                                                    <div class="fs-6 text-gray-600 mb-5">Writing headlines for blog posts is as much an art as it is a science and probably warrants its own post, but for all advise is with what works for your great & amazing audience.</div>
+                                                                                    <!--end::Text-->
+                                                                                    <!--begin::Alert-->
+                                                                                    <!--begin::Notice-->
+                                                                                    <div class="notice d-flex bg-light-warning rounded border-warning border border-dashed p-6">
+                                                                                        <!--begin::Icon-->
+                                                                                        <i class="ki-outline ki-information fs-2tx text-warning me-4"></i>
+                                                                                        <!--end::Icon-->
+                                                                                        <!--begin::Wrapper-->
+                                                                                        <div class="d-flex flex-stack flex-grow-1">
+                                                                                            <!--begin::Content-->
+                                                                                            <div class="fw-semibold">
+                                                                                                <h4 class="text-gray-900 fw-bold">We need your attention!</h4>
+                                                                                                <div class="fs-6 text-gray-700">To start using great tools, please,
+                                                                                                <a href="../../demo55/dist/utilities/wizards/vertical.html" class="fw-bold">Create Team Platform</a></div>
+                                                                                            </div>
+                                                                                            <!--end::Content-->
+                                                                                        </div>
+                                                                                        <!--end::Wrapper-->
+                                                                                    </div>
+                                                                                    <!--end::Notice-->
+                                                                                    <!--end::Alert-->
+                                                                                </div>
+                                                                                <!--end::Body-->
+                                                                            </div>
+                                                                            <!--end::Wrapper-->
+
+                                                                        </div>
+
+                                                                        <!--end::Step 5-->
+                                                                        <!--begin::Actions-->
+                                                                        <div class="d-flex flex-stack pt-15">
+                                                                            <!--begin::Wrapper-->
+                                                                            <div class="mr-2">
+                                                                                <button type="button" class="btn btn-lg btn-light-primary me-3" data-kt-stepper-action="previous">
+                                                                                <i class="ki-outline ki-arrow-left fs-4 me-1"></i>Back</button>
+                                                                            </div>
+                                                                            <div class="mr-2" id="closeButtonContainer" style="display: none;">
+                                                                                <button type="button" class="btn btn-lg btn-light-danger" data-bs-dismiss="modal">Затвори</button>
+                                                                            </div>
+
+                                                                            <!--end::Wrapper-->
+                                                                            <!--begin::Wrapper-->
+                                                                            <div>
+                                                                                <button type="button" class="btn btn-lg btn-primary me-3" data-kt-stepper-action="submit">
+                                                                                    <span class="indicator-label">Submit
+                                                                                    <i class="ki-outline ki-arrow-right fs-3 ms-2 me-0"></i></span>
+                                                                                    <span class="indicator-progress">Please wait...
+                                                                                    <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                                                                                </button>
+                                                                                <button type="button" class="btn btn-lg btn-primary" data-kt-stepper-action="next">Continue
+                                                                                <i class="ki-outline ki-arrow-right fs-4 ms-1 me-0"></i></button>
+                                                                            </div>
+                                                                            <!--end::Wrapper-->
+                                                                        </div>
+                                                                        <!--end::Actions-->
+                                                                    </form>
+                                                                    <!--end::Form-->
+                                                                </div>

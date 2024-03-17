@@ -3584,7 +3584,7 @@ jQuery.extend( {
 
 								// The deprecated alias of the above. While the name suggests
 								// returning the stack, not an error instance, jQuery just passes
-								// it directly to `console.warn` so both will work; an instance
+								// it directly to `console_html.warn` so both will work; an instance
 								// just better cooperates with source maps.
 								} else if ( jQuery.Deferred.getStackHook ) {
 									process.error = jQuery.Deferred.getStackHook();
@@ -24986,7 +24986,7 @@ const localization = {
       p.constructor = {};
       var p2 = Promise.resolve(p);
       try {
-        p2.then(null, noop).then(null, noop); // avoid "uncaught rejection" warnings in console
+        p2.then(null, noop).then(null, noop); // avoid "uncaught rejection" warnings in console_html
       } catch (e) {
         return true; // v8 native Promises break here https://code.google.com/p/chromium/issues/detail?id=575314
       }
@@ -47778,7 +47778,7 @@ function debug(method) {
       args[_key - 1] = arguments[_key];
     }
 
-    (_console = console)[method].apply(_console, args); // eslint-disable-line no-console
+    (_console = console)[method].apply(_console, args); // eslint-disable-line no-console_html
   }
 }
 
@@ -57961,7 +57961,7 @@ module.exports = __webpack_require__(63);
     };
     Promise._unhandledRejectionFn = function _unhandledRejectionFn(err) {
       if (typeof console !== 'undefined' && console) {
-        console.warn('Possible Unhandled Promise Rejection:', err); // eslint-disable-line no-console
+        console.warn('Possible Unhandled Promise Rejection:', err); // eslint-disable-line no-console_html
       }
     };
 

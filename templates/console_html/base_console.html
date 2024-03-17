@@ -1,0 +1,68 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="bg">
+	<!--begin::Head-->
+	<head>
+		<title>Dobbox Fly - #1 Софтуер за управление на бизнес процеси.</title>
+		<meta charset="utf-8" />
+		<meta name="description" content="Мощна система за управление на бизнес процеси." />
+		<meta name="keywords" content="Търговски софтуер, Целеполагане , Фактуриране, CRM Система , ERP Система" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta property="og:locale" content="bg_BG" />
+		<meta property="og:type" content="article" />
+		<meta property="og:title" content="Dobbox Fly - #1 Софтуер за управление на бизнес процеси." />
+		<meta property="og:url" content="https://dobbox.net" />
+		<meta property="og:site_name" content="Dobbox | WEB" />
+		<link rel="canonical" href="https://dobbox.net" />
+        <link rel="shortcut icon" href="{% static 'media/logos/favicon.svg' %}"/>
+        <!--begin::Fonts(mandatory for all pages)-->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700"/>
+        <!--end::Fonts-->
+        <!--begin::Vendor Stylesheets(used for this page only)-->
+        <link href="{% static 'plugins/datatables/datatables.bundle.css' %}" rel="stylesheet" type="text/css"/>
+        <!--end::Vendor Stylesheets-->
+        <!--begin::Global Stylesheets Bundle(mandatory for all pages)-->
+        <link href="{% static 'plugins/global/plugins.bundle.css' %}" rel="stylesheet" type="text/css"/>
+        <link href="{% static 'css/style.bundle.css' %}" rel="stylesheet" type="text/css"/>
+        <!--end::Global Stylesheets Bundle-->
+
+        <script>
+            // Frame-busting to prevent site from being loaded within a frame without permission (click-jacking)
+            if (window.top != window.self) {
+                window.top.location.replace(window.self.location.href);
+            }
+        </script>
+    </head>
+    <!--end::Head-->
+    <!--begin::Body-->
+    <body  id="kt_app_body" data-kt-app-header-fixed="true" data-kt-app-header-fixed-mobile="true" data-kt-app-sidebar-enabled="true" data-kt-app-sidebar-fixed="true" data-kt-app-sidebar-hoverable="true" data-kt-app-sidebar-push-header="true" data-kt-app-sidebar-push-toolbar="true" data-kt-app-sidebar-push-footer="true"  class="app-default" >
+{#            {% include 'partials/theme-mode/_init.html' %}#}
+{##}
+{#            {% include 'partials/_scrolltop.html' %}#}
+
+               {% block content %}
+                {% endblock %}
+
+                <!--begin::Javascript-->
+
+                    <!--begin::Global Javascript Bundle(mandatory for all pages)-->
+                            <script src="{% static 'js/plugins/global/plugins.bundle.js' %}"></script>
+                            <script src="{% static 'js/scripts.bundle.js' %}"></script>
+                            <!--end::Global Javascript Bundle-->
+                            <!--begin::Vendors Javascript(used for this page only)-->
+                            <script src="{% static 'js/plugins/custom/datatables/datatables.bundle.js' %}"></script>
+                        <!--end::Vendors Javascript-->
+                    <!--begin::Custom Javascript(used for this page only)-->
+                            <script src="{% static 'js/widgets.bundle.js' %}"></script>
+{#                            <script src="{% static 'assets/js/custom/widgets.js' %}"></script>#}
+
+{#                            <script src="{% static 'assets/js/custom/utilities/modals/upgrade-plan.js' %}"></script>#}
+{#                            <script src="{% static 'assets/js/custom/utilities/modals/users-search.js' %}"></script>#}
+
+                        <!--end::Custom Javascript-->
+                <!--end::Javascript-->
+            </body>
+    <!--end::Body-->
+</html>
+

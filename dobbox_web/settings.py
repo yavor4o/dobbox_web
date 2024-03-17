@@ -28,11 +28,13 @@ INSTALLED_APPS = [
     "dobbox_web.landing.apps.LandingConfig",
     "dobbox_web.authentication.apps.AuthenticationConfig",
     "dobbox_web.nomenclatures.apps.NomenclaturesConfig",
+    "dobbox_web.console.apps.ConsoleConfig",
 
     # other apps
     'import_export',
     'dal',
     'dal_select2',
+
 ]
 
 MIDDLEWARE = [

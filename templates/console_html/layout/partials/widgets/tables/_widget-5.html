@@ -1,0 +1,85 @@
+<!--begin::Table Widget 5-->
+<div class="card card-flush mb-5 mb-xl-10">
+    <!--begin::Card header-->
+    <div class="card-header pt-7">
+        <!--begin::Title-->
+        <h3 class="card-title align-items-start flex-column">
+            <span class="card-label fw-bold text-dark">Статистика по SR</span>
+            <span class="text-gray-400 mt-1 fw-semibold fs-6">разходи , брой заявки и брой съоръжения</span>
+        </h3>
+        <!--end::Title-->
+        <!--begin::Actions-->
+        <div class="card-toolbar">
+            <!--begin::Filters-->
+            <div class="d-flex flex-stack flex-wrap gap-4">
+                <!--begin::Destination-->
+{#                <div class="d-flex align-items-center fw-bold">#}
+{#                    <!--begin::Label-->#}
+{#                    <div class="text-muted fs-7 me-2">Cateogry</div>#}
+{#                    <!--end::Label-->#}
+{#                    <!--begin::Select-->#}
+{#                    <select class="form-select form-select-transparent text-dark fs-7 lh-1 fw-bold py-0 ps-3 w-auto" data-control="select2" data-hide-search="true" data-dropdown-css-class="w-150px" data-placeholder="Select an option">#}
+{#                        <option></option>#}
+{#                        <option value="Show All" selected>Show All</option>#}
+{#                        <option value="a">Category A</option>#}
+{#                        <option value="b">Category B</option>#}
+{#                    </select>#}
+{#                    <!--end::Select-->#}
+{#                </div>#}
+                <!--end::Destination-->
+                <!--begin::Status-->
+{#                <div class="d-flex align-items-center fw-bold">#}
+{#                    <!--begin::Label-->#}
+{#                    <div class="text-muted fs-7 me-2">Status</div>#}
+{#                    <!--end::Label-->#}
+{#                    <!--begin::Select-->#}
+{#                    <select class="form-select form-select-transparent text-dark fs-7 lh-1 fw-bold py-0 ps-3 w-auto" data-control="select2" data-hide-search="true" data-dropdown-css-class="w-150px" data-placeholder="Select an option" data-kt-table-widget-5="filter_status">#}
+{#                        <option></option>#}
+{#                        <option value="Show All" selected>Show All</option>#}
+{#                        <option value="In Stock">In Stock</option>#}
+{#                        <option value="Out of Stock">Out of Stock</option>#}
+{#                        <option value="Low Stock">Low Stock</option>#}
+{#                    </select>#}
+{#                    <!--end::Select-->#}
+{#                </div>#}
+                <!--end::Status-->
+                <!--begin::Search-->
+                <button type="button" id="export-button" class="btn btn-light-primary me-3">
+                                                        <i class="ki-outline ki-exit-up fs-2"></i>Експортирай
+                                                    </button>
+                <!--end::Search-->
+            </div>
+            <!--begin::Filters-->
+        </div>
+        <!--end::Actions-->
+    </div>
+    <!--end::Card header-->
+    <!--begin::Card body-->
+    <div class="card-body">
+        <!--begin::Table-->
+        <table class="table align-middle table-row-dashed fs-6 gy-3" id="kt_table_widget_5_table">
+            <!--begin::Table head-->
+            <thead>
+                <!--begin::Table row-->
+                <tr class="text-center text-black fw-bold fs-7 text-uppercase gs-0">
+                    <th class="text-center pe-3 min-w-100px">SR</th>
+                    <th class="text-center pe-3 min-w-100px">Брой Заявки</th>
+                    <th class="text-center pe-3 min-w-150px">Разход</th>
+                    <th class="text-center pe-3 min-w-100px">Брой активи</th>
+                    <th class="text-center pe-3 min-w-100px">ASM</th>
+
+                </tr>
+                <!--end::Table row-->
+            </thead>
+            <!--end::Table head-->
+            <!--begin::Table body-->
+            <tbody class=" fs-8 text-center text-black">
+                                     <!-- тук се генерират данните от таблицата автоматично -->
+                            </tbody>
+            <!--end::Table body-->
+        </table>
+        <!--end::Table-->
+    </div>
+    <!--end::Card body-->
+</div>
+<!--end::Table Widget 5-->

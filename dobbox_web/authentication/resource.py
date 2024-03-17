@@ -19,8 +19,6 @@ class DobboxUserResource(resources.ModelResource):
         column_name='region name'
     )
 
-
-
     class Meta:
         model = DobboxUser
         fields = ('id', 'email', 'is_active', 'is_staff', 'is_superuser', 'date_joined' , 'full_name', 'manager',

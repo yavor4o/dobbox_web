@@ -178,6 +178,27 @@
                                     <!--end::Menu item-->
                                     <!--begin::Menu separator-->
                                     <div class="separator my-2"></div>
+                                        <!--end::Menu separator-->
+                                    {% if request.user.is_authenticated and request.user.is_staff %}
+                                                <div class="menu-item px-5">
+                                                    <a href="{% url 'admin:index' %}" class="menu-link px-5">
+                                                        Администрация
+                                                        <span class="ms-2 lh-0" data-bs-toggle="tooltip" title="Вход в системната администрация.">
+                                                            <i class="ki-outline ki-information-5 fs-5"></i>
+                                                        </span>
+                                                    </a>
+                                                </div>
+                                        <div class="menu-item px-5">
+                                                    <a href="{% url 'console:console home' %}" class="menu-link px-5">
+                                                        Dashboard
+                                                        <span class="ms-2 lh-0" data-bs-toggle="tooltip" title="Към Системата.">
+                                                            <i class="ki-outline ki-information-5 fs-5"></i>
+                                                        </span>
+                                                    </a>
+                                                </div>
+                                    {% endif %}
+                                    <!--begin::Menu separator-->
+                                    <div class="separator my-2"></div>
                                     <!--end::Menu separator-->
                                     <!-- begin::Menu item-->
                                        <div class="menu-item px-5">

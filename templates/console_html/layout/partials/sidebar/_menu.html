@@ -1,0 +1,52 @@
+{% load static %}
+{% load check_path filter_path %}
+
+<div class="app-sidebar-menu flex-column-fluid">
+    <div id="kt_app_sidebar_menu_wrapper" class="hover-scroll-overlay-y my-5" data-kt-scroll="true" data-kt-scroll-activate="true" data-kt-scroll-height="auto" data-kt-scroll-dependencies="#kt_app_sidebar_logo, #kt_app_sidebar_footer" data-kt-scroll-wrappers="#kt_app_sidebar_menu" data-kt-scroll-offset="5px">
+        <div class="menu menu-column menu-rounded menu-sub-indention fw-bold px-6" id="#kt_app_sidebar_menu" data-kt-menu="true" data-kt-menu-expand="true">
+
+
+            {% is_current_path 'console:console home' as dashboard_active %}
+            <div class="menu-item {% if dashboard_active %} here show {% else %} '' {% endif %}">
+                <a class="menu-link" href="{% url 'console:console home' %}">
+                    <span class="menu-icon"><i class="ki-outline ki-category fs-2"></i></span>
+                    <span class="menu-title">Dashboard</span>
+                </a>
+            </div>
+
+            
+            {% is_current_path 'console :assets transport' as assets_transport_active %}
+            {% is_current_path 'console :assets movements' as assets_movements_active %}
+
+            <div data-kt-menu-trigger="click" class="menu-item {% if request.path|startswith:'console/assets/' %} here show  {% endif %} menu-accordion">
+                <span class="menu-link">
+                    <span class="menu-icon"><i class="bi bi-archive fs-2"></i></span>
+                    <span class="menu-title">Съоръжения</span>
+                    <span class="menu-arrow"></span>
+                </span>
+                <div class="menu-sub menu-sub-accordion">
+                
+                    {% is_current_path 'console:transport request' as transport_request_active %}
+                    <div class="menu-item">
+                        <a class="menu-link {% if transport_request_active %} active {% endif %}" href="{% url 'console:transport request' %}">
+                            <span class="menu-bullet"><span class="bullet bullet-dot"></span></span>
+                            <span class="menu-title">Заявки Транспорт</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {% if assets_transport_active %}active{% endif %}" href="{% url 'console:assets transport' %}">
+                            <span class="menu-bullet"><span class="bullet bullet-dot"></span></span>
+                            <span class="menu-title">Транспорт</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {% if assets_movements_active %}active{% endif %}" href="{% url 'console:assets movements' %}">
+                            <span class="menu-bullet"><span class="bullet bullet-dot"></span></span>
+                            <span class="menu-title">Движения активи</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
