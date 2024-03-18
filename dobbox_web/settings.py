@@ -29,11 +29,13 @@ INSTALLED_APPS = [
     "dobbox_web.authentication.apps.AuthenticationConfig",
     "dobbox_web.nomenclatures.apps.NomenclaturesConfig",
     "dobbox_web.console.apps.ConsoleConfig",
+    "dobbox_web.assets.apps.AssetsConfig",
 
     # other apps
     'import_export',
     'dal',
     'dal_select2',
+
 
 ]
 
@@ -105,6 +107,7 @@ LANGUAGES = [
     ('en', 'English'),
 ]
 TIME_ZONE = 'UTC'
+
 
 USE_I18N = True
 

@@ -46,9 +46,13 @@
 														{% if request.user.userdata.profile_image %}
                                                 <img src="{{ request.user.userdata.profile_image.url }}" class="symbol-label">
                                             {% else %}
-                                                <span class="symbol-label bg-primary text-inverse-primary fs-1 fw-bold">
-                                                    {{ request.user.get_initials }}
-                                                </span>
+                                                    {% if request.user.get_initials %}
+                                                    <span class="symbol-label bg-primary text-inverse-primary fs-1 fw-bold">
+                                                        {{ request.user.get_initials }}
+                                                    </span>
+                                                    {% else %}
+                                                    <img src="{% static 'media/avatars/blank.png' %}" class="symbol-label"/>
+                                                    {% endif %}
                                             {% endif %}
 														<div class="position-absolute translate-middle bottom-0 start-100 mb-6 bg-success rounded-circle border border-4 border-body h-20px w-20px"></div>
 													</div>

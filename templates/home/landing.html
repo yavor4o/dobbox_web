@@ -136,9 +136,13 @@
                                             {% if request.user.userdata.profile_image %}
                                                 <img src="{{ request.user.userdata.profile_image.url }}" class="symbol-label">
                                             {% else %}
-                                                <span class="symbol-label bg-primary text-inverse-primary fw-bold">
-                                                    {{ request.user.get_initials }}
-                                                </span>
+                                                {% if request.user.get_initials %}
+                                                    <span class="symbol-label bg-primary text-inverse-primary fs-1 fw-bold">
+                                                        {{ request.user.get_initials }}
+                                                    </span>
+                                                {% else %}
+                                                    <img src="{% static 'media/avatars/blank.png' %}"  class="symbol-label"/>
+                                                {% endif %}
                                             {% endif %}
 
                                     </div>
@@ -153,8 +157,12 @@
                                             <!--begin::Avatar-->
                                             <div class="symbol me-4 symbol-40px symbol-circle ms-3">
                                                 <span class="symbol-label bg-primary text-inverse-primary fw-bold">
-                                                   {% if request.user.is_authenticated %}
-                                                        {{ request.user.get_initials }}
+                                                   {% if request.user.get_initials %}
+                                                        <span class="symbol-label bg-primary text-inverse-primary fs-1 fw-bold">
+                                                            {{ request.user.get_initials }}
+                                                        </span>
+                                                    {% else %}
+                                                        <img src="{% static 'media/avatars/blank.png' %}"  class="symbol-label"/>
                                                     {% endif %}
                                                 </span>
                                             </div>

@@ -1,3 +1,4 @@
+{% load static %}
 <!--begin::Footer-->
 <div class="app-sidebar-footer d-flex align-items-center px-8 pb-10" id="kt_app_sidebar_footer">
     <!--begin::User-->
@@ -14,9 +15,13 @@
                     {% if request.user.userdata.profile_image %}
                         <img src="{{ request.user.userdata.profile_image.url }}" class="symbol-label">
                     {% else %}
-                        <span class="symbol-label bg-primary text-inverse-primary fw-bold">
-                            {{ request.user.get_initials }}
-                        </span>
+                        {% if request.user.get_initials %}
+                            <span class="symbol-label bg-primary text-inverse-primary fs-1 fw-bold">
+                                {{ request.user.get_initials }}
+                            </span>
+                        {% else %}
+                            <img src="{% static 'media/avatars/blank.png' %}" class="symbol-label"/>
+                        {% endif %}
                     {% endif %}
             </div>
             <!--begin::Name-->

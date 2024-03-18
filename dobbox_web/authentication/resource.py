@@ -9,7 +9,6 @@ from ..nomenclatures.models import Office
 
 
 class DobboxUserResource(resources.ModelResource):
-    # Дефиниране на допълнителни полета от UserData, които искате да включите
     full_name = fields.Field(
         attribute='userdata__full_name',
         column_name='full name'
@@ -23,9 +22,6 @@ class DobboxUserResource(resources.ModelResource):
         model = DobboxUser
         fields = ('id', 'email', 'is_active', 'is_staff', 'is_superuser', 'date_joined' , 'full_name', 'manager',
                   'region_name')
-
-
-
 
 
 class RegionsResource(resources.ModelResource):
