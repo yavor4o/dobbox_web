@@ -17,6 +17,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -30,12 +31,13 @@ INSTALLED_APPS = [
     "dobbox_web.nomenclatures.apps.NomenclaturesConfig",
     "dobbox_web.console.apps.ConsoleConfig",
     "dobbox_web.assets.apps.AssetsConfig",
+    "dobbox_web.contragents.apps.ContragentsConfig",
+    "dobbox_web.transport.apps.TransportConfig",
 
     # other apps
     'import_export',
     'dal',
     'dal_select2',
-
 
 ]
 
@@ -47,6 +49,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+
 ]
 
 ROOT_URLCONF = 'dobbox_web.urls'
@@ -107,7 +111,6 @@ LANGUAGES = [
     ('en', 'English'),
 ]
 TIME_ZONE = 'UTC'
-
 
 USE_I18N = True
 
