@@ -29,7 +29,7 @@
 
         <script>
             // Frame-busting to prevent site from being loaded within a frame without permission (click-jacking)
-            if (window.top != window.self) {
+            if (window.top !== window.self) {
                 window.top.location.replace(window.self.location.href);
             }
         </script>
@@ -55,7 +55,8 @@
                         <!--end::Vendors Javascript-->
                     <!--begin::Custom Javascript(used for this page only)-->
                             <script src="{% static 'js/widgets.bundle.js' %}"></script>
-{#                            <script src="{% static 'assets/js/custom/widgets.js' %}"></script>#}
+                            <script src="{% static 'js/widgets.js' %}"></script>
+<script src="{% static 'js/assets/assets.js' %}"></script>
 
 {#                            <script src="{% static 'assets/js/custom/utilities/modals/upgrade-plan.js' %}"></script>#}
 {#                            <script src="{% static 'assets/js/custom/utilities/modals/users-search.js' %}"></script>#}

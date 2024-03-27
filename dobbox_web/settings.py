@@ -1,4 +1,8 @@
+import os
 from pathlib import Path
+
+from dotenv import load_dotenv
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -140,8 +144,14 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'admin@data.dobbox.net'
 EMAIL_HOST_PASSWORD = '841115'
 DEFAULT_FROM_EMAIL = 'admin@data.dobbox.net'
+MAIL_DEFAULT_CC_RECIPIENT = 'ydobrev@abv.bg'
 
 IMPORT_EXPORT_IMPORT_PERMISSION_CODE = "can_import"
 IMPORT_EXPORT_EXPORT_PERMISSION_CODE = "can_export"
 
 LOGIN_URL = 'login'
+
+
+
+
+GOOGLE_MAPS_API_KEY = os.environ.get('GOOGLE_MAPS_API_KEY')

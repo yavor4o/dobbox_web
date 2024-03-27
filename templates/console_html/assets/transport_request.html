@@ -1470,16 +1470,16 @@
 
 <!-- Включване на JavaScript файловете с Jinja -->
 
-        <script src="{% static 'js/assets/assets.js' %}"></script>
-        <script src="{% static 'js/assets/request_assets.js' %}"></script>
-        <script src="{% static 'js/assets/asset_request_suggestion.js' %}"></script>
+        
+{#        <script src="{% static 'js/assets/request_assets.js' %}"></script>#}
+{#        <script src="{% static 'js/assets/asset_request_suggestion.js' %}"></script>#}
 
-    <script>
-        window.googleMapsApiKey = "{{ config.GOOGLE_MAPS_API_KEY }}";
-    </script>
+{#    <script>#}
+{#        window.googleMapsApiKey = "{{ config.GOOGLE_MAPS_API_KEY }}";#}
+{#    </script>#}
  
 
-
+ {% csrf_token %} 
 
 {% endblock %}
 

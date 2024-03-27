@@ -1,38 +1,45 @@
     "use strict";
-    
+
+var csrftoken = getCookie('csrftoken');
+
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        document.cookie.split(';').forEach(function(cookie) {
+            cookie = cookie.trim();
+            if (cookie.startsWith(name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+            }
+        });
+    }
+    return cookieValue;
+}
     // Функция за асинхронно зареждане на Google Maps API
     window.onGoogleMapsApiLoaded = function() {
         // Сигнализира, че Google Maps API е зареден.
     };
-    
-    
-    //Използва се за глобален CRF тоукън
-    $.ajaxSetup({
-        beforeSend: function(xhr, settings) {
-            if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
-                xhr.setRequestHeader("X-CSRFToken", csrfToken);
-            }
-        }
-    });
+
     
     //Използва се за асинхронно зареждане на Google Maps JavaScript API
     function loadGoogleMapsApi() {
         let script = document.createElement('script');
         script.type = 'text/javascript';
-        script.src = 'https://maps.googleapis.com/maps/api/js?key=' + window.googleMapsApiKey + '&loading=async&callback&callback=onGoogleMapsApiLoaded';
+        script.src = 'https://maps.googleapis.com/maps/api/js?key=' + 'AIzaSyDHq1Umnzw-7ed8Q6xbnO3nzkaZRyrVAaU' + '&callback=onGoogleMapsApiLoaded';
+
         document.body.appendChild(script);
     }
     
     //Генерира карта маршрут за транспортната фирма по обекти във вид на маршрут.
     function initMap(start_coordinates, coordinates, mapContainerId) {
-    let startLat = parseFloat(start_coordinates[0]);
-    let startLng = parseFloat(start_coordinates[1]);
-    console.log(start_coordinates);
+    let startLat = parseFloat(start_coordinates.lat);
+    let startLng = parseFloat(start_coordinates.lng);
+    console.log(coordinates);
 
     // Инициализация на картата
     let map = new google.maps.Map(document.getElementById(mapContainerId), {
         zoom: 12,
         center: {lat: startLat, lng: startLng}
+
     });
 
     // Добавяне на маркер за началната точка
@@ -86,8 +93,12 @@
     
             // Изпращане на AJAX заявка към сървъра
             $.ajax({
-                url: '/assets/sub-asset-request',
+                url: '/console/api/sub-asset-request/',
                 type: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'X-CSRFToken': csrftoken,
+                },
                 data: {assetRequestId: rowData.id},
                 success: function (response) {
                     let assets = response.assets;
@@ -175,14 +186,14 @@
             $(document).ready(function () {
                 // Зареждане на статусите
                 $.ajax({
-                    url: '/assets/asset-statuses',
+                    url: '/console/api/get-transport-request-statuses',
                     type: 'GET',
                     success: function (statuses) {
                         let filterSelect = $('#deliveryFilter');
                         $.each(statuses, function (index, status) {
                             filterSelect.append($('<option>', {
-                                value: status,
-                                text: status
+                                value: status.name,
+                                text: status.name
                             }));
                         });
                     }
@@ -197,9 +208,9 @@
 
             // Задаване на различен брой редове за показване в таблицата в зависимост от рута
             let pageLength;
-            if (currentPath === "/assets/transport-request") {
+            if (currentPath === "/console/api/transport-request") {
                 pageLength = 10; // Стандартен брой редове за /assets/transport-request
-            } else if (currentPath === "/console_html/dashboard") {
+            } else if (currentPath === "/console/") {
                 pageLength = 3; // Намален брой редове за /console_html/dashboard
             } else {
                 pageLength = 10; // Стандартен брой редове за всички останали рутове
@@ -207,13 +218,13 @@
 
             // Set date data order
             const tableRows = table.querySelectorAll('tbody tr');
-    
+
             tableRows.forEach(row => {
                 const dateRow = row.querySelectorAll('td');
                 const realDate = moment(dateRow[8].innerHTML, "DD MMM YYYY, LT").format(); // select date from 5th column in table
                 dateRow[8].setAttribute('data-order', realDate);
             });
-    
+
             datatable = $(table).DataTable({
                 buttons: [
                     {
@@ -232,30 +243,31 @@
                             [3, 10, 25, 50,500]
                         ],
                 fixedColumns: {
-            leftColumns: 3 // Фиксира първите три колони
-        },
-                "processing": true,
-                "pageLength": pageLength,
-                "serverSide": true,
-                "ajax": {
-                    "url": "/assets/asset-requests",
-                        "data": function (d) {
-                                    // Проверка на текущия рут и задаване на филтри
-                                    if (window.location.pathname === '/console_html/dashboard') {
-                                        d.filterStatusName = 'В изчакване,Одобрена'; // Задаване на начални филтри
-                                    } else {
-                                        // Запазване на съществуващата логика за филтриране
-                                        const filterStatusValue = $('#deliveryFilter').val().trim();
-                                        const filterDeliveryType = $('input[name="transport_type"]:checked').val();
-                                        if (filterStatusValue) {
-                                            d.filterStatusName = filterStatusValue;
-                                        }
-                                        if (filterDeliveryType && filterDeliveryType !== 'all') {
-                                            d.filterDeliveryType = filterDeliveryType;
+                leftColumns: 3 // Фиксира първите три колони
+                },
+                    "processing": true,
+                    "pageLength": pageLength,
+                    "serverSide": true,
+                    "ajax": {
+                        "url": "/console/api/transport-requests/",
+                            "data": function (d) {
+                                        // Проверка на текущия рут и задаване на филтри
+                                        if (window.location.pathname === '/console/') {
+                                            d.filterStatusName = 'В изчакване,Одобрена'; // Задаване на начални филтри
+                                        } else {
+                                            // Запазване на съществуващата логика за филтриране
+                                            const filterStatusValue = $('#deliveryFilter').val().trim();
+
+                                            const filterDeliveryType = $('input[name="transport_type"]:checked').val();
+                                            if (filterStatusValue) {
+                                                d.filterStatusName = filterStatusValue;
+                                            }
+                                            if (filterDeliveryType && filterDeliveryType !== 'all') {
+                                                d.filterDeliveryType = filterDeliveryType;
+                                            }
                                         }
                                     }
-                                }
-                },
+                    },
     
     
                 "columns": [
@@ -267,7 +279,7 @@
                     {"data": "object_name"},
                     {"data": "object_city"},
                     {"data": "created_at"},
-                    {"data": "estimated_request_cost"},
+                    {"data": "estimated_transport_cost"},
     
     
                 ],
@@ -358,9 +370,10 @@
                         "targets": 3, // Индексът на колоната за статуса и транспорта
                         "render": function (data, type, full, meta) {
                             let badgeClass = '';
-                            let transportBadgeClass = full.self_transport === 'Yes' ? 'badge badge-light-success' : ' badge badge-light-dark';
-                            let transportInfo = full.self_transport === 'Yes' ? 'Транспорт Девин' : 'Транспортна фирма';
-    
+                            let transportBadgeClass = full.is_self_transport  ? 'badge badge-light-success' : ' badge badge-light-dark';
+                            let transportInfo = full.is_self_transport ? 'Транспорт Девин' : 'Транспортна фирма';
+
+
     
                             switch (full.status_name) {
                                 case 'Одобрена':
@@ -459,7 +472,7 @@
     // Функция за превключване на редовете
         function toggleRow(tr) {
             let row = datatable.row(tr);
-    
+
             if (row.child.isShown()) {
                 // Свиване на реда
                 row.child.hide();
@@ -499,8 +512,12 @@
                 }).then(function (result) {
                     if (result.value) {
                         $.ajax({
-                            url: `/assets/handle_asset_request/${action}/${requestId}`,
+                            url: `/console/api/handle-transport-request/${action}/${requestId}/`,
                             type: 'POST',
+                            headers: {
+                                'Content-Type': 'application/x-www-form-urlencoded',
+                                'X-CSRFToken': csrftoken,
+                            },
                             success: function (response) {
     
                                 datatable.ajax.reload(null, false);
@@ -520,7 +537,7 @@
             $('#kt_assets_table tbody').on('click', '.cancel-btn', function () {
                 let requestId = $(this).data('asset-id');
                 let action = 'cancel'
-    
+
                 Swal.fire({
                     text: "Сигурни ли сте че искате да анулирате заявката?",
                     icon: "warning",
@@ -535,16 +552,20 @@
                 }).then(function (result) {
                     if (result.value) {
                         $.ajax({
-                            url: `/assets/handle_asset_request/${action}/${requestId}`,
+                            url: `/console/api/handle-transport-request/${action}/${requestId}/`,
                             type: 'POST',
+                            headers: {
+                                'Content-Type': 'application/x-www-form-urlencoded',
+                                'X-CSRFToken': csrftoken,
+                            },
                             success: function (response) {
-    
+
                                 datatable.ajax.reload(null, false);
                             },
                             error: function (error) {
                                 console.error('Error approving request: ', error);
                                 console.error('Error cancelling request: ', error.responseText);
-    
+
                             }
                         });
                     }
@@ -618,10 +639,22 @@
                     if (result.value) {
                         // Ако потвърди изтриването, изпратете AJAX заявка
                         $.ajax({
-                            url: '/assets/delete_request/' + requestId,
+                            url: `/console/api/delete-transport-request/${requestId}`,
                             type: 'DELETE',
+                            headers: {
+                                'Content-Type': 'application/x-www-form-urlencoded',
+                                'X-CSRFToken': csrftoken,
+                            },
                             success: function (response) {
-                                // Успешно изтриване
+                                Swal.fire({
+                                    text: "Заявката е успешно изтрита.",
+                                    icon: "success",
+                                    buttonsStyling: false,
+                                    confirmButtonText: "Затвори!",
+                                    customClass: {
+                                        confirmButton: "btn fw-bold btn-primary",
+                                    }
+                                });
     
     
                                 // Презареждане на таблицата
@@ -661,8 +694,13 @@
                     if (result.value) {
                         // Ако потвърди изтриването, изпратете AJAX заявка
                         $.ajax({
-                            url: '/assets/delete_asset/' + assetId,
+                            url: `/console/api/delete-asset/${assetId}`,
                             type: 'DELETE',
+                            headers: {
+                                'Content-Type': 'application/x-www-form-urlencoded',
+                                'X-CSRFToken': csrftoken,
+                            },
+
                             success: function (response) {
                                 // Успешно изтриване
                                 Swal.fire({
@@ -715,7 +753,7 @@
                 $('#modal_history_transport').text('История на заявка № ' + assetId);
     
                 $.ajax({
-                    url: '/assets/get-request-history/' + assetId,
+                    url: `/console/api/get-request-history/${assetId}`,
                     type: 'GET',
                     success: function (response) {
                         response.sort(function (a, b) {
@@ -798,10 +836,15 @@
         let handleTransportRoute = () => {
         $('#kt_assets_table tbody').on('click', '.primary-btn', function() {
             let requestId = $(this).data('asset-id');
+
     
             $.ajax({
-                    url: '/assets/get-object-coordinates',
+                    url: '/console/api/transport-details-view/',
                 type: 'POST',
+                headers: {
+                                'Content-Type': 'application/x-www-form-urlencoded',
+                                'X-CSRFToken': csrftoken,
+                            },
                 contentType: 'application/json',
                 data: JSON.stringify({ request_ids: [requestId] }),
                 success: function(response) {
@@ -848,9 +891,7 @@
     };
     
     
-    
-    
-    
+
     
     
         // Init toggle toolbar Тук на база тази функция с чекбоксовете се обработва и логиката за пускане на заявка за транспорт от множество заявки
@@ -895,7 +936,7 @@
     
                 if (selectedIds.length > 0) {
                     $.ajax({
-                        url: '/assets/get-assets-info',
+                        url: '/console/api/get-transport-info/',
                         type: 'POST',
                         contentType: 'application/json',
                         data: JSON.stringify({assetIds: selectedIds}),
@@ -942,7 +983,7 @@
                                     <div class="fs-9 fw-semibold text-gray-500">За километри</div>  
                                 </div>
                                 <div class="border border-gray-300 border-dashed rounded min-w-10px py-1 px-1 me-2 mb-3">
-                                    <div class="fs-7 text-primary fw-bold">${costInfo.asset_costs.toFixed(2)} лв.</div>
+                                    <div class="fs-7 text-primary fw-bold">${costInfo.asset_costs} лв.</div>
                                     <div class="fs-9 fw-semibold text-gray-500">За съоръжения</div>
                                 </div>
                                 
@@ -980,7 +1021,7 @@
                                     return new Promise((resolve, reject) => {
                                         setTimeout(function() {
                                         $.ajax({
-                                            url: '/assets/set-transport',
+                                            url: '/console/api/set-transport-request/',
                                             type: 'POST',
                                             contentType: 'application/json',
                                             data: JSON.stringify(requestData),
@@ -1069,7 +1110,7 @@
         // Функция за избор на транспортна компания
     function loadTransportCompanies() {
         $.ajax({
-            url: '/assets/get-transport-companies',
+            url: '/console/api/get-transport-companies',
             type: 'GET',
             success: function(companies_data) {
                 let select = $('#floatingSelect');
@@ -1126,4 +1167,4 @@
         loadGoogleMapsApi();
         TransportRequest.init();
     });
-    
+

@@ -1,10 +1,6 @@
 "use strict";
 
 
-
-
-
-
 // Class definition
 let KTAccountSettingsDeactivateAccount = function () {
     // Private letiables
